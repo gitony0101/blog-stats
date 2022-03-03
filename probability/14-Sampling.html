@@ -1,0 +1,954 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sampling &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/14-Sampling.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Parameter Testing" href="15-Parameter-Testing.html" />
+    <link rel="prev" title="Poisson Processes" href="13-Poisson-Processes.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Conditional-Probability.html">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Expectation.html">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Continuous-Random-Variables.html">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Moments.html">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Transformations.html">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Conditional-Expectation.html">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/14-Sampling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/14-Sampling.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/14-Sampling.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/14-Sampling.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Sampling
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampling-distribution-of-bar-x">
+     Sampling Distribution of
+     <span class="math notranslate nohighlight">
+      \(\bar{X}\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#central-limit-theorem">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distribution">
+   <span class="math notranslate nohighlight">
+    \(χ^2\)
+   </span>
+   Distribution
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pdf-and-cdf">
+     <span class="math notranslate nohighlight">
+      \(χ^2\)
+     </span>
+     PDF and CDF
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#student-s-t-distribution">
+     Student’s t Distribution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f-distribution">
+   F Distribution
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Sampling</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Sampling
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sampling-distribution-of-bar-x">
+     Sampling Distribution of
+     <span class="math notranslate nohighlight">
+      \(\bar{X}\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#central-limit-theorem">
+   Central Limit Theorem
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distribution">
+   <span class="math notranslate nohighlight">
+    \(χ^2\)
+   </span>
+   Distribution
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pdf-and-cdf">
+     <span class="math notranslate nohighlight">
+      \(χ^2\)
+     </span>
+     PDF and CDF
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#student-s-t-distribution">
+     Student’s t Distribution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f-distribution">
+   F Distribution
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="sampling">
+<h1>Sampling<a class="headerlink" href="#sampling" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The pointer estimators themselves are random variables. For instance we have 10 samples of household income, so each sample has a mean value, which are most probably different than each other, therefore the sample mean is essentially a random variable.|</p>
+<p>The distribution of point estimator is called the  <strong>sampling distribution</strong>, i.e. the distribution of sample statistics. The knowledge of its properties will enable us to make statements about how close the point estimates (e.g. sample mean) to the population parameters.</p>
+<div class="section" id="sampling-distribution-of-bar-x">
+<h2>Sampling Distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span><a class="headerlink" href="#sampling-distribution-of-bar-x" title="Permalink to this headline">¶</a></h2>
+<p>If point estimators are unbiased, then  <strong>mean of sampling distribution</strong> and  <strong>standard error of the mean</strong> are:
+$<span class="math notranslate nohighlight">\(
+E(\bar{X})=μ\\
+σ_{\bar{X}}=\frac{σ}{\sqrt{n}}\sqrt{\frac{N-n}{N-1}}
+\)</span>$</p>
+<p>The name of <em>standard error</em> generally is used when referring to the standard deviation of a sampling distribution.</p>
+<p>To illustrate the sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span>, we will generate a population of <span class="math notranslate nohighlight">\(100000\)</span> people’s height with standard deviation of <span class="math notranslate nohighlight">\(3\)</span>, mean of <span class="math notranslate nohighlight">\(170\)</span>cm.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">170</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">pop_size</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">pop_height</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">pop_size</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now pretend that we know nothing of the population, but we are able to draw as many samples as possible with zero cost (this will never be possible in real world, but perfect illustration to sampling distribution). After drawing each sample we calculate the sample mean then append onto the list <code class="docutils literal notranslate"><span class="pre">sample_mean</span></code>, finally we plot the histogram.</p>
+<p>Here we plot six sampling distributions with increasing sample sizes, the larger the sample size <span class="math notranslate nohighlight">\(n\)</span>, the smaller the standard errors are. The red dashed line is a normal distribution <span class="math notranslate nohighlight">\(z∼ N(170, 3)\)</span>, in contrast, the histogram of sample mean is much concentrated.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]</span>
+<span class="n">number_of_sample</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">sample_means</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">norm_pdf_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">norm_pdf_y</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">norm_pdf_x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span>
+                         <span class="mi">2</span><span class="p">,</span>
+                         <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+                         
+                         <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_sample</span><span class="p">):</span>
+        <span class="n">sample_means</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pop_height</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_sizes</span><span class="p">[</span><span class="n">ind</span><span class="p">])))</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span>
+                               <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                               <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sampling Distribution of Mean of Height&#39;</span><span class="p">,</span>
+                               <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">norm_pdf_x</span><span class="p">,</span> <span class="n">norm_pdf_y</span><span class="p">,</span> <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$z∼ N(170, 3)$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">180</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;number of sample: </span><span class="si">{</span><span class="mi">10000</span><span class="si">}</span><span class="se">\n</span><span class="s1">sample size: </span><span class="si">{</span><span class="n">sample_sizes</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">standard error: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_means</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="mf">160.5</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.8</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Sampling Distribution Of Means With Various Sample Size&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_8_0.png" src="../_images/14-Sampling_8_0.png" />
+</div>
+</div>
+<p>From <span class="math notranslate nohighlight">\(σ_{\bar{x}}=\frac{σ}{\sqrt{n}}\sqrt{\frac{N-n}{N-1}}\)</span>, we can see as <span class="math notranslate nohighlight">\(n →  N\)</span>, then <span class="math notranslate nohighlight">\(σ_{\bar{x}}→  0\)</span>.</p>
+<p>Though raising sample size can contract the variation of sampling distribution,  but efficiency drops relatively fast. Take a look at graph of <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>, the slope is steep in the beginning, then flattens as the sample size increases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;$y=\sqrt</span><span class="si">{n}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_10_0.png" src="../_images/14-Sampling_10_0.png" />
+</div>
+</div>
+<p>There are also sampling distribution of sample variances.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">number_of_sample</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">sample_vars</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span>
+                         <span class="mi">2</span><span class="p">,</span>
+                         <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+                         
+                         <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">indx</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">flatten</span><span class="p">()):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_sample</span><span class="p">):</span>
+        <span class="n">sample_vars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pop_height</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">sample_sizes</span><span class="p">[</span><span class="n">indx</span><span class="p">]),</span>
+                   <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">patches</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+        <span class="n">sample_vars</span><span class="p">,</span>
+        <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Sampling Distribution of Variance of Height&#39;</span><span class="p">,</span>
+        <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample_vars</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;number of sample: </span><span class="si">{</span><span class="mi">10000</span><span class="si">}</span><span class="se">\n</span><span class="s1">sample size: </span><span class="si">{</span><span class="n">sample_sizes</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s1">standard error: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">sample_vars</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="se">\n</span><span class="s1">mean: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">sample_vars</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+        <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.80</span><span class="p">),</span>
+        <span class="n">size</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Sampling Distribution Of Variances With Various Sample Size&#39;</span><span class="p">,</span>
+             <span class="n">y</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_12_0.png" src="../_images/14-Sampling_12_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="central-limit-theorem">
+<h1>Central Limit Theorem<a class="headerlink" href="#central-limit-theorem" title="Permalink to this headline">¶</a></h1>
+<p>We mentioned above that properties of sampling distribution can help us making meaningful inferences about population. The most important property is <strong>Central Limit Theorem</strong> which guarantees that with large sample size, we can safely assume the sample mean follows a normal distribution. With this information, we can make statistical inferences such as how far away the sample mean is from the population mean?</p>
+<p>Here is the classical definition:</p>
+<p><span class="math notranslate nohighlight">\(\{\bar{X}_1,...\bar{X}_2\}\)</span> is a random i.i.d. sequence drawn from an unknown distribution whose <span class="math notranslate nohighlight">\(E(X_i)=μ\)</span> and <span class="math notranslate nohighlight">\(\text{Var}(X_i)=σ^2\)</span>, as <span class="math notranslate nohighlight">\(n →  ∞\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{n}(\bar{X}_n-μ)\xrightarrow[]{d} N(0, σ^2)
+\]</div>
+<p>Simply speaking, sampling distribution of sample mean will converge to a normal distribution when sample size is large enough. The figure below shows three different distributions other than normal distribution, as the sample size increases their sampling distributions converge to normal distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_data</span> <span class="o">=</span> <span class="mi">100000</span>
+<span class="n">n_bins</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n_data</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>  <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;Counts&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Random data&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_data</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Average over 2&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n_data</span> <span class="o">//</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Average over 10&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_15_0.png" src="../_images/14-Sampling_15_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.2</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.1</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">]</span>
+
+<span class="n">func</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">colors</span><span class="p">,</span> <span class="n">alphas</span><span class="p">)):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">loc</span> <span class="o">-</span> <span class="n">scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">loc</span> <span class="o">+</span> <span class="n">scale</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y_fall</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">end</span><span class="p">)</span> <span class="o">-</span> <span class="n">func</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
+
+    <span class="n">X_dist</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">X</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">][</span><span class="n">X</span><span class="p">[</span><span class="n">X</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">start</span><span class="p">]</span>
+    <span class="n">y_dist</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">X_dist</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">X_dist</span><span class="p">,</span>
+                    <span class="n">y_dist</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+                    <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;i = </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">, % = </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">y_fall</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Percentage of X falling between i*standard deviation&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">((</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_16_0.png" src="../_images/14-Sampling_16_0.png" />
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="distribution">
+<h1><span class="math notranslate nohighlight">\(χ^2\)</span> Distribution<a class="headerlink" href="#distribution" title="Permalink to this headline">¶</a></h1>
+<p><span class="math notranslate nohighlight">\(χ^2\)</span> distribution is closely connected with normal distributions, if <span class="math notranslate nohighlight">\(z\)</span> has the standard normal distribution, then <span class="math notranslate nohighlight">\(z^2\)</span> has the <span class="math notranslate nohighlight">\(χ^2\)</span> distribution with <span class="math notranslate nohighlight">\(d.f.=1\)</span>. And further,if</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+z_1, z_2, ..., z_k ∼ i.i.d. N(0, 1)
+\end{equation}
+\]</div>
+<p>Then summation has a <span class="math notranslate nohighlight">\(χ^2\)</span> distribution of <span class="math notranslate nohighlight">\(d.f. = k\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+∑_{i=0}^k z_i^2 ∼ χ^2(k)
+\end{equation}
+\]</div>
+<p>We will see in later chapters how <span class="math notranslate nohighlight">\(χ^2\)</span> distribution is referred when performing hypothesis testing.</p>
+<div class="section" id="pdf-and-cdf">
+<h2><span class="math notranslate nohighlight">\(χ^2\)</span> PDF and CDF<a class="headerlink" href="#pdf-and-cdf" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+    <span class="n">chi_pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chi_pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;dof = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_21_0.png" src="../_images/14-Sampling_21_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="student-s-t-distribution">
+<h2>Student’s t Distribution<a class="headerlink" href="#student-s-t-distribution" title="Permalink to this headline">¶</a></h2>
+<p>The <strong>t-distribution</strong> is used when data are approximately normally distributed, which means the data follow a bell shape but the population variance is unknown. We will come back to this topic in chapter of estimation.</p>
+<p>The PDF of t-distribution is derived from normal and <span class="math notranslate nohighlight">\(χ^2\)</span> distribution
+$<span class="math notranslate nohighlight">\(
+f(t)=\frac{Γ\left(\frac{ν+1}{2}\right)}{\sqrt{ν π} Γ\left(\frac{ν}{2}\right)}\left(1+\frac{t^{2}}{ν}\right)^{-\frac{ν+1}{2}}
+\)</span>$
+No need to know the meaning of its components. But we do need a visual memory of the comparison of t-distribution and normal distribution.</p>
+<p>If a sample has <span class="math notranslate nohighlight">\(n\)</span> observations, then the degree of freedom (d.o.f.) of t-distribution is <span class="math notranslate nohighlight">\(n-1\)</span>, the larger the d.o.f. the closer to normal distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y_norm</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_norm</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal Distribution&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">y_t</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span>
+            <span class="n">y_t</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">.1</span> <span class="o">*</span> <span class="n">i</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;t-Distribution with dof = </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_25_0.png" src="../_images/14-Sampling_25_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">ndata</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">ndata</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">data_outlier</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">data</span><span class="p">,</span> <span class="n">noise</span><span class="p">))</span>
+
+<span class="n">fit_gauss_wo</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">fit_gauss_w</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_outlier</span><span class="p">)</span>
+<span class="n">fit_t_wo</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">fit_t_w</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_outlier</span><span class="p">)</span>
+
+<span class="n">fitted_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
+<span class="n">fitted_gauss_wo</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span>
+                                 <span class="n">loc</span><span class="o">=</span><span class="n">fit_gauss_wo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                 <span class="n">scale</span><span class="o">=</span><span class="n">fit_gauss_wo</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">fitted_gauss_w</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span>
+                                <span class="n">loc</span><span class="o">=</span><span class="n">fit_gauss_w</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                <span class="n">scale</span><span class="o">=</span><span class="n">fit_gauss_w</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">fitted_t_wo</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span>
+                          <span class="n">df</span><span class="o">=</span><span class="n">ndata</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                          <span class="n">loc</span><span class="o">=</span><span class="n">fit_t_wo</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                          <span class="n">scale</span><span class="o">=</span><span class="n">fit_t_wo</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">fitted_t_w</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span>
+                         <span class="n">df</span><span class="o">=</span><span class="n">ndata</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                         <span class="n">loc</span><span class="o">=</span><span class="n">fit_t_w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                         <span class="n">scale</span><span class="o">=</span><span class="n">fit_t_w</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>  <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span> <span class="n">fitted_gauss_wo</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span> <span class="n">fitted_t_wo</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;t-dist&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Without outliers&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data_outlier</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span> <span class="n">fitted_gauss_w</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;norm&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fitted_x</span><span class="p">,</span> <span class="n">fitted_t_w</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;t-dist&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;With outliers&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_26_0.png" src="../_images/14-Sampling_26_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span>
+
+<span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sem</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">std</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">se</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">sem</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">sd</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">sd</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">dashes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">se</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_dashes</span><span class="p">(</span><span class="n">dashes</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">se</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">set_dashes</span><span class="p">(</span><span class="n">dashes</span><span class="p">)</span>
+
+<span class="n">arrow</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+             <span class="n">length_includes_head</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+             <span class="n">head_width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">std</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">sem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">sem</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">sem</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">sem</span><span class="p">,</span> <span class="o">**</span><span class="n">arrow</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="s1">&#39; ± SD&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">,</span> <span class="s1">&#39; ± SEM&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+            <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="n">xycoords</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="s1">&#39;medium&#39;</span><span class="p">,</span>
+            <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">),</span>
+            <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;data&#39;</span><span class="p">,</span>
+            <span class="n">arrowprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.05</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_27_0.png" src="../_images/14-Sampling_27_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="f-distribution">
+<h1>F Distribution<a class="headerlink" href="#f-distribution" title="Permalink to this headline">¶</a></h1>
+<p>If <span class="math notranslate nohighlight">\(U_1\)</span> has a <span class="math notranslate nohighlight">\(χ^2\)</span> distribution with <span class="math notranslate nohighlight">\(ν_1\)</span> d.f. and <span class="math notranslate nohighlight">\(U_2\)</span> has a <span class="math notranslate nohighlight">\(χ^2\)</span> distribution with <span class="math notranslate nohighlight">\(ν_2\)</span> d.f., then</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{equation}
+\frac{U_1/ν_1}{U_2/ν_2}∼ F(ν_1, ν_2)
+\end{equation}
+\]</div>
+<p>We are using <span class="math notranslate nohighlight">\(F\)</span> distribution for ratios of variances.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">df1s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<span class="n">df2s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">df1s</span><span class="p">,</span> <span class="n">df2s</span><span class="p">):</span>
+    <span class="n">f_pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dfn</span> <span class="o">=</span> <span class="n">df1</span><span class="p">,</span> <span class="n">dfd</span> <span class="o">=</span> <span class="n">df2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$df_1 = </span><span class="si">{</span><span class="n">df1</span><span class="si">}</span><span class="s1">, df_2 = </span><span class="si">{</span><span class="n">df2</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/14-Sampling_30_0.png" src="../_images/14-Sampling_30_0.png" />
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(χ^2\)</span> and <span class="math notranslate nohighlight">\(F\)</span> distribution are mostly used for statistical testing, we will elaborate the topic later.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="13-Poisson-Processes.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Poisson Processes</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="15-Parameter-Testing.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Parameter Testing</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

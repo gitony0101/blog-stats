@@ -1,0 +1,909 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Continuous Random Variables &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/05-Continuous-Random-Variables.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Moments" href="06-Moments.html" />
+    <link rel="prev" title="Expectation" href="04-Expectation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Conditional-Probability.html">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Expectation.html">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Moments.html">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Transformations.html">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Conditional-Expectation.html">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Sampling.html">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/05-Continuous-Random-Variables.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/05-Continuous-Random-Variables.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/05-Continuous-Random-Variables.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/05-Continuous-Random-Variables.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uniform-normal-and-exponential-distributions">
+   Uniform, Normal, and Exponential distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uniform">
+     Uniform
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal">
+     Normal
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exponential">
+     Exponential
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#universality-with-logistic">
+   Universality with Logistic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-process-simulation">
+   Poisson process simulation
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Continuous Random Variables</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#uniform-normal-and-exponential-distributions">
+   Uniform, Normal, and Exponential distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#uniform">
+     Uniform
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#normal">
+     Normal
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exponential">
+     Exponential
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#universality-with-logistic">
+   Universality with Logistic
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#poisson-process-simulation">
+   Poisson process simulation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="continuous-random-variables">
+<h1>Continuous Random Variables<a class="headerlink" href="#continuous-random-variables" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="uniform-normal-and-exponential-distributions">
+<h2>Uniform, Normal, and Exponential distributions<a class="headerlink" href="#uniform-normal-and-exponential-distributions" title="Permalink to this headline">¶</a></h2>
+<p>For <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/stats/continuous.html">continuous distributions in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></a>, the <code class="docutils literal notranslate"><span class="pre">pdf</span></code> function gives the PDF, the <code class="docutils literal notranslate"><span class="pre">cdf</span></code> function gives the CDF, and the <code class="docutils literal notranslate"><span class="pre">rvs</span></code> function generates random numbers from the continuous distribution. This is in keeping with the application programming interface of the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/stats/discrete.html">discrete statistical distributions in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></a>. Thus, we have the following functions:</p>
+<div class="section" id="uniform">
+<h3>Uniform<a class="headerlink" href="#uniform" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html#scipy.stats.uniform"><code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform</span></code></a> provides functions for Uniform continuous random variables.</p>
+<ul class="simple">
+<li><p>To evaluate the <span class="math notranslate nohighlight">\(Unif(a, b)\)</span> PDF at <span class="math notranslate nohighlight">\(x\)</span>, we use <code class="docutils literal notranslate"><span class="pre">uniform.pdf(x,</span> <span class="pre">a,</span> <span class="pre">b)</span></code>.</p></li>
+<li><p>For the CDF, we use <code class="docutils literal notranslate"><span class="pre">uniform.cdf(x,</span> <span class="pre">a,</span> <span class="pre">b)</span></code>.</p></li>
+<li><p>To generate <span class="math notranslate nohighlight">\(n\)</span> realizations from the <span class="math notranslate nohighlight">\(Unif(a, b)\)</span> distribution, we use <code class="docutils literal notranslate"><span class="pre">uniform.rvs(a,</span> <span class="pre">b,</span> <span class="pre">size=n)</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1597</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="c1"># to learn more about scipy.stats,uniform un-comment ouf the following line</span>
+<span class="c1">#print(uniform.__doc__)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PDF of Unif(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">) evaluated at </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CDF of Unif(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">) evaluated at </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating </span><span class="si">{}</span><span class="s1"> realizations from Unif(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">):</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PDF of Unif(0, 4) evaluated at 3 is 0.25
+
+CDF of Unif(0, 4) evaluated at 3 is 0.75
+
+Generating 10 realizations from Unif(0, 4):
+[3.24085002 2.48793265 0.69337744 3.98212677 3.53906749 0.19890551
+ 3.30252222 2.37991343 1.42342695 1.92222338]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="normal">
+<h3>Normal<a class="headerlink" href="#normal" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm"><code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code></a> provides functions for normal continuous random variables.</p>
+<ul class="simple">
+<li><p>To evaluate the <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> PDF at <span class="math notranslate nohighlight">\(x\)</span>, we use <code class="docutils literal notranslate"><span class="pre">norm.pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code>, where the parameter <code class="docutils literal notranslate"><span class="pre">loc</span></code> corresponds to <span class="math notranslate nohighlight">\(\mu\)</span> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> corresponds to standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> (and <strong>not</strong> variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>).</p></li>
+<li><p>For the CDF, we use <code class="docutils literal notranslate"><span class="pre">norm.cdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code>.</p></li>
+<li><p>To generate <span class="math notranslate nohighlight">\(n\)</span> realizations from the <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> distribution, we use <code class="docutils literal notranslate"><span class="pre">norm.rvs(loc,</span> <span class="pre">scale,</span> <span class="pre">size=n)</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2584</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="c1"># to learn more about scipy.stats,norm un-comment ouf the following line</span>
+<span class="c1">#print(norm.__doc__)</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">1.5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PDF of N(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">) evaluated at </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CDF of N(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">) evaluated at </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating </span><span class="si">{}</span><span class="s1"> realizations from N(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">):</span><span class="se">\n</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PDF of N(0.0, 2.0) evaluated at 1.5 is 0.15056871607740221
+
+CDF of N(0.0, 2.0) evaluated at 1.5 is 0.7733726476231317
+
+Generating 10 realizations from N(0.0, 2.0):
+[-4.56890553  1.4163793  -0.72812069  1.80610792 -1.5542524   0.4551897
+ -1.82794816  1.58959742 -3.26902153 -2.71002864]
+</pre></div>
+</div>
+</div>
+</div>
+<p>☣ 5.9.1 (Normal parameters in <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code>). Note that we have to input the standard deviation for the <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameter value, not the variance! For example, to get the <span class="math notranslate nohighlight">\(N(10, 3)\)</span> CDF at 12, we use<code class="docutils literal notranslate"><span class="pre">norm.cdf(12,</span> <span class="pre">10,</span> <span class="pre">np.sqrt(3))</span></code>. Ignoring this is a common, disastrous coding error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">loc</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">var</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;N(</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">) CDF at </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N(10, 1.7320508075688772) CDF at 12 is 0.8758934605050381
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exponential">
+<h3>Exponential<a class="headerlink" href="#exponential" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.expon.html#scipy.stats.expon"><code class="docutils literal notranslate"><span class="pre">scipy.stats.expon</span></code></a> provides functions for exponential continuous random variables. The probability density function for <span class="math notranslate nohighlight">\(Expo(\lambda)\)</span> is:</p>
+<p>\begin{align}
+f(x) &amp;= e^{-x}
+\end{align}</p>
+<p>The probability density is defined in the “standardized” form. To shift and/or scale the distribution use the <code class="docutils literal notranslate"><span class="pre">loc</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameters. Specifically, <code class="docutils literal notranslate"><span class="pre">expon.pdf(x,</span> <span class="pre">loc,</span> <span class="pre">scale)</span></code> is identically equivalent to <code class="docutils literal notranslate"><span class="pre">expon.pdf(y)</span> <span class="pre">/</span> <span class="pre">scale</span></code> with <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">-</span> <span class="pre">loc)</span> <span class="pre">/</span> <span class="pre">scale</span></code>.</p>
+<ul class="simple">
+<li><p>To evaluate the <span class="math notranslate nohighlight">\(Expo(\lambda)\)</span> PDF at <span class="math notranslate nohighlight">\(x\)</span>, we use <code class="docutils literal notranslate"><span class="pre">expon.pdf(x,</span> <span class="pre">scale=1/lambda)</span></code>, where the <span class="math notranslate nohighlight">\(\lambda\)</span> corresponds to <code class="docutils literal notranslate"><span class="pre">scale=1/lambd</span></code>.</p></li>
+<li><p>For the CDF, we use <code class="docutils literal notranslate"><span class="pre">expon.cdf(x,</span> <span class="pre">scale=1/lambd)</span></code>.</p></li>
+<li><p>To generate <span class="math notranslate nohighlight">\(n\)</span> realizations from the <span class="math notranslate nohighlight">\(Expo(\lambda)\)</span> distribution, we use <code class="docutils literal notranslate"><span class="pre">expon.rvs(scale=1/lambd,</span> <span class="pre">size=n)</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">4181</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+
+<span class="n">lambd</span> <span class="o">=</span> <span class="mf">2.1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambd</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PDF of Expo(</span><span class="si">{}</span><span class="s1">) evaluated at </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lambd</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambd</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CDF of Expo(</span><span class="si">{}</span><span class="s1">) evaluated at </span><span class="si">{}</span><span class="s1"> is </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lambd</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">expon</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambd</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Generating </span><span class="si">{}</span><span class="s1"> realizations from Expo(</span><span class="si">{}</span><span class="s1">):</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">lambd</span><span class="p">,</span> <span class="n">expon</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PDF of Expo(2.1) evaluated at 5 is 5.782654363446904e-05
+
+CDF of Expo(2.1) evaluated at 5 is 0.9999724635506503
+
+Generating 10 realizations from Expo(2.1):
+[0.44907946 0.77554149 1.469014   0.15728342 0.92258566 0.54294386
+ 0.80347768 0.23157762 0.34759354 1.03891708]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Due to the importance of location-scale transformations for continuous distributions, SciPy has default parameter settings for each of these three families. The default for the Uniform <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html#scipy.stats.uniform"><code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform</span></code></a> is <code class="docutils literal notranslate"><span class="pre">loc=0,</span> <span class="pre">scale=1</span></code>, the default for the Normal <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html#scipy.stats.norm"><code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code></a> is <code class="docutils literal notranslate"><span class="pre">loc=0,</span> <span class="pre">scale=1</span></code>, and the default for the Exponential <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.expon.html#scipy.stats.expon"><code class="docutils literal notranslate"><span class="pre">scipy.stats.expon</span></code></a> is <code class="docutils literal notranslate"><span class="pre">loc=0,</span> <span class="pre">scale=1</span></code>.</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">uniform.pdf(0.5)</span></code>, with no additional inputs, evaluates the <span class="math notranslate nohighlight">\(Unif(0, 1)\)</span> PDF at 0.5.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">norm.rvs(size=10)</span></code>, with no additional inputs, generates 10 realizations from the <span class="math notranslate nohighlight">\(N (0, 1)\)</span> distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.79839927, -0.69769073,  0.34055804, -0.22043838,  0.79782274,
+       -2.60292799, -1.53866926,  0.93084378,  0.81590117, -0.42043989])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This means there are two ways to generate a <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> random variable in SciPy. After choosing our values of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>we can do either of the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans1</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">ans2</span> <span class="o">=</span> <span class="n">mu</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;norm.rvs(mu, sigma, size=1) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mu + sigma * norm.rvs(size=1) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm.rvs(mu, sigma, size=1) = [1.99342831]
+mu + sigma * norm.rvs(size=1) = [1.99342831]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Either way, we end up generating a draw from the <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> distribution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here is how we can create a plot of the standard Normal PDF from −3 to 3 using Matplotlib in Jupyter notebook.</p>
+<p><a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.linspace.html"><code class="docutils literal notranslate"><span class="pre">numpy.linspace</span></code></a> creates an evenly-spaced numerical sequence, ranging from <code class="docutils literal notranslate"><span class="pre">start</span></code> to <code class="docutils literal notranslate"><span class="pre">stop</span></code>. The third function parameter <code class="docutils literal notranslate"><span class="pre">num</span></code> lets you specify how many numbers in the sequence to generate.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">numpy.linspace(-3,</span> <span class="pre">3,</span> <span class="pre">1000)</span></code> to generate 1000 numbers ranging from -3 to 3 as our <code class="docutils literal notranslate"><span class="pre">x</span></code> values in the graph; with 1000 values in the sequence, the curve looks very smooth. If we were to choose <code class="docutils literal notranslate"><span class="pre">num=20</span></code>, the piecewise linearity would become very apparent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then call <code class="docutils literal notranslate"><span class="pre">norm.pdf(x)</span></code> to generate the <code class="docutils literal notranslate"><span class="pre">y</span></code> values in the graph, and pass both the <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> values to <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html"><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.plot</span></code></a>. This will render a graph of <span class="math notranslate nohighlight">\(N(0,1)\)</span> from -3 to 3. <code class="docutils literal notranslate"><span class="pre">pyplot.show</span></code> will display the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Continuous-Random-Variables_23_0.png" src="../_images/05-Continuous-Random-Variables_23_0.png" />
+</div>
+</div>
+<p>Alternately, we could “freeze” an instance of the <code class="docutils literal notranslate"><span class="pre">scipy.stats.norm</span></code> distribution object to fix the shape, location and scale parameters. This might be useful if you are working with multiple distributions with differing shape, location and scale, and wanted to use these distributions throughout your notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rv1</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rv2</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rv3</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rv1</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;norm(0, 1)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rv2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;norm(0.5, 1)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rv3</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;norm(1, 1)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Continuous-Random-Variables_25_0.png" src="../_images/05-Continuous-Random-Variables_25_0.png" />
+</div>
+</div>
+<p>We can also set the axis labels and plot title with <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlabel.html"><code class="docutils literal notranslate"><span class="pre">pyplot.xlabel</span></code></a>, <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylabel.html"><code class="docutils literal notranslate"><span class="pre">pyplot.ylabel</span></code></a>, and <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html"><code class="docutils literal notranslate"><span class="pre">pyplot.title</span></code></a> functions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rv</span> <span class="o">=</span> <span class="n">norm</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rv</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;norm.pdf(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Standard Normal PDF&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Continuous-Random-Variables_27_0.png" src="../_images/05-Continuous-Random-Variables_27_0.png" />
+</div>
+</div>
+<p>The axis limits can be set manually with <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xlim.html"><code class="docutils literal notranslate"><span class="pre">pyplot.xlim</span></code></a> and <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.ylim.html"><code class="docutils literal notranslate"><span class="pre">pyplot.ylim</span></code></a> If, for example, you wanted the vertical axis to range from 0 to 1, you would follow the call to <code class="docutils literal notranslate"><span class="pre">pyplot.plot</span></code> with <code class="docutils literal notranslate"><span class="pre">pyplot.ylim([0,</span> <span class="pre">1])</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rv</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Continuous-Random-Variables_29_0.png" src="../_images/05-Continuous-Random-Variables_29_0.png" />
+</div>
+</div>
+<p>Finally, to change the color of the plot, add <code class="docutils literal notranslate"><span class="pre">color=&quot;orange&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">color=&quot;green&quot;</span></code>, or whatever your favorite color is! (see <a class="reference external" href="https://matplotlib.org/users/colors.html">Specifying Colors</a> in the Matplotlib documentation)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rv</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Continuous-Random-Variables_31_0.png" src="../_images/05-Continuous-Random-Variables_31_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="universality-with-logistic">
+<h2>Universality with Logistic<a class="headerlink" href="#universality-with-logistic" title="Permalink to this headline">¶</a></h2>
+<p>We proved in Example 5.3.4 that for <span class="math notranslate nohighlight">\(U \sim Unif(0, 1)\)</span>, the r.v.  <span class="math notranslate nohighlight">\(log\left(\frac{U}{1−U}\right)\)</span> follows a Logistic distribution. In SciPy and <code class="docutils literal notranslate"><span class="pre">uniform.rvs</span></code>, we can simply generate a large number of <span class="math notranslate nohighlight">\(Unif(0, 1)\)</span> realizations and transform them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">u</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">))</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 2.0197625 , -0.72108035, -1.86938026, ..., -1.2638552 ,
+        1.8532956 ,  1.46624836])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">x</span></code> contains 10<sup>4</sup> realizations from the distribution of <span class="math notranslate nohighlight">\(log\left(\frac{U}{1−U}\right)\)</span>. We can visualize them with a histogram, using <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html"><code class="docutils literal notranslate"><span class="pre">matplotlib.hist</span></code></a>. The histogram resembles a Logistic PDF, which is reassuring. To control how fine-grained the histogram is, we can set the number of bins in the histogram via the <code class="docutils literal notranslate"><span class="pre">bins</span></code> parameter (the 2nd parameter passed into <code class="docutils literal notranslate"><span class="pre">pyplot.hist</span></code>: <code class="docutils literal notranslate"><span class="pre">hist(x,</span> <span class="pre">100)</span></code> produces a finer histogram, while <code class="docutils literal notranslate"><span class="pre">hist(x,</span> <span class="pre">10)</span></code> produces a coarser histogram.</p>
+<p>To illustrate, we will generate two graphs side-by-side with <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html"><code class="docutils literal notranslate"><span class="pre">pyplot.figure</span></code></a>, and use a <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html"><code class="docutils literal notranslate"><span class="pre">pyplot.subplot</span></code></a> for each graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;bins=100&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;bins=10&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/05-Continuous-Random-Variables_35_0.png" src="../_images/05-Continuous-Random-Variables_35_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="poisson-process-simulation">
+<h2>Poisson process simulation<a class="headerlink" href="#poisson-process-simulation" title="Permalink to this headline">¶</a></h2>
+<p>To simulate <span class="math notranslate nohighlight">\(n\)</span> arrivals in a Poisson process with rate <span class="math notranslate nohighlight">\(\lambda\)</span>, we first generate the interarrival times as i.i.d. Exponentials and store them in variable <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">lambd</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.17627964 0.01902565 0.02146015 0.19802154 0.16173354 0.02476036
+ 0.02394206 0.11207592 0.00051518 0.09787187 0.06122226 0.07313865
+ 0.07720919 0.15936267 0.00195037 0.01965782 0.00122744 0.03186262
+ 0.13671518 0.29913587 0.05325137 0.1329256  0.18825129 0.31339715
+ 0.07390052 0.2792474  0.19905106 0.1237123  0.12739159 0.05063309
+ 0.00787248 0.20327465 0.28319828 0.0039541  0.0084741  0.01842843
+ 0.00354277 0.08189181 0.07338873 0.03824727 0.02011739 0.0211869
+ 0.02824106 0.07150573 0.24463567 0.35755971 0.01220348 0.00555063
+ 0.05732313 0.20553653]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we convert the interarrival times into arrival times using the <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.cumsum.html"><code class="docutils literal notranslate"><span class="pre">numpy.cumsum</span></code></a> function, which stands for “cumulative sum”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.17627964 0.19530529 0.21676545 0.41478698 0.57652053 0.60128088
+ 0.62522295 0.73729887 0.73781405 0.83568592 0.89690818 0.97004683
+ 1.04725602 1.20661869 1.20856907 1.22822689 1.22945433 1.26131695
+ 1.39803213 1.697168   1.75041936 1.88334496 2.07159625 2.38499339
+ 2.45889391 2.73814132 2.93719238 3.06090468 3.18829627 3.23892936
+ 3.24680184 3.4500765  3.73327478 3.73722888 3.74570298 3.76413141
+ 3.76767418 3.849566   3.92295473 3.961202   3.98131938 4.00250628
+ 4.03074735 4.10225307 4.34688874 4.70444845 4.71665193 4.72220256
+ 4.77952569 4.98506222]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The array <code class="docutils literal notranslate"><span class="pre">t</span></code> now contains all the simulated arrival times.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04-Expectation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Expectation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06-Moments.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Moments</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

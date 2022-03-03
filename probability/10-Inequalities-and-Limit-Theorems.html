@@ -1,0 +1,863 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inequalities and Limit Theorems &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/10-Inequalities-and-Limit-Theorems.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Markov Chains" href="11-Markov-Chains.html" />
+    <link rel="prev" title="Conditional Expectation" href="09-Conditional-Expectation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Conditional-Probability.html">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Expectation.html">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Continuous-Random-Variables.html">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Moments.html">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Transformations.html">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Conditional-Expectation.html">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Sampling.html">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/10-Inequalities-and-Limit-Theorems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/10-Inequalities-and-Limit-Theorems.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/10-Inequalities-and-Limit-Theorems.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/10-Inequalities-and-Limit-Theorems.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jensen-s-inequality">
+   Jensen’s inequality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization-of-the-law-of-large-numbers">
+   Visualization of the law of large numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-estimate-of-pi">
+   Monte Carlo estimate of
+   <span class="math notranslate nohighlight">
+    \(\pi\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizations-of-the-central-limit-theorem">
+   Visualizations of the central limit theorem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chi-square-and-student-t-distributions">
+   Chi-Square and Student-
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Inequalities and Limit Theorems</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#jensen-s-inequality">
+   Jensen’s inequality
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization-of-the-law-of-large-numbers">
+   Visualization of the law of large numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-estimate-of-pi">
+   Monte Carlo estimate of
+   <span class="math notranslate nohighlight">
+    \(\pi\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizations-of-the-central-limit-theorem">
+   Visualizations of the central limit theorem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#chi-square-and-student-t-distributions">
+   Chi-Square and Student-
+   <span class="math notranslate nohighlight">
+    \(t\)
+   </span>
+   distributions
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#references">
+     References
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="inequalities-and-limit-theorems">
+<h1>Inequalities and Limit Theorems<a class="headerlink" href="#inequalities-and-limit-theorems" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="jensen-s-inequality">
+<h2>Jensen’s inequality<a class="headerlink" href="#jensen-s-inequality" title="Permalink to this headline">¶</a></h2>
+<p>Python/NumPy/SciPy make it easy to compare the expectations of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(g(X)\)</span> for a given choice of <span class="math notranslate nohighlight">\(g\)</span>, and this allows us to verify some special cases of Jensen’s inequality. For example, suppose we simulate 10<sup>4</sup> times from the <span class="math notranslate nohighlight">\(Expo(1)\)</span> distribution:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">24157817</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>According to Jensen’s inequality, <span class="math notranslate nohighlight">\(\mathbb{E}(log \, X) \leq log \, \mathbb{E} \, X\)</span>. The former can be approximated by <code class="docutils literal notranslate"><span class="pre">numpy.mean(numpy.log(x))</span></code> and the latter can be approximated by <code class="docutils literal notranslate"><span class="pre">numpy.log(numpy.mean(x))</span></code>, so compute both</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">meanlog</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy.mean(numpy.log(x)) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">meanlog</span><span class="p">))</span>
+
+<span class="n">logmean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy.log(numpy.mean(x)) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">logmean</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.mean(numpy.log(x)) = -0.5600958563379892
+numpy.log(numpy.mean(x)) = 0.00800014338803644
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the <span class="math notranslate nohighlight">\(Expo(1)\)</span> distribution, we find that <code class="docutils literal notranslate"><span class="pre">numpy.mean(numpy.log(x))</span></code> is approximately −0.56 (the true value is around −0.577), while <code class="docutils literal notranslate"><span class="pre">numpy.log(numpy.mean(x))</span></code> is approximately 0 (the true value is 0). This indeed suggests <span class="math notranslate nohighlight">\(\mathbb{E}(log \, X) \leq log \, \mathbb{E} \, X\)</span>. We could also compare <code class="docutils literal notranslate"><span class="pre">numpy.mean(x**3)</span></code> to <code class="docutils literal notranslate"><span class="pre">numpy.mean(x)**3</span></code>, or <code class="docutils literal notranslate"><span class="pre">numpy.mean(numpy.sqrt(x))</span></code> to <code class="docutils literal notranslate"><span class="pre">numpy.sqrt(numpy.mean(x))</span></code> - the possibilities are endless.</p>
+</div>
+<div class="section" id="visualization-of-the-law-of-large-numbers">
+<h2>Visualization of the law of large numbers<a class="headerlink" href="#visualization-of-the-law-of-large-numbers" title="Permalink to this headline">¶</a></h2>
+<p>To plot the running proportion of Heads in a sequence of independent fair coin tosses, we first generate the coin tosses themselves:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">39088169</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nsim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we compute <span class="math notranslate nohighlight">\(\bar{X}_n\)</span> for each value of <span class="math notranslate nohighlight">\(n\)</span> and store the results in <code class="docutils literal notranslate"><span class="pre">xbar</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># divide by sequence from 1 to nsim, inclusive</span>
+<span class="n">xbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nsim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above line of code performs element-wise division of the two arrays <code class="docutils literal notranslate"><span class="pre">numpy.cumsum(x)</span></code> and <code class="docutils literal notranslate"><span class="pre">np.arange(1,</span> <span class="pre">nsim+1)</span></code>. Finally, we plot <code class="docutils literal notranslate"><span class="pre">xbar</span></code> against the number of coin tosses:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nsim</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">xbar</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\bar</span><span class="si">{x}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nsim</span><span class="p">,</span> 
+           <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$p=</span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">nsim</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$n$: number of coin tosses&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\bar</span><span class="si">{x}</span><span class="s1">_</span><span class="si">{n}</span><span class="s1">$: proportion of H to $n$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Visualizing the Law of Large Numbers&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10-Inequalities-and-Limit-Theorems_12_0.png" src="../_images/10-Inequalities-and-Limit-Theorems_12_0.png" />
+</div>
+</div>
+<p>You should see that the values of <code class="docutils literal notranslate"><span class="pre">xbar</span></code> approach <code class="docutils literal notranslate"><span class="pre">p</span></code>, by the law of large numbers.</p>
+</div>
+<div class="section" id="monte-carlo-estimate-of-pi">
+<h2>Monte Carlo estimate of <span class="math notranslate nohighlight">\(\pi\)</span><a class="headerlink" href="#monte-carlo-estimate-of-pi" title="Permalink to this headline">¶</a></h2>
+<p>A famous example of Monte Carlo integration is the Monte Carlo estimate of <span class="math notranslate nohighlight">\(\pi\)</span>. The unit disk <span class="math notranslate nohighlight">\({(x, y): x^2 +y^2 ≤ 1}\)</span> is inscribed in the square <span class="math notranslate nohighlight">\([−1, 1] \times [−1, 1]\)</span>, which has area 4. If we generate a large number of points that are Uniform on the square, the proportion of points falling inside the disk is approximately equal to the ratio of the disk’s area to the square’s area, which is <span class="math notranslate nohighlight">\(\pi/4\)</span>. Thus, to estimate <span class="math notranslate nohighlight">\(\pi\)</span> we can take the proportion of points inside the circle and multiply by 4.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>, to generate Uniform points on the 2D square, we can independently generate the <span class="math notranslate nohighlight">\(x\)</span>-coordinate and the <span class="math notranslate nohighlight">\(y\)</span>-coordinate as <span class="math notranslate nohighlight">\(Unif(−1, 1)\)</span> r.v.s, using the results of Example 7.1.22:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">63245986</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nsim</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nsim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s try graphing a small portion of those <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inside</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mf">1.0</span>
+<span class="n">outside</span> <span class="o">=</span> <span class="o">~</span><span class="n">inside</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># we&#39;ll graph the first n co-ordinate pairs</span>
+<span class="c1"># for points inside and points outside of </span>
+<span class="c1"># x**2 + y**2 = 1.0</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">5000</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">inside</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">inside</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#fc8d59&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">outside</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">outside</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="n">n</span><span class="p">],</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#91bfdb&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Monte Carlo estimate of $\pi$: </span><span class="si">{}</span><span class="s1"> / </span><span class="si">{}</span><span class="s1"> points&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nsim</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10-Inequalities-and-Limit-Theorems_17_0.png" src="../_images/10-Inequalities-and-Limit-Theorems_17_0.png" />
+</div>
+</div>
+<p>To count the number of points <em>in</em> the disk, we use <code class="docutils literal notranslate"><span class="pre">numpy.sum(x**2</span> <span class="pre">+</span> <span class="pre">y**2</span> <span class="pre">&lt;</span> <span class="pre">1.0)</span></code>. The array <code class="docutils literal notranslate"><span class="pre">x**2</span> <span class="pre">+</span> <span class="pre">y**2</span> <span class="pre">&lt;</span> <span class="pre">1.0</span></code> is effectively an indicator vector whose i<sup>th</sup> element is <code class="docutils literal notranslate"><span class="pre">True</span></code> (equivalent to 1) if the i<sup>th</sup> point falls <em>inside</em> the disk, and <code class="docutils literal notranslate"><span class="pre">False</span></code> (equivalent to 0) otherwise, so the sum of the boolean elements is the number of points in the disk. To get our estimate of <span class="math notranslate nohighlight">\(\pi\)</span>, we convert the sum into a proportion and multiply by 4. Altogether, we have</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_points_inside</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">est_pi</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">num_points_inside</span> <span class="o">/</span> <span class="n">nsim</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;estimated value for pi: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">est_pi</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>estimated value for pi: 3.143172
+</pre></div>
+</div>
+</div>
+</div>
+<p>How close was your estimate to the actual value of <span class="math notranslate nohighlight">\(\pi\)</span>?</p>
+</div>
+<div class="section" id="visualizations-of-the-central-limit-theorem">
+<h2>Visualizations of the central limit theorem<a class="headerlink" href="#visualizations-of-the-central-limit-theorem" title="Permalink to this headline">¶</a></h2>
+<p>One way to visualize the central limit theorem for a distribution of interest is to plot the distribution of <span class="math notranslate nohighlight">\(\bar{X}_{n}\)</span> for various values of <span class="math notranslate nohighlight">\(n\)</span>, as in Figure 10.5. To do this, we first have to generate i.i.d. <span class="math notranslate nohighlight">\(X_{1}, \, \ldots, \, X_{n}\)</span> a bunch of times from our distribution of interest. For example, suppose that our distribution of interest is <span class="math notranslate nohighlight">\(Unif(0, 1)\)</span>, and we are interested in the distribution of <span class="math notranslate nohighlight">\(\bar{X}_{12}\)</span>, i.e., we set <span class="math notranslate nohighlight">\(n = 12\)</span>. In the following code, we create a matrix of i.i.d. standard Uniforms. The matrix has 12 columns, corresponding to <span class="math notranslate nohighlight">\(X_{1}\)</span> through <span class="math notranslate nohighlight">\(X_{12}\)</span>. Each row of the matrix is a different realization of <span class="math notranslate nohighlight">\(X_{1}\)</span> through <span class="math notranslate nohighlight">\(X_{12}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">102334155</span><span class="p">)</span>
+
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="o">*</span><span class="n">nsim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nsim</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;matrix x has shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>matrix x has shape: (10000, 12)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, to obtain realizations of <span class="math notranslate nohighlight">\(\bar{X}_{12}\)</span>, we simply take the average of each row of the matrix <code class="docutils literal notranslate"><span class="pre">x</span></code>; we can do this by calling the <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.mean.html"><code class="docutils literal notranslate"><span class="pre">numpy.ndarray.mean</span></code></a> method on <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code> object <code class="docutils literal notranslate"><span class="pre">x</span></code>, specifying <code class="docutils literal notranslate"><span class="pre">axis=1</span></code> to take the average of each row of matrix <code class="docutils literal notranslate"><span class="pre">x</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xbar</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we create a histogram:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xbar</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $\bar</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{12}</span><span class="s1">$, $X_i ∼ Unif(0,1)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\bar</span><span class="si">{x}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10-Inequalities-and-Limit-Theorems_26_0.png" src="../_images/10-Inequalities-and-Limit-Theorems_26_0.png" />
+</div>
+</div>
+<p>You should see a histogram that looks Normal. Because the <span class="math notranslate nohighlight">\(Unif(0, 1)\)</span> distribution is symmetric, the CLT kicks in quickly and the Normal approximation for <span class="math notranslate nohighlight">\(\bar{X}_{n}\)</span> works quite well, even for <span class="math notranslate nohighlight">\(n = 12\)</span>. Changing <code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform</span></code> to <code class="docutils literal notranslate"><span class="pre">scipy.stats.expon</span></code>, we see that for <span class="math notranslate nohighlight">\(X_j\)</span> generated from the <span class="math notranslate nohighlight">\(Expo(1)\)</span> distribution, the distribution of <span class="math notranslate nohighlight">\(\bar{X}_{n}\)</span> remains skewed when <span class="math notranslate nohighlight">\(n = 12\)</span>, so a larger value of <span class="math notranslate nohighlight">\(n\)</span> is required before the Normal approximation is adequate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">165580141</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+
+<span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n3</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">256</span>
+
+<span class="n">x1</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n1</span><span class="o">*</span><span class="n">nsim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nsim</span><span class="p">,</span> <span class="n">n1</span><span class="p">))</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n2</span><span class="o">*</span><span class="n">nsim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nsim</span><span class="p">,</span> <span class="n">n2</span><span class="p">))</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">n3</span><span class="o">*</span><span class="n">nsim</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">nsim</span><span class="p">,</span> <span class="n">n3</span><span class="p">))</span>
+
+<span class="n">xbar1</span> <span class="o">=</span> <span class="n">x1</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xbar2</span> <span class="o">=</span> <span class="n">x2</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xbar3</span> <span class="o">=</span> <span class="n">x3</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xbar1</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1b9e77&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $\bar</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{12}</span><span class="s1">$, $X_j \sim \, Expo(1)$&#39;</span><span class="p">)</span>
+
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xbar2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#d95f02&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $\bar</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{32}</span><span class="s1">$, $X_j \sim \, Expo(1)$&#39;</span><span class="p">)</span>
+
+<span class="n">ax3</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xbar3</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#7570b3&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $\bar</span><span class="si">{X}</span><span class="s1">_</span><span class="si">{256}</span><span class="s1">$, $X_j \sim \, Expo(1)$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10-Inequalities-and-Limit-Theorems_28_0.png" src="../_images/10-Inequalities-and-Limit-Theorems_28_0.png" />
+</div>
+</div>
+<p>Have a look at Appendix A below for another neat visualization of the CLT.</p>
+</div>
+<div class="section" id="chi-square-and-student-t-distributions">
+<h2>Chi-Square and Student-<span class="math notranslate nohighlight">\(t\)</span> distributions<a class="headerlink" href="#chi-square-and-student-t-distributions" title="Permalink to this headline">¶</a></h2>
+<p>Although the Chi-Square is just a special case of the Gamma (refer to <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.gamma</span></code></a>), it still has its own functions in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.chi2.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.chi2</span></code></a>: <code class="docutils literal notranslate"><span class="pre">chi2.pdf(x,</span> <span class="pre">n)</span></code> and <code class="docutils literal notranslate"><span class="pre">chi2.cdf(x,</span> <span class="pre">n)</span></code> return the values of the <span class="math notranslate nohighlight">\(\chi^2_{n}\)</span> PDF and CDF at <code class="docutils literal notranslate"><span class="pre">x</span></code>; and <code class="docutils literal notranslate"><span class="pre">chi2.rvs(n,</span> <span class="pre">size=nsim)</span></code> generates <code class="docutils literal notranslate"><span class="pre">nsim</span></code> <span class="math notranslate nohighlight">\(\chi^2_{n}\)</span> r.v.s.</p>
+<p>The graph below illustrates Theorem 10.4.2:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">gamma</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">n_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">.7</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.3</span><span class="p">,</span> <span class="mf">.2</span><span class="p">]</span>
+
+<span class="c1"># graph for Chi-Square</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">n_vals</span><span class="p">):</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#33aaff&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;n=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$X ∼ \chi^2_</span><span class="si">{n}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># graph for Gamma</span>
+<span class="n">lambd</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">n_vals</span><span class="p">):</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gamma</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambd</span><span class="p">),</span>
+             <span class="n">lw</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff9933&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;n=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$X ∼ Gamma(\frac</span><span class="si">{n}{2}</span><span class="s1">, \frac</span><span class="si">{1}{2}</span><span class="s1">)$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">((</span><span class="sa">r</span><span class="s1">&#39;Theorem 10.4.2: $\chi^2_</span><span class="si">{n}</span><span class="s1">$ distribution is the $Gamma(\frac</span><span class="si">{n}{2}</span><span class="s1">,&#39;</span>
+              <span class="sa">r</span><span class="s1">&#39; \, \frac</span><span class="si">{1}{2}</span><span class="s1">)$ distribution&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10-Inequalities-and-Limit-Theorems_31_0.png" src="../_images/10-Inequalities-and-Limit-Theorems_31_0.png" />
+</div>
+</div>
+<p>The Student-<span class="math notranslate nohighlight">\(t\)</span> distribution is supported in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.t</span></code></a>. To evaluate the PDF or CDF of the <span class="math notranslate nohighlight">\(t_n\)</span> distribution at <span class="math notranslate nohighlight">\(x\)</span>, we use <code class="docutils literal notranslate"><span class="pre">t.pdf(x,</span> <span class="pre">n)</span></code> or <code class="docutils literal notranslate"><span class="pre">t.cdf(x,</span> <span class="pre">n)</span></code>. To generate <code class="docutils literal notranslate"><span class="pre">nsim</span></code> r.v.s from the <span class="math notranslate nohighlight">\(t_{n}\)</span> distribution, we use <code class="docutils literal notranslate"><span class="pre">t.rvs(n,</span> <span class="pre">size=nsim)</span></code>. Of course, <code class="docutils literal notranslate"><span class="pre">t.pdf(x,</span> <span class="pre">1)</span></code> is the same as <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.cauchy.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.cauchy</span></code></a>’s <code class="docutils literal notranslate"><span class="pre">cauchy.pdf(x)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span><span class="p">,</span> <span class="n">cauchy</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># graph for Student-t </span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#33aaff&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Student-$t$: $\tt{t.pdf(x, 1)}$&#39;</span><span class="p">)</span>
+
+<span class="c1"># graph for Cauchy</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">cauchy</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">3.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ff9933&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Cauchy: $\tt{cauchy.pdf(x)}$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Student-$t$ vs. Cauchy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10-Inequalities-and-Limit-Theorems_33_0.png" src="../_images/10-Inequalities-and-Limit-Theorems_33_0.png" />
+</div>
+</div>
+<p><em>Can you use the central limit theorem to explain why the distribution of particles at the bottom is approximately Normal?</em></p>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
+<p>This interactive visualization extends ideas from the following blogposts:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://blog.vctr.me/posts/central-limit-theorem.html">Central Limit Theorem Visualized in D3</a></p></li>
+<li><p><a class="reference external" href="https://www.stefaanlippens.net/jupyter-custom-d3-visualization.html">Custom D3.js Visualization in a Jupyter Notebook</a></p></li>
+</ul>
+<hr class="docutils" />
+<p>Joseph K. Blitzstein and Jessica Hwang, Harvard University and Stanford University, © 2019 by Taylor and Francis Group, LLC</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="09-Conditional-Expectation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Conditional Expectation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="11-Markov-Chains.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Markov Chains</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,960 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditional Probability &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/02-Conditional-Probability.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Random Variables and their Distributions" href="03-Random-Variables-and-their-Distributions.html" />
+    <link rel="prev" title="Probability and Counting" href="01-Probability-and-Counting.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Expectation.html">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Continuous-Random-Variables.html">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Moments.html">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Transformations.html">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Conditional-Expectation.html">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Sampling.html">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/02-Conditional-Probability.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/02-Conditional-Probability.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/02-Conditional-Probability.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/02-Conditional-Probability.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulating-the-frequentist-interpretation">
+   Simulating the frequentist interpretation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monty-hall-simulation">
+   Monty Hall simulation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#as-a-short-simulation-program">
+     As a short simulation program
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#as-an-interactive-widget-in-this-jupyter-notebook">
+     As an interactive widget in this Jupyter notebook
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Conditional Probability</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulating-the-frequentist-interpretation">
+   Simulating the frequentist interpretation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monty-hall-simulation">
+   Monty Hall simulation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#as-a-short-simulation-program">
+     As a short simulation program
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#as-an-interactive-widget-in-this-jupyter-notebook">
+     As an interactive widget in this Jupyter notebook
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="conditional-probability">
+<h1>Conditional Probability<a class="headerlink" href="#conditional-probability" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="simulating-the-frequentist-interpretation">
+<h1>Simulating the frequentist interpretation<a class="headerlink" href="#simulating-the-frequentist-interpretation" title="Permalink to this headline">¶</a></h1>
+<p>Recall that the frequentist interpretation of conditional probability based on a large number <code class="docutils literal notranslate"><span class="pre">n</span></code> of repetitions of an experiment is <span class="math notranslate nohighlight">\(P(A|B) ≈ n_{AB}/n_{B}\)</span>, where <span class="math notranslate nohighlight">\(n_{AB}\)</span> is the number of times that <span class="math notranslate nohighlight">\(A \cap B\)</span> occurs and <span class="math notranslate nohighlight">\(n_{B}\)</span> is the number of times that <span class="math notranslate nohighlight">\(B\)</span> occurs. Let’s try this out by simulation, and verify the results of Example 2.2.5. So let’s use <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.random.choice.html"><code class="docutils literal notranslate"><span class="pre">numpy.random.choice</span></code></a> to simulate <code class="docutils literal notranslate"><span class="pre">n</span></code> families, each with two children.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">child1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+<span class="n">child2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;child1:</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">child1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;child2:</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">child2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>child1:
+[2 1 1 ... 1 2 1]
+
+child2:
+[2 2 2 ... 2 2 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">child1</span></code> is a NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code> of length <code class="docutils literal notranslate"><span class="pre">n</span></code>, where each element is a 1 or a 2. Letting 1 stand for “girl” and 2 stand for “boy”, this <code class="docutils literal notranslate"><span class="pre">array</span></code> represents the gender of the elder child in each of the <code class="docutils literal notranslate"><span class="pre">n</span></code> families. Similarly, <code class="docutils literal notranslate"><span class="pre">child2</span></code> represents the gender of the younger child in each family.</p>
+<p>Alternatively, we could have used</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;girl&quot;</span><span class="p">,</span> <span class="s2">&quot;boy&quot;</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;boy&#39;, &#39;boy&#39;, &#39;boy&#39;, ..., &#39;boy&#39;, &#39;boy&#39;, &#39;boy&#39;], dtype=&#39;&lt;U4&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>but it is more convenient working with numerical values.</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be the event that both children are girls and <span class="math notranslate nohighlight">\(B\)</span> the event that the elder is a girl. Following the frequentist interpretation, we count the number of repetitions where <span class="math notranslate nohighlight">\(B\)</span> occurred and name it <code class="docutils literal notranslate"><span class="pre">n_b</span></code>, and we also count the number of repetitions where <span class="math notranslate nohighlight">\(A \cap B\)</span> occurred and name it <code class="docutils literal notranslate"><span class="pre">n_ab</span></code>. Finally, we divide <code class="docutils literal notranslate"><span class="pre">n_ab</span></code> by <code class="docutils literal notranslate"> <span class="pre">n_b</span></code> to approximate <span class="math notranslate nohighlight">\(P(A|B)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">child1</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">n_ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">child1</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">child2</span><span class="o">==</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P(both girls | elder is girl) = </span><span class="si">{:0.2F}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_ab</span> <span class="o">/</span> <span class="n">n_b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(both girls | elder is girl) = 0.50
+</pre></div>
+</div>
+</div>
+</div>
+<p>The ampersand <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> is an elementwise <span class="math notranslate nohighlight">\(AND\)</span>, so <code class="docutils literal notranslate"><span class="pre">n_ab</span></code> is the number of families where both the first child and the second child are girls. When we ran this code, we got 0.50, confirming our answer <span class="math notranslate nohighlight">\(P(\text{both girls | elder is a girl}) = 1/2\)</span>.</p>
+<p>Now let <span class="math notranslate nohighlight">\(A\)</span> be the event that both children are girls and <span class="math notranslate nohighlight">\(B\)</span> the event that at least one of the children is a girl. Then <span class="math notranslate nohighlight">\(A \cap B\)</span> is the same, but <code class="docutils literal notranslate"><span class="pre">n_b</span></code> needs to count the number of families where at least one child is a girl. This is accomplished with the elementwise <span class="math notranslate nohighlight">\(OR\)</span> operator <code class="docutils literal notranslate"><span class="pre">|</span></code> (this is not a conditioning bar; it is an inclusive <span class="math notranslate nohighlight">\(OR\)</span>, returning <code class="docutils literal notranslate"><span class="pre">True</span></code> if at least one element is <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">child1</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">child2</span><span class="o">==</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">n_ab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">child1</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">child2</span><span class="o">==</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P(both girls | at least one girl) = </span><span class="si">{:0.2F}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_ab</span> <span class="o">/</span> <span class="n">n_b</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(both girls | at least one girl) = 0.33
+</pre></div>
+</div>
+</div>
+</div>
+<p>For us, the result was 0.33, confirming that <span class="math notranslate nohighlight">\(P(\text{both girls | at least one girl}) = 1/3\)</span>.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="monty-hall-simulation">
+<h1>Monty Hall simulation<a class="headerlink" href="#monty-hall-simulation" title="Permalink to this headline">¶</a></h1>
+<p>Many long, bitter debates about the Monty Hall problem could have been averted by trying it out with a simulation. To study how well the never-switch strategy performs, let’s generate 10<sup>5</sup> runs of the Monty Hall game. To simplify notation, assume the contestant always chooses door 1. Then we can generate a vector specifying which door has the car for each repetition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">55</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">cardoor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The never-switch strategy has success rate </span><span class="si">{:.3F}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cardoor</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The never-switch strategy has success rate 0.331
+</pre></div>
+</div>
+</div>
+</div>
+<p>At this point we could generate the vector specifying which doors Monty opens, but that’s unnecessary since the never-switch strategy succeeds if and only if door 1 has the car! So the fraction of times when the never-switch strategy succeeds is <code class="docutils literal notranslate"><span class="pre">numpy.sum(cardoor==1)/n</span></code>, which was 0.331in our simulation. This is very close to 1/3.</p>
+<p>What if we want to play the Monty Hall game interactively? We can do this by programming a Python class that would let us play interactively or let us run a simulation across many trials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Monty</span><span class="p">():</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Object creation function. &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">doors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare_game</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_success_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Return the rate of success in this series of plays: num. wins / num. plays. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_plays</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">1.0</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">num_wins</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_plays</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.0</span>
+
+    <span class="k">def</span> <span class="nf">prepare_game</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Prepare initial values for game play, and randonly choose the door with the car. &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_plays</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_wins</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardoor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">montys_choice</span> <span class="o">=</span> <span class="kc">None</span>
+       
+    <span class="k">def</span> <span class="nf">choose_door</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">door</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Player chooses a door at state 0. Monty will choose a remaining door to reveal a goat. &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">=</span> <span class="n">door</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">montys_choice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="o">!=</span><span class="bp">self</span><span class="o">.</span><span class="n">players_choice</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="o">!=</span><span class="bp">self</span><span class="o">.</span><span class="n">cardoor</span><span class="p">)])</span>
+        
+    <span class="k">def</span> <span class="nf">switch_door</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">do_switch</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Player has the option to switch from the door she has chosen to the remaining unopened door. </span>
+<span class="sd">        </span>
+<span class="sd">            If the door the player has selected is the same as the cardoor, then num. of wins is incremented.</span>
+<span class="sd">            </span>
+<span class="sd">            Finally, number of plays will be incremented.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">do_switch</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="o">!=</span><span class="bp">self</span><span class="o">.</span><span class="n">players_choice</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="o">!=</span><span class="bp">self</span><span class="o">.</span><span class="n">montys_choice</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">cardoor</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">num_wins</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_plays</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+    <span class="k">def</span> <span class="nf">continue_play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Player opts to continue playing in this series. </span>
+<span class="sd">        </span>
+<span class="sd">            The game is returned to state 0, but the counters for num. wins and num. plays</span>
+<span class="sd">            will be kept intact and running.</span>
+<span class="sd">            </span>
+<span class="sd">            A new cardoor is randomly chosen.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cardoor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doors</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">montys_choice</span> <span class="o">=</span> <span class="kc">None</span>
+            
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; The entire game state is returned to its initial state. </span>
+<span class="sd">        </span>
+<span class="sd">            All counters and variable holdling state are re-initialized.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare_game</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In brief:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Monty</span></code> class represents a simple state model for the game.</p></li>
+<li><p>When an instance of the <code class="docutils literal notranslate"><span class="pre">Monty</span></code> game is created, game state-holding variables are initialized and a <code class="docutils literal notranslate"><span class="pre">cardoor</span></code> randomly chosen.</p></li>
+<li><p>After the player initially picks a door, <code class="docutils literal notranslate"><span class="pre">Monty</span></code> will choose a remaining door that does not have car behind it.</p></li>
+<li><p>The player can then choose to switch to the other, remaining unopened door, or stick with her initial choice.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Monty</span></code> will then see if the player wins or not, and updates the state-holding variables for num. wins and num. plays.</p></li>
+<li><p>The player can continue playing, or stop and reset the game to its original state.</p></li>
+</ul>
+<div class="section" id="as-a-short-simulation-program">
+<h2>As a short simulation program<a class="headerlink" href="#as-a-short-simulation-program" title="Permalink to this headline">¶</a></h2>
+<p>Here is an example showing how to use the <code class="docutils literal notranslate"><span class="pre">Monty</span></code> class above to run a simulation to see how often the switching strategy succeeds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">89</span><span class="p">)</span>
+
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+
+<span class="n">game</span> <span class="o">=</span> <span class="n">Monty</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">choose_door</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]))</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">switch_door</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">game</span><span class="o">.</span><span class="n">continue_play</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;In </span><span class="si">{}</span><span class="s1"> trials, the switching strategy won </span><span class="si">{}</span><span class="s1"> times.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">num_plays</span><span class="p">,</span> <span class="n">game</span><span class="o">.</span><span class="n">num_wins</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Success rate is </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">game</span><span class="o">.</span><span class="n">get_success_rate</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>In 100000 trials, the switching strategy won 66730 times.
+Success rate is 0.667
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="as-an-interactive-widget-in-this-jupyter-notebook">
+<h2>As an interactive widget in this Jupyter notebook<a class="headerlink" href="#as-an-interactive-widget-in-this-jupyter-notebook" title="Permalink to this headline">¶</a></h2>
+<p>Optionally, the <code class="docutils literal notranslate"><span class="pre">Monty</span></code> Python class above can also be used as an engine to power an interactive widget that lets you play the three-door game <em>in the browser</em> using <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/user_guide.html"><code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code> </a>.</p>
+<p>To run the interactive widget, make sure you have the <code class="docutils literal notranslate"><span class="pre">ipywidgets</span></code> package installed (v7.4.2 or greater).</p>
+<p>To install with the <code class="docutils literal notranslate"><span class="pre">conda</span></code> package manager, execute the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>conda install ipywidgets
+</pre></div>
+</div>
+<p>To install with the <code class="docutils literal notranslate"><span class="pre">pip</span></code> package manager, execute the following command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install ipywidgets
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">Box</span><span class="p">,</span> <span class="n">Button</span><span class="p">,</span> <span class="n">ButtonStyle</span><span class="p">,</span> <span class="n">FloatText</span><span class="p">,</span> <span class="n">GridBox</span><span class="p">,</span> <span class="n">IntText</span><span class="p">,</span> <span class="n">Label</span><span class="p">,</span> <span class="n">Layout</span><span class="p">,</span> <span class="n">HBox</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The doors in the game are represented by <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#Button"><code class="docutils literal notranslate"><span class="pre">ipywidgets.Button</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">door1</span>  <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Door 1&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">flex</span><span class="o">=</span><span class="s1">&#39;1 1 auto&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">))</span>
+<span class="n">door2</span>  <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Door 2&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">door1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
+<span class="n">door3</span>  <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;Door 3&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">door1</span><span class="o">.</span><span class="n">layout</span><span class="p">)</span>
+<span class="n">doors_arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">door1</span><span class="p">,</span> <span class="n">door2</span><span class="p">,</span> <span class="n">door3</span><span class="p">]</span>
+<span class="n">doors</span>  <span class="o">=</span> <span class="n">Box</span><span class="p">(</span><span class="n">doors_arr</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;doors&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>State-holding variables in the <code class="docutils literal notranslate"><span class="pre">Monty</span></code> object are displayed using <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#IntText"><code class="docutils literal notranslate"><span class="pre">ipywidgets.IntText</span></code></a> (for the <code class="docutils literal notranslate"><span class="pre">num_wins</span></code> and <code class="docutils literal notranslate"><span class="pre">num_plays</span></code>); and <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#FloatText"><code class="docutils literal notranslate"><span class="pre">ipywidgets.FloatText</span></code></a> (for the success rate).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label1</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;number of plays&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;label1&#39;</span><span class="p">))</span>
+<span class="n">text1</span>  <span class="o">=</span> <span class="n">IntText</span><span class="p">(</span><span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;text1&#39;</span><span class="p">))</span>
+
+<span class="n">label2</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;number of wins&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;label2&#39;</span><span class="p">))</span>
+<span class="n">text2</span>  <span class="o">=</span> <span class="n">IntText</span><span class="p">(</span><span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;text2&#39;</span><span class="p">))</span>
+
+<span class="n">label3</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;success rate&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;label3&#39;</span><span class="p">))</span>
+<span class="n">text3</span>  <span class="o">=</span> <span class="n">FloatText</span><span class="p">(</span><span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;text3&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20List.html#Label"><code class="docutils literal notranslate"><span class="pre">ipywidgets.Label</span></code></a> is used to display the title and descriptive text in the game widget.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">banner</span> <span class="o">=</span> <span class="n">Box</span><span class="p">([</span><span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;Interactive widget: Monty Hall problem&#39;</span><span class="p">,</span> 
+                    <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;50%&#39;</span><span class="p">))],</span> 
+             <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">justify_content</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;banner&#39;</span><span class="p">))</span>
+
+<span class="n">status</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s1">&#39;Pick a door...&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;status&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Buttons allowing for further user actions are located at the bottom of the widget.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">reveal</span></code> button is used to show what’s behind all of the doors after the player makes her final choice.</p></li>
+<li><p>After the player completes a round of play, she can click the <code class="docutils literal notranslate"><span class="pre">continue</span></code> button to keep counting game state (num. wins and num. plays)</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">reset</span></code> button lets the player return the game to its original state after completing a round of play.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">button_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">flex</span><span class="o">=</span><span class="s1">&#39;1 1 auto&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<span class="n">reveal</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;reveal&#39;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="s1">&#39;open selected door&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">button_layout</span><span class="p">,</span> <span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">contin</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="s1">&#39;continue play&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">button_layout</span><span class="p">,</span> <span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">reset</span>  <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;reset&#39;</span><span class="p">,</span> <span class="n">tooltip</span><span class="o">=</span><span class="s1">&#39;reset game&#39;</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="n">button_layout</span><span class="p">,</span> <span class="n">disabled</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">actions</span>  <span class="o">=</span> <span class="n">Box</span><span class="p">([</span><span class="n">reveal</span><span class="p">,</span> <span class="n">contin</span><span class="p">,</span> <span class="n">reset</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">grid_area</span><span class="o">=</span><span class="s1">&#39;actions&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Styling.html#The-Grid-layout"><code class="docutils literal notranslate"><span class="pre">ipywidgets.GridBox</span></code></a> helps us lay out the user interface elements for the <code class="docutils literal notranslate"><span class="pre">Monty</span></code> game widget.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ui</span> <span class="o">=</span> <span class="n">GridBox</span><span class="p">(</span><span class="n">children</span><span class="o">=</span><span class="p">[</span><span class="n">banner</span><span class="p">,</span> <span class="n">doors</span><span class="p">,</span> <span class="n">label1</span><span class="p">,</span> <span class="n">text1</span><span class="p">,</span> <span class="n">label2</span><span class="p">,</span> <span class="n">text2</span><span class="p">,</span> <span class="n">label3</span><span class="p">,</span> <span class="n">text3</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">actions</span><span class="p">],</span>
+        <span class="n">layout</span><span class="o">=</span><span class="n">Layout</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="s1">&#39;50%&#39;</span><span class="p">,</span>
+            <span class="n">grid_template_rows</span><span class="o">=</span><span class="s1">&#39;auto auto auto auto auto auto auto&#39;</span><span class="p">,</span>
+            <span class="n">grid_template_columns</span><span class="o">=</span><span class="s1">&#39;25</span><span class="si">% 25%</span><span class="s1"> 25</span><span class="si">% 25%</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">grid_template_areas</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">                &quot;banner banner banner banner&quot;</span>
+<span class="s1">                &quot;doors doors doors doors&quot;</span>
+<span class="s1">                &quot;label1 label1 text1 text1&quot;</span>
+<span class="s1">                &quot;label2 label2 text2 text2&quot;</span>
+<span class="s1">                &quot;label3 label3 text3 text3&quot;</span>
+<span class="s1">                &quot;status status status status&quot;</span>
+<span class="s1">                &quot;. . actions actions&quot;</span>
+<span class="s1">            &#39;&#39;&#39;</span>
+        <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We lastly create some functions to connect the widget to the <code class="docutils literal notranslate"><span class="pre">Monty</span></code> game object. These functions adapt player action <a class="reference external" href="https://ipywidgets.readthedocs.io/en/stable/examples/Widget%20Events.html#Example">events</a> to state changes in the <code class="docutils literal notranslate"><span class="pre">Monty</span></code> object, and then update the widget user interface accordingly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uigame</span> <span class="o">=</span> <span class="n">Monty</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">reset_ui</span><span class="p">(</span><span class="n">disable_reset</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return widget elements to their initial state.</span>
+<span class="sd">        Do not disable the reset button in the case of continue.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doors_arr</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Door </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">button_style</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            
+    <span class="n">reveal</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">contin</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">reset</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="n">disable_reset</span>
+    
+<span class="k">def</span> <span class="nf">update_status</span><span class="p">(</span><span class="n">new_status</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Update the widget text fields for displaying present game status. &quot;&quot;&quot;</span>
+    <span class="n">text1</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">uigame</span><span class="o">.</span><span class="n">num_plays</span>
+    <span class="n">text2</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">uigame</span><span class="o">.</span><span class="n">num_wins</span>
+    <span class="n">text3</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">uigame</span><span class="o">.</span><span class="n">get_success_rate</span><span class="p">()</span>
+    <span class="n">status</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">new_status</span>
+    
+<span class="k">def</span> <span class="nf">update_ui_reveal</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot; Helper function to update the widget after the player clicks the reveal button. &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">uigame</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">==</span> <span class="n">uigame</span><span class="o">.</span><span class="n">cardoor</span><span class="p">:</span>
+        <span class="n">new_status</span> <span class="o">=</span> <span class="s1">&#39;You win! Continue playing?&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_status</span> <span class="o">=</span> <span class="s1">&#39;Sorry, you lose. Continue playing?&#39;</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doors_arr</span><span class="p">):</span>
+        <span class="n">d</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">uigame</span><span class="o">.</span><span class="n">cardoor</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;car&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;goat&#39;</span>
+        <span class="k">if</span> <span class="n">uigame</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">uigame</span><span class="o">.</span><span class="n">players_choice</span> <span class="o">==</span> <span class="n">uigame</span><span class="o">.</span><span class="n">cardoor</span><span class="p">:</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">button_style</span> <span class="o">=</span> <span class="s1">&#39;success&#39;</span>   
+                <span class="n">d</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="s1">&#39;check&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">button_style</span> <span class="o">=</span> <span class="s1">&#39;danger&#39;</span> 
+                <span class="n">d</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="s1">&#39;times&#39;</span>
+    <span class="n">update_status</span><span class="p">(</span><span class="n">new_status</span><span class="p">)</span>
+    <span class="n">reveal</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">contin</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">reset</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">False</span>    
+    
+<span class="k">def</span> <span class="nf">on_button_clicked</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>  
+    <span class="sd">&quot;&quot;&quot;  Event-handling function that maps button click events in the widget </span>
+<span class="sd">         to corresponding functions in Monty, and updates the user interface</span>
+<span class="sd">         according to the present game state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">uigame</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Door 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Door 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Door 3&#39;</span><span class="p">]:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">uigame</span><span class="o">.</span><span class="n">choose_door</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+            <span class="n">b</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">b</span><span class="o">.</span><span class="n">button_style</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span>
+
+            <span class="n">m</span> <span class="o">=</span> <span class="n">doors_arr</span><span class="p">[</span><span class="n">uigame</span><span class="o">.</span><span class="n">montys_choice</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;goat&#39;</span>
+
+            <span class="n">unopened</span> <span class="o">=</span> <span class="n">uigame</span><span class="o">.</span><span class="n">doors</span><span class="p">[(</span><span class="n">uigame</span><span class="o">.</span><span class="n">doors</span> <span class="o">!=</span> <span class="n">uigame</span><span class="o">.</span><span class="n">players_choice</span><span class="p">)</span> <span class="o">&amp;</span>
+                                        <span class="p">(</span><span class="n">uigame</span><span class="o">.</span><span class="n">doors</span> <span class="o">!=</span> <span class="n">uigame</span><span class="o">.</span><span class="n">montys_choice</span><span class="p">)][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">status</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;Monty reveals a goat behind Door </span><span class="si">{}</span><span class="s1">. Click Door </span><span class="si">{}</span><span class="s1"> to switch, or </span><span class="se">\&#39;</span><span class="s1">reveal</span><span class="se">\&#39;</span><span class="s1"> Door </span><span class="si">{}</span><span class="s1">.&#39;</span> \
+                            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uigame</span><span class="o">.</span><span class="n">montys_choice</span><span class="p">,</span> <span class="n">unopened</span><span class="p">,</span> <span class="n">uigame</span><span class="o">.</span><span class="n">players_choice</span><span class="p">)</span>
+
+            <span class="n">reveal</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">reset</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;reset&#39;</span><span class="p">:</span>
+                <span class="n">uigame</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+                <span class="n">reset_ui</span><span class="p">()</span>
+                <span class="n">update_status</span><span class="p">(</span><span class="s1">&#39;Pick a door...&#39;</span><span class="p">)</span>    
+    <span class="k">elif</span> <span class="n">uigame</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Door 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Door 2&#39;</span><span class="p">,</span> <span class="s1">&#39;Door 3&#39;</span><span class="p">]:</span>
+            <span class="n">prev_choice</span> <span class="o">=</span> <span class="n">uigame</span><span class="o">.</span><span class="n">players_choice</span>
+            <span class="n">uigame</span><span class="o">.</span><span class="n">switch_door</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            
+            <span class="n">pb</span> <span class="o">=</span> <span class="n">doors_arr</span><span class="p">[</span><span class="n">prev_choice</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">pb</span><span class="o">.</span><span class="n">icon</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">pb</span><span class="o">.</span><span class="n">button_style</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            
+            <span class="n">b</span><span class="o">.</span><span class="n">disabled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">b</span><span class="o">.</span><span class="n">button_style</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span>
+            
+            <span class="n">status</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;Now click </span><span class="se">\&#39;</span><span class="s1">reveal</span><span class="se">\&#39;</span><span class="s1"> to see what</span><span class="se">\&#39;</span><span class="s1">s behind Door </span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uigame</span><span class="o">.</span><span class="n">players_choice</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;reset&#39;</span><span class="p">:</span>
+            <span class="n">uigame</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="n">reset_ui</span><span class="p">()</span>
+            <span class="n">update_status</span><span class="p">(</span><span class="s1">&#39;Pick a door...&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;reveal&#39;</span><span class="p">:</span>
+            <span class="n">uigame</span><span class="o">.</span><span class="n">switch_door</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">update_ui_reveal</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">uigame</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;reveal&#39;</span><span class="p">:</span>
+            <span class="n">update_ui_reveal</span><span class="p">()</span>  
+        <span class="k">else</span><span class="p">:</span>            
+            <span class="k">if</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;continue&#39;</span><span class="p">:</span>
+                <span class="n">uigame</span><span class="o">.</span><span class="n">continue_play</span><span class="p">()</span>
+                <span class="n">reset_ui</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">update_status</span><span class="p">(</span><span class="s1">&#39;Pick a door once more...&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">b</span><span class="o">.</span><span class="n">description</span> <span class="o">==</span> <span class="s1">&#39;reset&#39;</span><span class="p">:</span>
+                <span class="n">uigame</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+                <span class="n">reset_ui</span><span class="p">()</span>
+                <span class="n">update_status</span><span class="p">(</span><span class="s1">&#39;Pick a door...&#39;</span><span class="p">)</span>
+
+<span class="c1"># hook up all buttons to our event-handling function</span>
+<span class="n">door1</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_button_clicked</span><span class="p">)</span>
+<span class="n">door2</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_button_clicked</span><span class="p">)</span>
+<span class="n">door3</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_button_clicked</span><span class="p">)</span>
+<span class="n">reveal</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_button_clicked</span><span class="p">)</span>
+<span class="n">contin</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_button_clicked</span><span class="p">)</span>
+<span class="n">reset</span><span class="o">.</span><span class="n">on_click</span><span class="p">(</span><span class="n">on_button_clicked</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">ui</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "ce50a45576624194a8e064abba500eae", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>How to play:</p>
+<ul class="simple">
+<li><p>Click a door to select.</p></li>
+<li><p>Monty will select a remaining door and open to reveal a goat.</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">reveal</span></code> button to open your selected door.</p></li>
+<li><p>Or click the remaining unopened Door button to switch your door choice, and then click <code class="docutils literal notranslate"><span class="pre">reveal</span></code>.</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">continue</span></code> button to keep playing.</p></li>
+<li><p>You may click the <code class="docutils literal notranslate"><span class="pre">reset</span></code> button at any time to return the game back to its initial state.</p></li>
+</ul>
+<hr class="docutils" />
+<p>Joseph K. Blitzstein and Jessica Hwang, Harvard University and Stanford University, © 2019 by Taylor and Francis Group, LLC</p>
+</div>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"004715cdd030448fa0ca7a5f23f870d0": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "0794e473562745578ea2a134d0b52ae7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": "\n                \"banner banner banner banner\"\n                \"doors doors doors doors\"\n                \"label1 label1 text1 text1\"\n                \"label2 label2 text2 text2\"\n                \"label3 label3 text3 text3\"\n                \"status status status status\"\n                \". . actions actions\"\n            ", "grid_template_columns": "25% 25% 25% 25%", "grid_template_rows": "auto auto auto auto auto auto auto", "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "50%"}}, "0b1fc2e945ab42078124550c90d10400": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "14955a1e940343529f1ff7f15c6b6880": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "FloatTextModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatTextModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "FloatTextView", "continuous_update": false, "description": "", "description_tooltip": null, "disabled": true, "layout": "IPY_MODEL_49ad42fe327f40a68309169ef8e5ecf7", "step": null, "style": "IPY_MODEL_3b8ce3da1b1d49039a15ce3df38be5c2", "value": 0.0}}, "1b79ae1332074c50aa18a26f5fb29364": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "label3", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "1c8a39172f1443b18b077255c166a4a8": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "21062804ace84b409719cf9ac523dde6": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "BoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "BoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "BoxView", "box_style": "", "children": ["IPY_MODEL_ef84f7907c2b4a2da79f276d6d0788c2", "IPY_MODEL_de5cef57c4bc4b76b3d64a57f125a45b", "IPY_MODEL_3827605600244313a41a191deb50142f"], "layout": "IPY_MODEL_e013d5db3cf84c71b25895d3475d3e96"}}, "257f7bbd84ad420c843ae8b2995b7b42": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "LabelModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "LabelModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "LabelView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_c71c862a98514b6996d64b04c3aedbf8", "placeholder": "\u200b", "style": "IPY_MODEL_e775c5721403481f9f590039496b762e", "value": "number of wins"}}, "2ec1a424990e43268abc688ff5ee98cf": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntTextModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntTextModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntTextView", "continuous_update": false, "description": "", "description_tooltip": null, "disabled": true, "layout": "IPY_MODEL_f2bbd095beb34e22ab941e6ab21b23a2", "step": 1, "style": "IPY_MODEL_e815eba921e8419f8a224c4fb0158a04", "value": 0}}, "3224fcb7963a44d1bc8408955f6f5748": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "IntTextModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntTextModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntTextView", "continuous_update": false, "description": "", "description_tooltip": null, "disabled": true, "layout": "IPY_MODEL_721cd5966805477ca1ba9103ab06694a", "step": 1, "style": "IPY_MODEL_cbec4e177a5b4f8c80bcba1bc13c3d05", "value": 0}}, "3827605600244313a41a191deb50142f": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "", "description": "Door 3", "disabled": false, "icon": "", "layout": "IPY_MODEL_606c9167feef4f65b93334845032d8d0", "style": "IPY_MODEL_f768a7d409b14a049ff49def6fe53f30", "tooltip": ""}}, "3b8ce3da1b1d49039a15ce3df38be5c2": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "3f75d049f31c454a828b197025db47a0": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "LabelModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "LabelModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "LabelView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_d1419ce37ae2471d8777301281123546", "placeholder": "\u200b", "style": "IPY_MODEL_f1f63b7f883e47b8a428a5f11628fa08", "value": "Interactive widget: Monty Hall problem"}}, "49ad42fe327f40a68309169ef8e5ecf7": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "text3", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "54a6b206d8bd4c3ea0a99c690ec261b0": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "banner", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": "center", "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "55245b4ce62847758a6dfcdaa7efba55": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "593e71de4c284252a7b7c8e4578d022b": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "status", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "606c9167feef4f65b93334845032d8d0": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": "1 1 auto", "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "65e8d66e20894ea5a2e10f5347bdbce4": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "label1", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "6fca99deff934564acb12391d9a8f7cc": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "BoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "BoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "BoxView", "box_style": "", "children": ["IPY_MODEL_beaccbf135a441cb948d259efbc27014", "IPY_MODEL_7a0e074ccc9a4c12bb7cdba1d2a52ce4", "IPY_MODEL_b0bce0b5cb444f12adb2f144891247ed"], "layout": "IPY_MODEL_7d1cd439732243bca3a66dd7bd848b9c"}}, "721cd5966805477ca1ba9103ab06694a": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "text1", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "7a0e074ccc9a4c12bb7cdba1d2a52ce4": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "", "description": "continue", "disabled": true, "icon": "", "layout": "IPY_MODEL_b672c410dbcc476dbad577b1a80f3da5", "style": "IPY_MODEL_b7a163f7f6bc4ebab8777feaf171cb07", "tooltip": "continue play"}}, "7d1cd439732243bca3a66dd7bd848b9c": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "actions", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "945bb77cd0894667b018597fa8d0b988": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "b022bde4ee1b4b2daf297f3bbc4855f2": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "LabelModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "LabelModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "LabelView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_1b79ae1332074c50aa18a26f5fb29364", "placeholder": "\u200b", "style": "IPY_MODEL_004715cdd030448fa0ca7a5f23f870d0", "value": "success rate"}}, "b0bce0b5cb444f12adb2f144891247ed": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "", "description": "reset", "disabled": true, "icon": "", "layout": "IPY_MODEL_b672c410dbcc476dbad577b1a80f3da5", "style": "IPY_MODEL_0b1fc2e945ab42078124550c90d10400", "tooltip": "reset game"}}, "b5fac7926c3a43f09fe21ae349d1a854": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "LabelModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "LabelModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "LabelView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_65e8d66e20894ea5a2e10f5347bdbce4", "placeholder": "\u200b", "style": "IPY_MODEL_945bb77cd0894667b018597fa8d0b988", "value": "number of plays"}}, "b672c410dbcc476dbad577b1a80f3da5": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": "1 1 auto", "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "b7a163f7f6bc4ebab8777feaf171cb07": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "beaccbf135a441cb948d259efbc27014": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "", "description": "reveal", "disabled": true, "icon": "", "layout": "IPY_MODEL_b672c410dbcc476dbad577b1a80f3da5", "style": "IPY_MODEL_feedc0c7270a4de7b5b109439625b9ae", "tooltip": "open selected door"}}, "c71c862a98514b6996d64b04c3aedbf8": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "label2", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "cbec4e177a5b4f8c80bcba1bc13c3d05": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "ce50a45576624194a8e064abba500eae": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "GridBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "GridBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "GridBoxView", "box_style": "", "children": ["IPY_MODEL_dea5274c48f24a99a4e1fd6a8bcb9a65", "IPY_MODEL_21062804ace84b409719cf9ac523dde6", "IPY_MODEL_b5fac7926c3a43f09fe21ae349d1a854", "IPY_MODEL_3224fcb7963a44d1bc8408955f6f5748", "IPY_MODEL_257f7bbd84ad420c843ae8b2995b7b42", "IPY_MODEL_2ec1a424990e43268abc688ff5ee98cf", "IPY_MODEL_b022bde4ee1b4b2daf297f3bbc4855f2", "IPY_MODEL_14955a1e940343529f1ff7f15c6b6880", "IPY_MODEL_e09f96d9bd114bd698584b1d7377599c", "IPY_MODEL_6fca99deff934564acb12391d9a8f7cc"], "layout": "IPY_MODEL_0794e473562745578ea2a134d0b52ae7"}}, "d1419ce37ae2471d8777301281123546": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "50%"}}, "de5cef57c4bc4b76b3d64a57f125a45b": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "", "description": "Door 2", "disabled": false, "icon": "", "layout": "IPY_MODEL_606c9167feef4f65b93334845032d8d0", "style": "IPY_MODEL_1c8a39172f1443b18b077255c166a4a8", "tooltip": ""}}, "dea5274c48f24a99a4e1fd6a8bcb9a65": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "BoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "BoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "BoxView", "box_style": "", "children": ["IPY_MODEL_3f75d049f31c454a828b197025db47a0"], "layout": "IPY_MODEL_54a6b206d8bd4c3ea0a99c690ec261b0"}}, "e013d5db3cf84c71b25895d3475d3e96": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "doors", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "e09f96d9bd114bd698584b1d7377599c": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "LabelModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "LabelModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "LabelView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_593e71de4c284252a7b7c8e4578d022b", "placeholder": "\u200b", "style": "IPY_MODEL_ed88d77cb52e4e7c8ed812a6137b6467", "value": "Pick a door..."}}, "e775c5721403481f9f590039496b762e": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "e815eba921e8419f8a224c4fb0158a04": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "ed88d77cb52e4e7c8ed812a6137b6467": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "ef84f7907c2b4a2da79f276d6d0788c2": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ButtonView", "button_style": "", "description": "Door 1", "disabled": false, "icon": "", "layout": "IPY_MODEL_606c9167feef4f65b93334845032d8d0", "style": "IPY_MODEL_55245b4ce62847758a6dfcdaa7efba55", "tooltip": ""}}, "f1f63b7f883e47b8a428a5f11628fa08": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "f2bbd095beb34e22ab941e6ab21b23a2": {"model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": "text2", "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": "auto"}}, "f768a7d409b14a049ff49def6fe53f30": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}, "feedc0c7270a4de7b5b109439625b9ae": {"model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "model_name": "ButtonStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ButtonStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "button_color": null, "font_weight": ""}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01-Probability-and-Counting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Probability and Counting</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03-Random-Variables-and-their-Distributions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Random Variables and their Distributions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

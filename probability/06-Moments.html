@@ -1,0 +1,986 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moments &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/06-Moments.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Joint Distributions" href="07-Joint-Distributions.html" />
+    <link rel="prev" title="Continuous Random Variables" href="05-Continuous-Random-Variables.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Conditional-Probability.html">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Expectation.html">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Continuous-Random-Variables.html">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Transformations.html">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Conditional-Expectation.html">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Sampling.html">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/06-Moments.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/06-Moments.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/06-Moments.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/06-Moments.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Moments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#medians-and-modes">
+   Medians and modes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dice-simulation">
+   Dice simulation
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Moments</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions">
+   Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Moments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#medians-and-modes">
+   Medians and modes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dice-simulation">
+   Dice simulation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="moments">
+<h1>Moments<a class="headerlink" href="#moments" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<p>The MGF of an r.v. is a <em>function</em>. As an example of defining and working with functions in Python, let’s use the <span class="math notranslate nohighlight">\(N(0, 1)\)</span> MGF, which is given by <span class="math notranslate nohighlight">\(M(t) = e^{\frac{t^{2}}{2}}\)</span>. The code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">M</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return N(0, 1) MGF evalated at t. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;calling function M with a single value: </span><span class="se">\n</span><span class="s1">M(0) = </span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">M</span><span class="p">(</span><span class="mi">0</span><span class="p">)))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;calling M with a vector: </span><span class="se">\n</span><span class="s1">M(np.arange(1,11))) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">M</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">))))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>calling function M with a single value: 
+M(0) = 1.0
+
+calling M with a vector: 
+M(np.arange(1,11))) = [1.64872127e+00 7.38905610e+00 9.00171313e+01 2.98095799e+03
+ 2.68337287e+05 6.56599691e+07 4.36731791e+10 7.89629602e+13
+ 3.88084696e+17 5.18470553e+21]
+</pre></div>
+</div>
+</div>
+</div>
+<p>defines <code class="docutils literal notranslate"><span class="pre">M</span></code> to be this function. The <code class="docutils literal notranslate"><span class="pre">def</span></code> Python keyword says that we’re <a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">defining a function</a>. The function is named <code class="docutils literal notranslate"><span class="pre">M</span></code>, and it takes one variable <code class="docutils literal notranslate"><span class="pre">t</span></code> (called the argument or parameter of the function). The line declaring the function name and list of parameter(s) is terminated with a colon <code class="docutils literal notranslate"><span class="pre">:</span></code>, with the body of the function following on the next line after an indent. Note that a simple Python function will not be able to flexibly deal with both single or vector inputs, such as is possible with a function in R. However, since our function <code class="docutils literal notranslate"><span class="pre">M</span></code> relies on <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.exp.html"><code class="docutils literal notranslate"><span class="pre">numpy.exp</span></code></a>, <code class="docutils literal notranslate"><span class="pre">M</span></code> can accept both a nested sequence of objects or <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays as inputs, and return an single or tuple of <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array as output.</p>
+<p>Writing</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def M(x):
+    return np.exp(x**2/2)
+</pre></div>
+</div>
+<p>would define the same function <code class="docutils literal notranslate"><span class="pre">M</span></code>, except that now the parameter is named <code class="docutils literal notranslate"><span class="pre">x</span></code>. Giving the parameters names is helpful for functions of more than one parameter, since Python then saves us from having to remember the order in which to write the parameters, and allows us to assign default values. For example, the <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> MGF is given by <span class="math notranslate nohighlight">\(g(t) = exp\left(\mu \, t + \frac{\sigma^2 \, t^2}{2} \right)\)</span>, which depends on <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(mu\)</span>, and <span class="math notranslate nohighlight">\(\sigma\)</span>. We can define this in Python by</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return the N(mean, sd) MGF evaluated at t.</span>
+<span class="sd">        default mean (mu) = 0</span>
+<span class="sd">        default sd (sigma) = 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mean</span><span class="o">*</span><span class="n">t</span> <span class="o">+</span> <span class="p">(</span><span class="n">sd</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;N(2, 3) MGF evaluated at 1 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N(2, 3) MGF evaluated at 1 = 665.1416330443618
+</pre></div>
+</div>
+</div>
+</div>
+<p>What is <code class="docutils literal notranslate"><span class="pre">g(1,</span> <span class="pre">2,</span> <span class="pre">3)</span></code>? It’s the <span class="math notranslate nohighlight">\(N(2, 3^{2})\)</span> MGF evaluated at 1, but it may be hard to remember which parameter is which, especially when working with many functions with many parameters over the course of many months. So we can also write <code class="docutils literal notranslate"><span class="pre">g(1,</span> <span class="pre">mean=2,</span> <span class="pre">sd=3)</span></code> or <code class="docutils literal notranslate"><span class="pre">g(1,</span> <span class="pre">sd=3,</span> <span class="pre">mean=2)</span></code>. Since the <code class="docutils literal notranslate"><span class="pre">mean</span></code> and <code class="docutils literal notranslate"><span class="pre">sd</span></code> function parameters have the form <code class="docutils literal notranslate"><span class="pre">parameter</span> <span class="pre">=</span> <span class="pre">expression</span></code>, the function is said to have “default parameter values.”</p>
+<p>Also, when defining <code class="docutils literal notranslate"><span class="pre">g</span></code> we specified default values of 0 for the <code class="docutils literal notranslate"><span class="pre">mean</span></code> and 1 for the <code class="docutils literal notranslate"><span class="pre">sd</span></code> standard deviation, so if we want the <span class="math notranslate nohighlight">\(N(0, 5^2)\)</span> MGF evaluated at 3, we can use <code class="docutils literal notranslate"><span class="pre">g(3,</span> <span class="pre">sd=5)</span></code> as shorthand. It would be bad here to write <code class="docutils literal notranslate"><span class="pre">g(3,</span> <span class="pre">5)</span></code>, since that is ambiguous about which argument is omitted; in fact, Python interprets this as <code class="docutils literal notranslate"><span class="pre">g(t3,</span> <span class="pre">mean=5)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans1</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;g(1, mean=2, sd=3) = </span><span class="si">{}</span><span class="se">\t</span><span class="s1">... explicitly using parameter names&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans1</span><span class="p">))</span>
+
+<span class="n">ans2</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;g(3, 5) = </span><span class="si">{}</span><span class="se">\t\t</span><span class="s1">... but which parameter was omitted?&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans2</span><span class="p">))</span>
+
+<span class="n">ans3</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;g(3, mean=5) = </span><span class="si">{}</span><span class="se">\t</span><span class="s1">... </span><span class="se">\&#39;</span><span class="s1">mean</span><span class="se">\&#39;</span><span class="s1"> parameter was omitted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g(1, mean=2, sd=3) = 665.1416330443618	... explicitly using parameter names
+g(3, 5) = 294267566.0415088		... but which parameter was omitted?
+g(3, mean=5) = 294267566.0415088	... &#39;mean&#39; parameter was omitted
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Moments<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>LOTUS makes it easy to write down any moment of a continuous r.v. as an integral. The <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/integrate.html"><code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code></a> module in SciPy can help us do the integral numerically, using the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html#scipy.integrate.quad"><code class="docutils literal notranslate"><span class="pre">scipy.integrate.quad</span></code></a> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For example, let’s approximate the 6<sup>th</sup> moment of a <span class="math notranslate nohighlight">\(N(0, 1)\)</span> r.v. The code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return the 6th moment of N(0, 1). &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">6</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">y</span><span class="p">,</span> <span class="n">abserr</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;6th moment of N(0,1) = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">, with error = </span><span class="si">{</span><span class="n">abserr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6th moment of N(0,1) = 15.000000000000004, with error = 4.4229308200406246e-09
+</pre></div>
+</div>
+</div>
+</div>
+<p>asks <code class="docutils literal notranslate"><span class="pre">quad</span></code> to compute <span class="math notranslate nohighlight">\(\int_{-\infty}^{\infty} g(x) \, dx\)</span>, where <span class="math notranslate nohighlight">\(g(x) = x^6 \, \phi(x)\)</span> with <span class="math notranslate nohighlight">\(\phi\)</span> the <span class="math notranslate nohighlight">\(N(0, 1)\)</span> PDF. When we ran this, <code class="docutils literal notranslate"><span class="pre">quad</span></code> reported 15 (the correct answer, as we know from this chapter!) and that the absolute error was less than 4.423 <span class="math notranslate nohighlight">\(\times\)</span> 10<sup>−9</sup>.</p>
+<p>☣ 6.9.1. Numerical integration runs into difficulties for some functions; as usual, checking answers in multiple ways is a good idea. Using <code class="docutils literal notranslate"><span class="pre">numpy.inf</span></code> for parameter <code class="docutils literal notranslate"><span class="pre">b</span></code> (the upper limit of integration) is preferred to using a large number as the upper limit when integrating up to <span class="math notranslate nohighlight">\(\infty\)</span> (and likewise for a lower limit of <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">-numpy.inf</span></code> for <span class="math notranslate nohighlight">\(-\infty\)</span>. For example, on many systems <code class="docutils literal notranslate"><span class="pre">quad(norm.pdf,</span> <span class="pre">0,</span> <span class="pre">10**6)</span></code> reports 0.0 while <code class="docutils literal notranslate"><span class="pre">quad(norm.pdf,</span> <span class="pre">0,</span> <span class="pre">numpy.inf)</span></code> reports the correct answer, 0.5.</p>
+<p>However, all of the continuous distributions supported in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/stats/continuous.html#moments"><code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></a> have a <code class="docutils literal notranslate"><span class="pre">moment(n,</span> <span class="pre">loc=0,</span> <span class="pre">scale=1)</span></code> function that allows you to quickly and easily obtain the n<sup>th</sup> order non-central moment of the continuous distribution in question. For example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;norm.moment(n=6) = </span><span class="si">{</span><span class="n">norm</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm.moment(n=6) = 15.000000000000004
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similarly, to check that the 2<sup>nd</sup> moment (and variance) of a <span class="math notranslate nohighlight">\(Unif(−1, 1)\)</span> r.v. is 1/3, we can use <code class="docutils literal notranslate"><span class="pre">quad</span></code> again</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return 2nd moment (var) of Unif(-1, 1).</span>
+<span class="sd">    </span>
+<span class="sd">        scipy.stats.uniform is constant between</span>
+<span class="sd">            a = loc</span>
+<span class="sd">            b = loc + scale</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">loc</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="n">b</span> <span class="o">-</span> <span class="n">loc</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">uniform</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+
+<span class="n">y</span><span class="p">,</span> <span class="n">abserr</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;2nd moment of Unif(-1,1) = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">, with error = </span><span class="si">{</span><span class="n">abserr</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2nd moment of Unif(-1,1) = 0.3333333333333333, with error = 3.700743415417188e-15
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alternately, we can either use <code class="docutils literal notranslate"><span class="pre">uniform.moment(n=2,</span> <span class="pre">loc=-1,</span> <span class="pre">scale=2)</span></code> or just <code class="docutils literal notranslate"><span class="pre">uniform.var(loc=-1,</span> <span class="pre">scale=2)</span></code>, keeping in mind that <code class="docutils literal notranslate"><span class="pre">loc=-1</span></code> and <code class="docutils literal notranslate"><span class="pre">scale</span> <span class="pre">=</span> <span class="pre">interval</span> <span class="pre">length</span> <span class="pre">=</span> <span class="pre">2</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans1</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">loc</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;uniform.moment(n=2, loc=-1, scale=2) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans1</span><span class="p">))</span>
+
+<span class="n">ans2</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">loc</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;uniform.var(loc=-1, scale=2) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>uniform.moment(n=2, loc=-1, scale=2) = 0.33333333333333326
+uniform.var(loc=-1, scale=2) = 0.3333333333333333
+</pre></div>
+</div>
+</div>
+</div>
+<p>For moments of a discrete r.v., we can use LOTUS and the <code class="docutils literal notranslate"><span class="pre">numpy.sum</span></code> function. For example, to find the 2<sup>nd</sup> moment of <span class="math notranslate nohighlight">\(X \sim Pois(7)\)</span>, we can use</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return the 2nd moment of Pois(7) evaluated at k. &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">poisson</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+<span class="c1"># we want to sum up to and including 100, so the upper limit is 100+1</span>
+<span class="n">ans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;2nd moment of Pois(7) = </span><span class="si">{</span><span class="n">ans</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2nd moment of Pois(7) = 55.99999999999994
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we summed up to 100 since it’s clear after getting a sense of the terms that the total contribution of all the terms after k = 100 is negligible (choosing an upper limit in this way is in contrast to how to use the integrate command in the continuous case). The result is extremely close to 56, which is comforting since <span class="math notranslate nohighlight">\(E(X^{2}) = Var(X) + (EX)^{2} = 7 + 49 = 56\)</span>.</p>
+<p>But similar to continous r.v., the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/tutorial/stats/discrete.html#moments">discrete r.v. in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></a> have a <code class="docutils literal notranslate"><span class="pre">moment</span></code> function as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">poisson</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;poisson.moment(n=2, mu=7) = </span><span class="si">{</span><span class="n">ans</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>poisson.moment(n=2, mu=7) = 56
+</pre></div>
+</div>
+</div>
+</div>
+<p>A sample moment can be found in easily using NumPy. If <code class="docutils literal notranslate"><span class="pre">x</span></code> is a vector of data, then <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.mean.html"><code class="docutils literal notranslate"><span class="pre">numpy.mean(x)</span></code></a> gives its sample mean and, more generally, <code class="docutils literal notranslate"><span class="pre">numpy.mean(x**n)</span></code> gives the n<sup>th</sup> sample mean for any positive integer <code class="docutils literal notranslate"><span class="pre">n</span></code>. For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">6765</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sample moment: numpy.mean(x**6) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample moment: numpy.mean(x**6) = 9.336344243424868
+</pre></div>
+</div>
+</div>
+</div>
+<p>gives the 6<sup>th</sup> sample moment of 100 i.i.d.  <span class="math notranslate nohighlight">\(N(0, 1)\)</span> r.v.s. How close is it to the true 6<sup>th</sup> moment? How close are other sample moments to the corresponding true moments?</p>
+<p>The sample variance can also be found in easily with NumPy. If <code class="docutils literal notranslate"><span class="pre">x</span></code> is a vector of data, then using the <code class="docutils literal notranslate"><span class="pre">ddof</span></code> parameter (delta degrees of freedom) such as in <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.var.html"><code class="docutils literal notranslate"><span class="pre">numpy.var(x,</span> <span class="pre">ddof=1)</span></code></a> gives its sample variance. This returns <code class="docutils literal notranslate"><span class="pre">nan</span></code> (not a number) as well as issuing <code class="docutils literal notranslate"><span class="pre">RuntimeWarning:</span> <span class="pre">Degrees</span> <span class="pre">of</span> <span class="pre">freedom</span> <span class="pre">&lt;=</span> <span class="pre">0</span> <span class="pre">for</span> <span class="pre">slice</span></code> (the divisor used in the calculation is <code class="docutils literal notranslate"><span class="pre">len(x)</span> <span class="pre">-</span> <span class="pre">ddof</span></code>) if <code class="docutils literal notranslate"><span class="pre">x</span></code> has length 1, since the <span class="math notranslate nohighlight">\(n − 1\)</span> in the denominator is 0 in this case. It makes sense not to return a numerical value in this case, not only because of the definition but also because it would be insane to try to estimate the variability of a population if we only have one observation!</p>
+<p>For a simple demonstration of using the sample mean and sample variance to estimate the true mean and true variance of a distribution, we generate 1000 times from a <span class="math notranslate nohighlight">\(N(0, 1)\)</span> distribution and store the values in <code class="docutils literal notranslate"><span class="pre">z</span></code>. We then compute the sample mean and sample variance with <code class="docutils literal notranslate"><span class="pre">numpy.mean(z)</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy.var(z,</span> <span class="pre">ddof=1)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10946</span><span class="p">)</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">mu_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sample mean of z: </span><span class="si">{</span><span class="n">mu_z</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">var_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sample variance of z: </span><span class="si">{</span><span class="n">var_z</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample mean of z: 0.00915384129813555
+sample variance of z: 1.073340109262066
+</pre></div>
+</div>
+</div>
+</div>
+<p>We find that <code class="docutils literal notranslate"><span class="pre">numpy.mean(z)</span></code> is close to 0 and <code class="docutils literal notranslate"><span class="pre">numpy.var(z,</span> <span class="pre">ddof=1)</span></code> is close to 1. You can try this out for a <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span> distribution (or other distribution) of your choosing; just remember that <code class="docutils literal notranslate"><span class="pre">numpy.norm.rvs</span></code> takes <span class="math notranslate nohighlight">\(\sigma\)</span> as the <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameter, and not <span class="math notranslate nohighlight">\(\sigma^2\)</span>!</p>
+<p>The sample standard deviation of <code class="docutils literal notranslate"><span class="pre">x</span></code> can be found using <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html"><code class="docutils literal notranslate"><span class="pre">numpy.std(x,</span> <span class="pre">ddof=1)</span></code></a>. This gives the same result as <code class="docutils literal notranslate"><span class="pre">numpy.sqrt(numpy.var(x,</span> <span class="pre">ddof=1))</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sd1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;np.std(z, ddof=1) = </span><span class="si">{</span><span class="n">sd1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">sd2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;np.sqrt(np.var(z, ddof=1)) = </span><span class="si">{</span><span class="n">sd2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.std(z, ddof=1) = 1.0360212880351765
+np.sqrt(np.var(z, ddof=1)) = 1.0360212880351765
+</pre></div>
+</div>
+</div>
+</div>
+<p>While the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/stats.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></a> module does have functions for <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html"><code class="docutils literal notranslate"><span class="pre">skew</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html"><code class="docutils literal notranslate"><span class="pre">kurtosis</span></code></a>, both functions rely on the <em>population standard deviation</em> (with <span class="math notranslate nohighlight">\(n\)</span> rather than <span class="math notranslate nohighlight">\(n-1\)</span> in the denominator).</p>
+<p>However, we can easily define our own functions for <em>sample skewness</em> and <em>sample kurtosis</em> by using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.moment.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.moment</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.std.html"><code class="docutils literal notranslate"><span class="pre">numpy.std(z,</span> <span class="pre">ddof=1)</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">moment</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">skew</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">use_sample_sd</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return the skew of x.</span>
+<span class="sd">    </span>
+<span class="sd">        Default is to use sample standard deviation on the denominator,</span>
+<span class="sd">        yielding sample skew. </span>
+<span class="sd">        </span>
+<span class="sd">        Specifying use_sample_sd=False is the same as using</span>
+<span class="sd">        scipy.stats.skew(x).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ddof</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">use_sample_sd</span><span class="o">==</span><span class="kc">True</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">moment</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;sample skew of z = </span><span class="si">{</span><span class="n">skew</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample skew of z = 0.02333931072753422
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kurt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">use_sample_sd</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return the excess kurtosis of x.</span>
+<span class="sd">    </span>
+<span class="sd">        Default is to use sample standard deviation on the denominator,</span>
+<span class="sd">        yielding sample kurtosis. </span>
+<span class="sd">        </span>
+<span class="sd">        Specifying use_sample_sd=False is the same as using</span>
+<span class="sd">        scipy.stats.kurtosis(x).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ddof</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">use_sample_sd</span><span class="o">==</span><span class="kc">True</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">moment</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="n">ddof</span><span class="p">)</span><span class="o">**</span><span class="mi">4</span> <span class="o">-</span> <span class="mf">3.0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sample kurtosis of z = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">kurt</span><span class="p">(</span><span class="n">z</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample kurtosis of z = 0.16247912720035718
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="medians-and-modes">
+<h2>Medians and modes<a class="headerlink" href="#medians-and-modes" title="Permalink to this headline">¶</a></h2>
+<p>To find the median of a continuous r.v. with CDF <span class="math notranslate nohighlight">\(F\)</span>, we need to solve the equation <span class="math notranslate nohighlight">\(F(x) = 1/2\)</span> for <span class="math notranslate nohighlight">\(x\)</span>, which is equivalent to finding the root (zero) of the function <span class="math notranslate nohighlight">\(g\)</span> given by <span class="math notranslate nohighlight">\(g(x) = F(x) − 1/2\)</span>. This can be done using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.root.html#scipy.optimize.root"><code class="docutils literal notranslate"><span class="pre">scipy.optimize.root</span></code></a> in SciPy. For example, let’s find the median of the Expo(1) distribution. The code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">expon</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root</span>
+
+<span class="c1"># to learn more about scipy.optimize.root, un-comment out the following line</span>
+<span class="c1">#print(root.__doc__)</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Assuming F(x) = Expo(1),</span>
+<span class="sd">        define a function g(x) = F(x) - 1/2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">expon</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+
+<span class="c1"># set our inital guess at a root to be 0</span>
+<span class="n">root</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    fjac: array([[-1.]])
+     fun: array([-5.55111512e-17])
+ message: &#39;The solution converged.&#39;
+    nfev: 9
+     qtf: array([-1.56348268e-11])
+       r: array([0.5000001])
+  status: 1
+ success: True
+       x: array([0.69314718])
+</pre></div>
+</div>
+</div>
+</div>
+<p>asks <code class="docutils literal notranslate"><span class="pre">root</span></code> to find a root of the desired function, with an initial guess of 0. This returns an answer very close to the true answer of <span class="math notranslate nohighlight">\(log(2) ≈ 0.693\)</span>. Of course, in this case we can solve <span class="math notranslate nohighlight">\(1 − e^{−x} = \frac{1}{2}\)</span> directly without having to use numerical methods.</p>
+<p>☣ 6.9.2. <code class="docutils literal notranslate"><span class="pre">scipy.optimize.root</span></code>is useful but there is no guarantee that it will find a root (<code class="docutils literal notranslate"><span class="pre">success</span></code> may be <code class="docutils literal notranslate"><span class="pre">False</span></code>). When using <code class="docutils literal notranslate"><span class="pre">scipy.optmize.root</span></code> please pay attention to the <code class="docutils literal notranslate"><span class="pre">status</span></code>, <code class="docutils literal notranslate"><span class="pre">success</span></code> and <code class="docutils literal notranslate"><span class="pre">message</span></code> in the result returned.</p>
+<p>An easier way to find the median of the <span class="math notranslate nohighlight">\(Expo(1)\)</span> is to use <code class="docutils literal notranslate"><span class="pre">scipy.stats.expon.median</span></code>. The <code class="docutils literal notranslate"><span class="pre">median</span></code> function of returns the median of the distribution, for <code class="docutils literal notranslate"><span class="pre">expon</span></code> as well as all other continuous distributions in <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ans</span> <span class="o">=</span> <span class="n">expon</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;expon.median() = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>expon.median() = 0.6931471805599453
+</pre></div>
+</div>
+</div>
+</div>
+<p>For finding the mode of a continuous distribution, we can use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fminbound.html#scipy.optimize.fminbound"><code class="docutils literal notranslate"><span class="pre">fminbound</span></code></a> function in SciPy. For example, let’s find the mode of the <span class="math notranslate nohighlight">\(Gamma(6, 1)\)</span> distribution, which is an important distribution that we will introduce in the next chapter. Its PDF is proportional to <span class="math notranslate nohighlight">\(x^{5} \, e^{−x}\)</span>. Using calculus, we can find that the mode is at <span class="math notranslate nohighlight">\(x = 5\)</span>. Using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fminbound.html#scipy.optimize.fminbound"><code class="docutils literal notranslate"><span class="pre">scipy.optimize.fminbound</span></code></a>, we can find that the mode is very close to <span class="math notranslate nohighlight">\(x = 5\)</span> as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Since fminbound MINIMIZES the argument function,</span>
+<span class="sd">        we will instead pass in the negative of the Gamma PDF</span>
+<span class="sd">        in order to obtain the MAXIMUM.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Gamma PDF is proportional to this function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span><span class="o">**-</span><span class="n">x</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fminbound</span>
+
+<span class="n">lower_bound</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">upper_bound</span> <span class="o">=</span> <span class="mf">20.0</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">fminbound</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mode of Gamma(6, 1) is approximately </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mode of Gamma(6, 1) is approximately 5.000000043355882
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we had wanted to <em>minimize</em> instead of <em>maximize</em>, we could have put simply passed in <code class="docutils literal notranslate"><span class="pre">f</span></code> to <code class="docutils literal notranslate"><span class="pre">fminbound</span></code> without composing the nested function <code class="docutils literal notranslate"><span class="pre">h</span></code>.</p>
+<p>Next, let’s do a discrete example of median and mode. An interesting fact about the <span class="math notranslate nohighlight">\(Bin(n, p)\)</span> distribution is that if the mean <span class="math notranslate nohighlight">\(np\)</span> is an integer, then the median and mode are also <span class="math notranslate nohighlight">\(np\)</span> (even if the distribution is very skewed). To check this fact about the median for the <span class="math notranslate nohighlight">\(Bin(50, 0.2)\)</span> distribution, we can use the following code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+
+<span class="n">bin_cdf_vector</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">bin_cdf_vector</span><span class="o">&gt;=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;median of Bin(50, 0.2) is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">median</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>median of Bin(50, 0.2) is 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.argmax.html"><code class="docutils literal notranslate"><span class="pre">numpy.argmax</span></code></a> function finds the location of the maximum of a vector, giving the index of the first occurrence of a maximum. Since <code class="docutils literal notranslate"><span class="pre">True</span></code> is encoded as 1 and <code class="docutils literal notranslate"><span class="pre">False</span></code> is encoded as 0, the first maximum in <code class="docutils literal notranslate"><span class="pre">binom.cdf(np.arange(0,50),</span> <span class="pre">50,</span> <span class="pre">0.2)</span> <span class="pre">&gt;=</span> <span class="pre">0.5</span></code> is at the first value for which the CDF is at least 0.5. The return value of <code class="docutils literal notranslate"><span class="pre">numpy.argmax</span></code> on <code class="docutils literal notranslate"><span class="pre">binom.cdf(np.arange(0,50),</span> <span class="pre">50,</span> <span class="pre">0.2)</span></code> is 10, showing that the median is at 10.</p>
+<p>Similarly, <code class="docutils literal notranslate"><span class="pre">numpy.argmax</span></code> on <code class="docutils literal notranslate"><span class="pre">binom.pmf(np.arange(0,50),</span> <span class="pre">50,</span> <span class="pre">0.2)</span></code> returns 10, showing that the mode is at 10.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bin_pmf_vector</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span> <span class="mi">50</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">bin_pmf_vector</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mode of Bin(50, 0.2) is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mode of Bin(50, 0.2) is 10
+</pre></div>
+</div>
+</div>
+</div>
+<p>The sample median of a vector x of data can be found using <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.median.html"><code class="docutils literal notranslate"><span class="pre">numpy.median(x)</span></code></a>. <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.mode.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.mode</span></code></a> can be used to find the sample mode, but it will only return the smallest mode in case there are ties. Instead, we can compose our own <code class="docutils literal notranslate"><span class="pre">mode</span></code> function, using <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">numpy.where</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.bincount.html"><code class="docutils literal notranslate"><span class="pre">numpy.bincount</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">17711</span><span class="p">)</span>
+
+<span class="n">bin_rv_vector</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">mode</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">bin_rv_vector</span><span class="p">)</span><span class="o">==</span><span class="n">m</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">mode</span><span class="p">(</span><span class="n">bin_rv_vector</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mode(s) in r.v. vector x: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mode(s) in r.v. vector x: [8]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dice-simulation">
+<h2>Dice simulation<a class="headerlink" href="#dice-simulation" title="Permalink to this headline">¶</a></h2>
+<p>In the starred Section 6.7, we showed that in rolling 6 fair dice, the probability of a total of 18 is 3431/6<sup>6</sup>. But the proof was complicated. If we only need an approximate answer, simulation is a much easier approach. And we already know how to do it! Here is the code for a million repetitions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">28657</span><span class="p">)</span>
+
+<span class="n">repetitions</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
+<span class="c1"># counter to track number of 18s seen</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repetitions</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">),</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">18</span><span class="p">:</span>
+        <span class="c1"># increment the counter</span>
+        <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">ans</span> <span class="o">=</span> <span class="n">c</span> <span class="o">/</span> <span class="n">repetitions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;probability of total 18 with 6 fair dice (simulated) is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>probability of total 18 with 6 fair dice (simulated) is 0.073304
+</pre></div>
+</div>
+</div>
+</div>
+<p>In our simulation this yielded 0.073304, which is very close to 3431/6<sup>6</sup> <span class="math notranslate nohighlight">\(\approx\)</span> 0.07354.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="05-Continuous-Random-Variables.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Continuous Random Variables</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="07-Joint-Distributions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Joint Distributions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

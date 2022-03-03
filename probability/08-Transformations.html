@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transformations &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/08-Transformations.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Conditional Expectation" href="09-Conditional-Expectation.html" />
+    <link rel="prev" title="Joint Distributions" href="07-Joint-Distributions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Conditional-Probability.html">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Expectation.html">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Continuous-Random-Variables.html">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Moments.html">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Conditional-Expectation.html">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Sampling.html">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/08-Transformations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/08-Transformations.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/08-Transformations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/08-Transformations.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#beta-and-gamma-distributions">
+   Beta and Gamma distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolution-of-uniforms">
+   Convolution of Uniforms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayes-billiards">
+   Bayes’ billiards
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulating-order-statistics">
+   Simulating order statistics
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Transformations</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#beta-and-gamma-distributions">
+   Beta and Gamma distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolution-of-uniforms">
+   Convolution of Uniforms
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayes-billiards">
+   Bayes’ billiards
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simulating-order-statistics">
+   Simulating order statistics
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="transformations">
+<h1>Transformations<a class="headerlink" href="#transformations" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="beta-and-gamma-distributions">
+<h2>Beta and Gamma distributions<a class="headerlink" href="#beta-and-gamma-distributions" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">beta</span><span class="p">,</span> <span class="n">gamma</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Beta and Gamma distributions are implemented in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.beta</span></code></a> and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.gamma.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.gamma</span></code></a>, respectively.</p>
+<ul class="simple">
+<li><p>To evaluate the <span class="math notranslate nohighlight">\(Beta(a, b)\)</span> PDF or CDF at <span class="math notranslate nohighlight">\(x\)</span>, we use <code class="docutils literal notranslate"><span class="pre">beta.pdf(x,</span> <span class="pre">a,</span> <span class="pre">b)</span></code> and <code class="docutils literal notranslate"><span class="pre">beta.cdf(x,</span> <span class="pre">a,</span> <span class="pre">b)</span></code>. To generate <span class="math notranslate nohighlight">\(n\)</span> realizations from the <span class="math notranslate nohighlight">\(Beta(a, b)\)</span> distribution, we use <code class="docutils literal notranslate"><span class="pre">beta.rvs(a,</span> <span class="pre">b,</span> <span class="pre">size=n)</span></code>.</p></li>
+<li><p>To evaluate the <span class="math notranslate nohighlight">\(Gamma(a, \lambda)\)</span> PDF or CDF at <span class="math notranslate nohighlight">\(x\)</span>, we use<code class="docutils literal notranslate"><span class="pre">gamma.pdf(x,</span> <span class="pre">a,</span> <span class="pre">scale=1/lambd)</span></code> or <code class="docutils literal notranslate"><span class="pre">gamma.cdf(x,</span> <span class="pre">a,</span> <span class="pre">scale=1/lambd)</span></code>. To generate <span class="math notranslate nohighlight">\(n\)</span> realizations from the <span class="math notranslate nohighlight">\(Gamma(a, \lambda)\)</span> distribution, we use <code class="docutils literal notranslate"><span class="pre">gamma.rvs(a,</span> <span class="pre">scale=1/lambd,</span> <span class="pre">size=n)</span></code>.</p>
+<ul>
+<li><p>The <span class="math notranslate nohighlight">\(\lambda\)</span> parameter in <span class="math notranslate nohighlight">\(Gamma(a, \lambda)\)</span> corresponds in <code class="docutils literal notranslate"><span class="pre">gamma</span></code> to using <code class="docutils literal notranslate"><span class="pre">scale</span></code> = <span class="math notranslate nohighlight">\(\frac{1}{\lambda}\)</span> and default value of <code class="docutils literal notranslate"><span class="pre">loc</span></code> = 0.</p></li>
+</ul>
+</li>
+</ul>
+<p>For example, we can check that the <span class="math notranslate nohighlight">\(Gamma(3, 2)\)</span> distribution has mean <span class="math notranslate nohighlight">\(\frac{3}{2}\)</span> and variance <span class="math notranslate nohighlight">\(\frac{3}{4}\)</span>. To do this, we generate a large number of <span class="math notranslate nohighlight">\(Gamma(3, 2)\)</span> random variables using <code class="docutils literal notranslate"><span class="pre">gamma.rvs</span></code>, then compute their mean and var using their corresponding methods in <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code> (you could of course also use <code class="docutils literal notranslate"><span class="pre">numpy.mean</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy.var</span></code>, passing in the array of r.v.):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">317811</span><span class="p">)</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">3.0</span>
+<span class="n">lambd</span> <span class="o">=</span> <span class="mf">2.0</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">gamma</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">lambd</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">mean</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="c1">#mean = np.mean(y)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mean of Gamma(3, 2) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean</span><span class="p">))</span>
+
+<span class="n">var</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>
+<span class="c1">#var = np.var(y)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;variance of Gamma(3, 2) = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean of Gamma(3, 2) = 1.5012880719327166
+variance of Gamma(3, 2) = 0.7512319256875035
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTE</strong>: <a class="reference external" href="https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a> in Python is a reserved keyword for declaring small, anonymous functions, and so we cannot used the name <code class="docutils literal notranslate"><span class="pre">lambda</span></code> for variable or functions.</p>
+<p>Try changing the <code class="docutils literal notranslate"><span class="pre">numpy.random.seed</span></code> input value in the code block above, and hit SHIFT+ENTER to re-execute the code block. Did you get values that are close to 1.5 and 0.75, respectively?</p>
+</div>
+<div class="section" id="convolution-of-uniforms">
+<h2>Convolution of Uniforms<a class="headerlink" href="#convolution-of-uniforms" title="Permalink to this headline">¶</a></h2>
+<p>Using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform</span></code></a> and <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.hist.html"><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.hist</span></code></a>, we can quickly verify that for <span class="math notranslate nohighlight">\(X, Y \stackrel{i.i.d.}{\sim} Unif(0, 1)\)</span>, the distribution of <span class="math notranslate nohighlight">\(T = X + Y\)</span> is triangular in shape:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">514229</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $T = X + Y$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x + y$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/08-Transformations_8_0.png" src="../_images/08-Transformations_8_0.png" />
+</div>
+</div>
+<p>The histogram looks like an ascending and then descending staircase, a discrete approximation to a triangle.</p>
+</div>
+<div class="section" id="bayes-billiards">
+<h2>Bayes’ billiards<a class="headerlink" href="#bayes-billiards" title="Permalink to this headline">¶</a></h2>
+<p>In the Bayes’ billiards story, we have <span class="math notranslate nohighlight">\(n\)</span> white balls and 1 gray ball, throw them onto the unit interval completely at random, and count the number of white balls to the left of the gray ball. Letting <span class="math notranslate nohighlight">\(p\)</span> be the position of the gray ball and <span class="math notranslate nohighlight">\(X\)</span> be the number of white balls to the left of the gray ball, we have</p>
+<p>\begin{align}
+p &amp;\sim Unif(0, 1) \
+X|p &amp;\sim Bin(n, p)
+\end{align}</p>
+<p>By performing this experiment a large number of times, we can verify the results we derived in this chapter about the marginal PMF of <span class="math notranslate nohighlight">\(X\)</span> and the posterior PDF of <span class="math notranslate nohighlight">\(p \text{ given } X = x\)</span>. We’ll let the number of simulations be called <code class="docutils literal notranslate"><span class="pre">nsims</span></code>, to avoid a name conflict with the number of white balls, <code class="docutils literal notranslate"><span class="pre">n</span></code>, which we set equal to 10:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nsims</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We simulate 10<sup>5</sup> values of <span class="math notranslate nohighlight">\(p\)</span>, then simulate 10<sup>5</sup> values from the conditional distribution of <span class="math notranslate nohighlight">\(X\)</span> given <span class="math notranslate nohighlight">\(p\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">832040</span><span class="p">)</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">nsims</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">nsims</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that we feed the entire array <code class="docutils literal notranslate"><span class="pre">p</span></code> into <code class="docutils literal notranslate"><span class="pre">binom.rvs</span></code>. This means that the first element of <code class="docutils literal notranslate"><span class="pre">x</span></code> is generated using the first element of <code class="docutils literal notranslate"><span class="pre">p</span></code>, the second element of <code class="docutils literal notranslate"><span class="pre">x</span></code> is generated using the second element of <code class="docutils literal notranslate"><span class="pre">p</span></code>, and so forth. Thus, conditional on a particular element of <code class="docutils literal notranslate"><span class="pre">p</span></code>, the corresponding element of <code class="docutils literal notranslate"><span class="pre">x</span></code> is Binomial, but the elements of <code class="docutils literal notranslate"><span class="pre">p</span></code> are themselves Uniform, exactly as the model specifies.</p>
+<p>According to the Bayes’ billiards argument, the marginal distribution of <span class="math notranslate nohighlight">\(X\)</span> should be Discrete Uniform on the integers 0 through <span class="math notranslate nohighlight">\(n\)</span>. Is this in fact the case? We can make a histogram of <code class="docutils literal notranslate"><span class="pre">x</span></code> to check! Because the distribution of <span class="math notranslate nohighlight">\(X\)</span> is discrete, we can specify <code class="docutils literal notranslate"><span class="pre">bins=np.arange(0,</span> <span class="pre">n+1,</span> <span class="pre">0.5),</span> <span class="pre">align='left'</span></code> in the call to <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.hist</span></code> so that each bar is centered at an integer value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">align</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="c1"># also set the x-axis ticks to show integers 0, 1, 2, ..., 10</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/08-Transformations_16_0.png" src="../_images/08-Transformations_16_0.png" />
+</div>
+</div>
+<p>Indeed, all the histogram bars are approximately equal in height, consistent with a Discrete Uniform distribution.</p>
+<p>Now for the posterior distribution of <span class="math notranslate nohighlight">\(p\)</span> given <span class="math notranslate nohighlight">\(X = x\)</span>. Conditioning is very simple since we are using <code class="docutils literal notranslate"><span class="pre">numpy.array</span></code>. To consider only the simulated values of <span class="math notranslate nohighlight">\(p\)</span> where the value of <span class="math notranslate nohighlight">\(X\)</span> was 3, we use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">numpy.where(x==3)</span></code></a> to find the indices where <code class="docutils literal notranslate"><span class="pre">x</span></code> = 3, and then use that within the square brackets of <code class="docutils literal notranslate"><span class="pre">p</span></code> to index only those corresponding values. In particular, we can create a histogram of these values using <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.hist</span></code> to see what the posterior distribution of <span class="math notranslate nohighlight">\(p\)</span> given <span class="math notranslate nohighlight">\(X = 3\)</span> looks like.</p>
+<p>According to the Beta-Binomial conjugacy result, the true posterior distribution is <span class="math notranslate nohighlight">\(p|X = 3 \sim Beta(4, 8)\)</span>. We can plot the histogram of <code class="docutils literal notranslate"><span class="pre">p[numpy.where(x==3)]</span></code> next to a histogram of simulated values from the <span class="math notranslate nohighlight">\(Beta(4, 8)\)</span> distribution to confirm that they look similar:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1346269</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">p_given_x_3</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="mi">3</span><span class="p">)]</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">p_given_x_3</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#e66101&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $\tt</span><span class="si">{p[numpy.where(x==3)]}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+
+<span class="n">brv</span> <span class="o">=</span> <span class="n">beta</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">brv</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#5e3c99&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $Beta(4, \, 8)$, $10^4$ simulated values&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/08-Transformations_18_0.png" src="../_images/08-Transformations_18_0.png" />
+</div>
+</div>
+<p>For the side-by-side graph above, we obtain an instance of <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html"><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.figure</span></code></a> from <code class="docutils literal notranslate"><span class="pre">pyplot</span></code>, specifying the figure’s width and height. Next, we use <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html"><code class="docutils literal notranslate"><span class="pre">figure.add_subplot(121)</span></code></a> to create graph axes in a figure with 1 row and 2 columns, in the 1st column position from the left, for the histogram of <code class="docutils literal notranslate"><span class="pre">p[numpy.where(x==3)]</span></code>. Likewise, <code class="docutils literal notranslate"><span class="pre">figure.add_subplot(122)</span></code> creates the graph axes for the histogram for <span class="math notranslate nohighlight">\(Beta(4, 8)\)</span> in the 2nd column position of the 1-row, 2-column figure.</p>
+</div>
+<div class="section" id="simulating-order-statistics">
+<h2>Simulating order statistics<a class="headerlink" href="#simulating-order-statistics" title="Permalink to this headline">¶</a></h2>
+<p>Simulating order statistics in Python/NumPy/SciPy is easy: we simply simulate i.i.d. r.v.s and sort them in order. For example,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2178309</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">rv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-2.05800632 -1.14300612 -0.09108752 -0.08188422  0.45810851  0.55556877
+  0.59398037  0.9312065   0.98367818  1.12202827]
+</pre></div>
+</div>
+</div>
+</div>
+<p>produces one realization of <span class="math notranslate nohighlight">\(X_{(1)}, \ldots, X_{(10)}\)</span>, where <span class="math notranslate nohighlight">\(X_{(1)}, \ldots, X_{(10)}\)</span> are i.i.d. <span class="math notranslate nohighlight">\(N(0, 1)\)</span>. If we want to plot a histogram of realizations of, say, <span class="math notranslate nohighlight">\(X_{(9)}\)</span>, we’ll need to use iteration. Let’s try using <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">Python’s list comprehensions</a>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3524578</span><span class="p">)</span>
+
+<span class="n">rv_arr</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">order_stats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rv_arr</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;order_stats has shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">order_stats</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>order_stats has shape: (10000, 10)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The 10<sup>4</sup> iterations are done with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>rv_arr = [np.sort(norm.rvs(size=10)) for _ in range(10**4)]
+</pre></div>
+</div>
+<p>This Python list comprehension does the following:</p>
+<ul class="simple">
+<li><p>loops 10<sup>4</sup> times with <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">_</span> <span class="pre">in</span> <span class="pre">range(10**4)</span></code>, where we ignore the iteration counter by using <code class="docutils literal notranslate"><span class="pre">_</span></code></p>
+<ul>
+<li><p>as we loop, we do not need to know which particular iteration we are on</p></li>
+</ul>
+</li>
+<li><p>for each iteration, calculate <code class="docutils literal notranslate"><span class="pre">np.sort(norm.rvs(size=10))</span></code></p></li>
+<li><p>gather up the results of all the iterations into a Python list (array), assigning this resulting list to <code class="docutils literal notranslate"><span class="pre">rv_arr</span></code></p></li>
+<li><p>this one-liner list comprehension is equivalent to all this code:</p></li>
+</ul>
+<pre>
+    rv_arr = []
+    for _ in range(10**4):
+        rv = np.sort(norm.rvs(size=10))
+        rv_arr.append(rv)
+</pre>
+<p>This creates a matrix, <code class="docutils literal notranslate"><span class="pre">order_stats</span></code>, with 10<sup>4</sup> rows and 10 columns. The <em>i</em><sup>th</sup> column of the matrix contains 10<sup>4</sup> realizations of <span class="math notranslate nohighlight">\(X_{(i+1)}\)</span> (don’t forget that Python is zero-indexed, so the 8<sup>th</sup> column is <span class="math notranslate nohighlight">\(X_{(9)}\)</span>!). Now we can create a histogram of <span class="math notranslate nohighlight">\(X_{(9)}\)</span>, simply by selecting column 8 of the matrix:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x9</span> <span class="o">=</span> <span class="n">order_stats</span><span class="p">[:,</span> <span class="mi">8</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">x9</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Histogram of $X_{(9)}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/08-Transformations_25_0.png" src="../_images/08-Transformations_25_0.png" />
+</div>
+</div>
+<p>We can also compute summaries like <code class="docutils literal notranslate"><span class="pre">numpy.mean(x9)</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy.var(x9)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_x9</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mean of x9 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mean_x9</span><span class="p">))</span>
+
+<span class="n">var_x9</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;variance of x9 = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">var_x9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mean of x9 = 1.0092010380841254
+variance of x9 = 0.2108867888683199
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<p>Joseph K. Blitzstein and Jessica Hwang, Harvard University and Stanford University, © 2019 by Taylor and Francis Group, LLC</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="07-Joint-Distributions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Joint Distributions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="09-Conditional-Expectation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Conditional Expectation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,663 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conditional Expectation &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/09-Conditional-Expectation.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Inequalities and Limit Theorems" href="10-Inequalities-and-Limit-Theorems.html" />
+    <link rel="prev" title="Transformations" href="08-Transformations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Conditional-Probability.html">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04-Expectation.html">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Continuous-Random-Variables.html">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Moments.html">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Transformations.html">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Sampling.html">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/09-Conditional-Expectation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/09-Conditional-Expectation.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/09-Conditional-Expectation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/09-Conditional-Expectation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mystery-prize-simulation">
+   Mystery prize simulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-until-hh-vs-ht">
+   Time until HH vs. HT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression">
+   Linear regression
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Conditional Expectation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mystery-prize-simulation">
+   Mystery prize simulation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#time-until-hh-vs-ht">
+   Time until HH vs. HT
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-regression">
+   Linear regression
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="conditional-expectation">
+<h1>Conditional Expectation<a class="headerlink" href="#conditional-expectation" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mystery-prize-simulation">
+<h2>Mystery prize simulation<a class="headerlink" href="#mystery-prize-simulation" title="Permalink to this headline">¶</a></h2>
+<p>We can use simulation to show that in Example 9.1.7, the example of bidding on a mystery prize with unknown value, any bid will lead to a negative payout on average. First choose a bid <code class="docutils literal notranslate"><span class="pre">b</span></code> (we chose 0.6); then simulate a large number of hypothetical mystery prizes using <code class="docutils literal notranslate"><span class="pre">rvs</span></code> in <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.uniform.html"><code class="docutils literal notranslate"><span class="pre">scipy.stats.uniform</span></code></a>, and store them in <code class="docutils literal notranslate"><span class="pre">v</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5702887</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="mf">0.6</span>
+<span class="n">nsim</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">nsim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The bid is accepted if <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">&gt;</span> <span class="pre">(2/3)*v</span></code>. To get the average profit conditional on an accepted bid, we use <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.where.html"><code class="docutils literal notranslate"><span class="pre">numpy.where</span></code></a> to find the indices in <code class="docutils literal notranslate"><span class="pre">v</span></code> where the values satisfy the condition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bid_accepted</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">b</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="p">)]</span>
+
+<span class="n">avg_profit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bid_accepted</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average profit conditional on an accepted bid: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">avg_profit</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>average profit conditional on an accepted bid: -0.1499047321616897
+</pre></div>
+</div>
+</div>
+</div>
+<p>This value is negative regardless of <code class="docutils literal notranslate"><span class="pre">b</span></code>, as you can check by experimenting with different values of<code class="docutils literal notranslate"><span class="pre">b</span></code>.  Try changing the value for <code class="docutils literal notranslate"><span class="pre">b</span></code> in the code block above, and then hit SHIFT+ENTER to re-run the code blocks. You can also try changing the seed value for random number generation as well.</p>
+</div>
+<div class="section" id="time-until-hh-vs-ht">
+<h2>Time until HH vs. HT<a class="headerlink" href="#time-until-hh-vs-ht" title="Permalink to this headline">¶</a></h2>
+<p>To verify the results of Example 9.1.9, we can start by generating a long sequence of fair coin tosses. This is done with the <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html"><code class="docutils literal notranslate"><span class="pre">numpy.random.choice</span></code></a> function. <code class="docutils literal notranslate"><span class="pre">numpy.random.choice</span></code> will chooose with replacement items from the specified list of <code class="docutils literal notranslate"><span class="pre">H</span></code> and <code class="docutils literal notranslate"><span class="pre">T</span></code>, returning a sequence of length specified bye the <code class="docutils literal notranslate"><span class="pre">size</span></code> parameter. We use <a class="reference external" href="https://docs.python.org/3.7/library/string.html"><code class="docutils literal notranslate"><span class="pre">str.join</span></code></a>, passing in an empty <code class="docutils literal notranslate"><span class="pre">str</span></code> argument <code class="docutils literal notranslate"><span class="pre">''</span></code> to be interspersed between the elements in the given sequence. This results in a single string of <code class="docutils literal notranslate"><span class="pre">H</span></code>’s and <code class="docutils literal notranslate"><span class="pre">T</span></code>’s:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;HHHHTHHTTHTHTHTHTTHHHHTTHTTHHHHTHHHHHTHHHHHTTHHHHHHTTHHTHHHTTHTHHHHTTHHHTHTHTTHHTHTTHHHTTTHHTHTTTHHH&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>A sequence of length 100 is enough to virtually guarantee that both <code class="docutils literal notranslate"><span class="pre">HH</span></code> and <code class="docutils literal notranslate"><span class="pre">HT</span></code> will have appeared at least once.</p>
+<p>To determine how many tosses are required on average to see <code class="docutils literal notranslate"><span class="pre">HH</span></code> and <code class="docutils literal notranslate"><span class="pre">HT</span></code>, we need to generate many sequences of coin tosses. For this, we use our familiar friend <a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions">Python list comprehensions</a> to execute a large number of iterations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">9227465</span><span class="p">)</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">r</span></code> contains a thousand sequences of coin tosses, each of length 100. To find the first appearance of <code class="docutils literal notranslate"><span class="pre">HH</span></code> in each of these sequences, it is easiest to use <a class="reference external" href="https://docs.python.org/3.7/howto/regex.html">regular expressions</a> in Python’s <a class="reference external" href="https://docs.python.org/3.7/library/re.html"><code class="docutils literal notranslate"><span class="pre">re</span></code></a> library.  We load the <code class="docutils literal notranslate"><span class="pre">re</span></code> library with the <code class="docutils literal notranslate"><span class="pre">import</span></code> keyword, and use <code class="docutils literal notranslate"><span class="pre">re.search</span></code> to obtain the start and end indices of the first appearance of <code class="docutils literal notranslate"><span class="pre">HH</span></code> in each sequence <code class="docutils literal notranslate"><span class="pre">ht_seq</span></code> in <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="c1"># to learn more about re, un-comment ouf the following line</span>
+<span class="c1">#print(re.__doc__)</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;HH&#39;</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">ht_seq</span><span class="p">)</span><span class="o">.</span><span class="n">span</span><span class="p">()</span> <span class="k">for</span> <span class="n">ht_seq</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;matrix t has shape: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+<span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>matrix t has shape: (1000, 2)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 3],
+       [1, 3],
+       [4, 6],
+       [2, 4],
+       [3, 5],
+       [0, 2],
+       [4, 6],
+       [0, 2],
+       [5, 7],
+       [1, 3]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code above creates a two-column matrix <code class="docutils literal notranslate"><span class="pre">t</span></code>, whose columns contain the starting and ending positions of the first appearance of <code class="docutils literal notranslate"><span class="pre">HH</span></code> in each sequence of coin tosses. (Use <code class="docutils literal notranslate"><span class="pre">t[0:10,</span> <span class="pre">:]</span></code> to display the first 10 rows of the matrix and get an idea of what your results look like.) What we want are the ending positions, given by the second column. In particular, we want the average value of the second column, which is an approximation of the average waiting time for <code class="docutils literal notranslate"><span class="pre">HH</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">t</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;average waiting time for </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1">: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">mean</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>average waiting time for &#39;HH&#39;: 6.16
+</pre></div>
+</div>
+</div>
+</div>
+<p>Is your answer around 6? Trying again with <code class="docutils literal notranslate"><span class="pre">HT</span></code> instead of <code class="docutils literal notranslate"><span class="pre">HH</span></code>, is your answer around 4? You can change the value of the <code class="docutils literal notranslate"><span class="pre">target</span></code> variable in the earlier code block, and then hit SHIFT+ENTER to execute the code blocks again.</p>
+</div>
+<div class="section" id="linear-regression">
+<h2>Linear regression<a class="headerlink" href="#linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>In Example 9.3.10, we derived formulas for the slope and intercept of a linear regression model, which can be used to predict a response variable using an explanatory variable. Let’s try to apply these formulas to a simulated dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">14930352</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">norm</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The array <code class="docutils literal notranslate"><span class="pre">x</span></code> contains 100 realizations of the random variable <span class="math notranslate nohighlight">\(X \sim N(0, 1)\)</span> and the array <code class="docutils literal notranslate"><span class="pre">y</span></code> contains 100 realizations of the random variable <span class="math notranslate nohighlight">\(Y = a + bX + \epsilon\)</span>, where <span class="math notranslate nohighlight">\(\epsilon \sim N(0,1)\)</span>. As we can see, the true values of <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> for this dataset are 3 and 5, respectively. We can visualize the data as a scatterplot with <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.scatter.html"><code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.scatter(x,y)</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># numpy.cov(x, y) returns a 2 x 2 covariance matrix</span>
+<span class="c1">#   cov(x,x)    cov(x,y)</span>
+<span class="c1">#   cov(y,x)    cov(y,y)</span>
+<span class="n">cov_xy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">var_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">cov_xy</span> <span class="o">/</span> <span class="n">var_x</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;b = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;a = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b = 4.869568946916433
+a = 2.9953152340248237
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">numpy.cov(x,</span> <span class="pre">y,</span> <span class="pre">ddof=1)[0][1]</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy.var(x,</span> <span class="pre">ddof=1)</span></code>, and <code class="docutils literal notranslate"><span class="pre">numpy.mean(x)</span></code> provide the sample covariance, sample variance, and sample mean, estimating the quantities <span class="math notranslate nohighlight">\(Cov(X, Y), Var(X)\)</span>, and <span class="math notranslate nohighlight">\(\mathbb{E}(X)\)</span>, respectively. (We have discussed sample mean and sample variance in detail in earlier chapters. Sample covariance is defined analogously, and is a natural way to estimate the true covariance.)</p>
+<p>You should find that <code class="docutils literal notranslate"><span class="pre">b</span></code> is close to 5 and <code class="docutils literal notranslate"><span class="pre">a</span></code> is close to 3. These estimated values define the line of best fit. We use yet another list comprehension to calculate <code class="docutils literal notranslate"><span class="pre">y</span></code> values corresponding to <code class="docutils literal notranslate"><span class="pre">x</span></code> on the best-fit line using <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, and then <code class="docutils literal notranslate"><span class="pre">matplotlit.pyplot.plot</span></code> lets use render the <em>line of best fit</em> on top of our scatterplot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#91bfdb&#39;</span><span class="p">)</span>
+
+<span class="n">abline_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="o">*</span> <span class="n">val</span> <span class="o">+</span> <span class="n">a</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">abline_values</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">2.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#fc8d59&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/09-Conditional-Expectation_22_0.png" src="../_images/09-Conditional-Expectation_22_0.png" />
+</div>
+</div>
+<hr class="docutils" />
+<p>Joseph K. Blitzstein and Jessica Hwang, Harvard University and Stanford University, © 2019 by Taylor and Francis Group, LLC</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="08-Transformations.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Transformations</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="10-Inequalities-and-Limit-Theorems.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Inequalities and Limit Theorems</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,637 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expectation &#8212; From Statistics to Statistical Learning</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/04-Expectation.html" />
+    <link rel="shortcut icon" href="../_static/logo.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Continuous Random Variables" href="05-Continuous-Random-Variables.html" />
+    <link rel="prev" title="Random Variables and their Distributions" href="03-Random-Variables-and-their-Distributions.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">From Statistics to Statistical Learning</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   From Statistics to Statistical Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Machine learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/01-data-processing.html">
+   Data Processing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/02-classification.html">
+   Classification
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/03-linear-models.html">
+   Linear Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/04-svms.html">
+   Support Vector Machines
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/05-decision-trees.html">
+   Decision Trees
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../sklearn/06-ensemble-learning.html">
+   Ensemble Learning
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Deep learning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
+   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Probablity
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-Probability-and-Counting.html">
+   Probability and Counting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02-Conditional-Probability.html">
+   Conditional Probability
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
+   Random Variables and their Distributions
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-Continuous-Random-Variables.html">
+   Continuous Random Variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-Moments.html">
+   Moments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-Joint-Distributions.html">
+   Joint Distributions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-Transformations.html">
+   Transformations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-Conditional-Expectation.html">
+   Conditional Expectation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
+   Inequalities and Limit Theorems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="11-Markov-Chains.html">
+   Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
+   Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="13-Poisson-Processes.html">
+   Poisson Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="14-Sampling.html">
+   Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="15-Parameter-Testing.html">
+   Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="16-Non-Parameter-Testing.html">
+   Non Parameter Testing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="17-Survival-Analysis.html">
+   Survival Analysis
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/probability/04-Expectation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/ivaquero/blog-stats/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/04-Expectation.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/04-Expectation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/04-Expectation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Expectation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometric-negative-binomial-and-poisson">
+   Geometric, Negative Binomial, and Poisson
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matching-simulation">
+   Matching simulation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distinct-birthdays-simulation">
+     Distinct birthdays simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Expectation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Expectation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometric-negative-binomial-and-poisson">
+   Geometric, Negative Binomial, and Poisson
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matching-simulation">
+   Matching simulation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#distinct-birthdays-simulation">
+     Distinct birthdays simulation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="expectation">
+<h1>Expectation<a class="headerlink" href="#expectation" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="geometric-negative-binomial-and-poisson">
+<h1>Geometric, Negative Binomial, and Poisson<a class="headerlink" href="#geometric-negative-binomial-and-poisson" title="Permalink to this headline">¶</a></h1>
+<p>The three functions for the Geometric distribution in SciPy’s <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.geom.html#scipy.stats.geom"><code class="docutils literal notranslate"><span class="pre">scipy.stats.geom</span></code></a> are <code class="docutils literal notranslate"><span class="pre">pmf</span></code>, <code class="docutils literal notranslate"><span class="pre">cdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">rvs</span></code>, corresponding to the PMF, CDF, and random number generation. For <code class="docutils literal notranslate"><span class="pre">pmf</span></code> and <code class="docutils literal notranslate"><span class="pre">cdf</span></code>, we need to supply the following as inputs: (1) the value <code class="docutils literal notranslate"><span class="pre">k</span></code> at which to evaluate the PMF or CDF, and (2) the parameter <code class="docutils literal notranslate"><span class="pre">p</span></code>. For <code class="docutils literal notranslate"><span class="pre">rvs</span></code>, we need to input (1) the number of random variables to generate and (2) the parameter <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<p>For example, to calculate <span class="math notranslate nohighlight">\(P(X = 3)\)</span> and <span class="math notranslate nohighlight">\(P(X \leq 3)\)</span> where <span class="math notranslate nohighlight">\(X \sim Geom(0.5)\)</span>, we use <code class="docutils literal notranslate"><span class="pre">geom.pmf(3,</span> <span class="pre">0.5)</span></code> and <code class="docutils literal notranslate"><span class="pre">geom.cdf(3,</span> <span class="pre">0.5)</span></code>, respectively. To generate 100 i.i.d. <span class="math notranslate nohighlight">\(Geom(0.8)\)</span> r.v.s, we use <code class="docutils literal notranslate"><span class="pre">geom.rvs(0.8,</span> <span class="pre">size=100)</span></code>. If instead we want 100 i.i.d. <span class="math notranslate nohighlight">\(FS(0.8)\)</span> r.v.s, we just need to add 1 to include the success: <code class="docutils literal notranslate"><span class="pre">geom.rvs(0.8,</span> <span class="pre">size=100)</span> <span class="pre">+</span> <span class="pre">1</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">610</span><span class="p">)</span>
+
+<span class="c1"># to learn more about scipy.stats.geom, un-comment ouf the following line</span>
+<span class="c1">#print(stats.geom.__doc__)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;stats.geom.pmf(3, 0.5) = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;stats.geom.cdf(3, 0.5) = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;stats.geom.rvs(0.8, size=100) = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;stats.geom.rvs(0.8, size=100) + 1 = </span><span class="si">{</span><span class="n">stats</span><span class="o">.</span><span class="n">geom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stats.geom.pmf(3, 0.5) = 0.125
+stats.geom.cdf(3, 0.5) = 0.875
+stats.geom.rvs(0.8, size=100) = [1 1 1 1 1 1 1 1 2 2 1 1 2 1 2 1 3 1 1 2 1 1 1 1 1 1 3 1 1 1 1 2 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 3 1 3 1 2 1 1 1 1 3 1 1 2 1 1 1 1 1
+ 1 1 1 1 2 1 1 1 1 1 2 1 1 1 1 1 1 1 1 2 1 1 1 1 1 2]
+stats.geom.rvs(0.8, size=100) + 1 = [2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 3
+ 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 2 2 3 2 2 2 2 2 2 4 2 2 3 2 2 3 2 2 3 2
+ 2 3 2 2 2 2 2 3 3 2 3 3 3 2 2 3 2 4 2 2 2 2 3 2 2 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the Negative Binomial distribution, we have <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.nbinom.html#scipy.stats.nbinom"><code class="docutils literal notranslate"><span class="pre">scipy.stats.nbinom</span></code></a> <code class="docutils literal notranslate"><span class="pre">pmf</span></code>, <code class="docutils literal notranslate"><span class="pre">cdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">rvs</span></code>. These take three inputs. For example, to calculate the <span class="math notranslate nohighlight">\(NBin(5, 0.5)\)</span> PMF at 3, we type <code class="docutils literal notranslate"><span class="pre">nbimom.pmf(3,</span> <span class="pre">5,</span> <span class="pre">0.5)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">nbinom</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;nbinom.pmf(3, 5, 0.5) = </span><span class="si">{</span><span class="n">nbinom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nbinom.pmf(3, 5, 0.5) = 0.13671874999999992
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, for the Poisson distribution and <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html#scipy.stats.poisson"><code class="docutils literal notranslate"><span class="pre">scipy.stats.poisson</span></code></a>, the three functions are <code class="docutils literal notranslate"><span class="pre">pmf</span></code>, <code class="docutils literal notranslate"><span class="pre">cdf</span></code>, and <code class="docutils literal notranslate"><span class="pre">rvs</span></code>. These take two inputs. For example, to find the <span class="math notranslate nohighlight">\(Pois(10)\)</span> CDF at 2, we type <code class="docutils literal notranslate"><span class="pre">poisson.cdf(2,</span> <span class="pre">10)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">poisson</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;poisson.cdf(2, 10) = </span><span class="si">{</span><span class="n">poisson</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>poisson.cdf(2, 10) = 0.0027693957155115775
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="matching-simulation">
+<h1>Matching simulation<a class="headerlink" href="#matching-simulation" title="Permalink to this headline">¶</a></h1>
+<p>Continuing with Example 4.4.4, let’s use simulation to calculate the expected number of matches in a deck of cards. As in Chapter 1, we let <span class="math notranslate nohighlight">\(n\)</span> be the number of cards in the deck and perform the experiment 10<sup>4</sup> times using iteration with a <code class="docutils literal notranslate"><span class="pre">for</span></code>-loop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">987</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span>
+
+<span class="n">ordered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>    
+    <span class="n">shuffled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">shuffled</span> <span class="o">==</span> <span class="n">ordered</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now <span class="math notranslate nohighlight">\(r\)</span> contains the number of matches from each of the 10<sup>4</sup> simulations. But instead of looking at the probability of at least one match, as in Chapter 1, we now want to find the expected number of matches. We can approximate this by the average of all the simulation results, that is, the arithmetic mean of the elements of <span class="math notranslate nohighlight">\(r\)</span>. This is accomplished with the <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.mean.html"><code class="docutils literal notranslate"><span class="pre">numpy.mean</span></code></a> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0127
+</pre></div>
+</div>
+</div>
+</div>
+<p>The command <code class="docutils literal notranslate"><span class="pre">numpy.mean(r)</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">numpy.sum(r)/len(r)</span></code>. The result we get is very close to 1, confirming the calculation we did in Example 4.4.4 using indicator r.v.s. You can verify that no matter what value of <span class="math notranslate nohighlight">\(n\)</span> you choose, <code class="docutils literal notranslate"><span class="pre">numpy.mean(r)</span></code> will be very close to 1.</p>
+<div class="section" id="distinct-birthdays-simulation">
+<h2>Distinct birthdays simulation<a class="headerlink" href="#distinct-birthdays-simulation" title="Permalink to this headline">¶</a></h2>
+<p>Let’s calculate the expected number of distinct birthdays in a group of <span class="math notranslate nohighlight">\(k\)</span> people by simulation. We’ll let <span class="math notranslate nohighlight">\(k = 20\)</span>, but you can choose whatever value of <span class="math notranslate nohighlight">\(k\)</span> you like.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1597</span><span class="p">)</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">trials</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+    <span class="n">bdays</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">365</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">uniqs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">bdays</span><span class="p">))</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">uniqs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use a for loop to iterate 10<sup>4</sup> times, so we just need to understand what is inside the body of the for loop. First, we sample <code class="docutils literal notranslate"><span class="pre">k</span></code> times with replacement from the numbers 1 through 365 and call these the birthdays of the <code class="docutils literal notranslate"><span class="pre">k</span></code> people, <code class="docutils literal notranslate"><span class="pre">bdays</span></code>. Then, <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.unique.html"><code class="docutils literal notranslate"><span class="pre">numpy.unique(bdays)</span></code></a> removes duplicates in the array <code class="docutils literal notranslate"><span class="pre">bdays</span></code>, and <code class="docutils literal notranslate"><span class="pre">len(numpy.unique(bdays))</span></code> returns the length of the array after duplicates have been removed (number of unique birthdays). This count of unique birthdays is appended to array <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p>
+<p>Now <code class="docutils literal notranslate"><span class="pre">r</span></code> contains the number of distinct birthdays that we observed in each of the 10<sup>4</sup> simulations. The average number of distinct birthdays across the 10<sup>4</sup> simulations is <code class="docutils literal notranslate"><span class="pre">numpy.mean(r)</span></code>. We can compare the simulated value to the theoretical value that we found in Example 4.4.5 using indicator r.v.s:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">simulated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+<span class="n">theoretical</span> <span class="o">=</span> <span class="mi">365</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">364</span><span class="o">/</span><span class="mi">365</span><span class="p">)</span><span class="o">**</span><span class="n">k</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;simulated: </span><span class="si">{</span><span class="n">simulated</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;theoretical: </span><span class="si">{</span><span class="n">theoretical</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>simulated: 19.4921
+theoretical: 19.487910239138333
+</pre></div>
+</div>
+</div>
+</div>
+<p>When we ran the code, both the simulated and theoretical values gave us approximately 19.5.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./probability"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="03-Random-Variables-and-their-Distributions.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Random Variables and their Distributions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05-Continuous-Random-Variables.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Continuous Random Variables</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By ivaquero<br/>
+    
+        &copy; Copyright 2022.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
