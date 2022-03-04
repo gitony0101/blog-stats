@@ -9,7 +9,9 @@ A Notebook Collection of the Following Data Science Books with Improved Readabil
 
 ## 1. Basic Style
 
-- Prefer `f-string` over `.format()`
+### 1.1. String
+
+- Prefer `f-string` to `.format()`
 
 ```python
 # good
@@ -20,7 +22,9 @@ print(f"Scatter Plot of = {title}")
 print("Scatter Plot of {}".format(title))
 ```
 
-- Prefer `enumerate()` over `range(len())`
+### 1.2. Iteration
+
+- Prefer `enumerate()` to `range(len())`
 
 ```python
 xs = range(3)
@@ -34,9 +38,44 @@ for i in range(len(xs)):
   print(f'{i}: {xs[i]}')
 ```
 
+- Prefer `product` to nested `for` loops
+
+```python
+# good
+from itertools import product
+
+for item1, item2, item3 in product(list1, list2, list3):
+    print(item1 + item2 + item3)
+
+# bad
+for item1 in list1:
+    for item2 in list2:
+        for item3 in list3:
+              print(item1 + item2 + item3)
+```
+
+### 1.3. Condition
+
+- Prefer `any()` or `all()` to `for...if`
+
+```python
+# good
+found = any(thing == other_thing for thing in things)
+
+# bad
+found = False
+
+for thing in things:
+    if thing == other_thing:
+        found = True
+        break
+```
+
 ## 2. Matplotlib Style
 
-- Prefer `Axes` object over `Figure` object
+### 2.1. Objects
+
+- Prefer `Axes` object to `Figure` object
 - use `constrained_layout=True` when draw subplots
 
 ```python
@@ -52,8 +91,10 @@ plt.subplot(122)
 plt.hist(x2, y2)
 ```
 
-- Prefer `axes.flatten()` over `plt.subplot()` in cases where subplots' data is iterable
-- Prefer `zip()` or `enumerate()` over `range()` for iterable objects
+### 2.2. Subplots
+
+- Prefer `axes.flatten()` to `plt.subplot()` in cases where subplots' data is iterable
+- Prefer `zip()` or `enumerate()` to `range()` for iterable objects
 
 ```python
 # good
@@ -68,7 +109,9 @@ for i in range(4):
   ax.plot(x[i], y[i])
 ```
 
-- Prefer `set()` method over `set_*()` method when there is no need to tweak many parameters
+### 2.3. Decoration
+
+- Prefer `set()` method to `set_*()` method when there is no need to tweak many parameters
 - Prefer use `plt.setp()` to tweak parameters.
 
 ```python
@@ -80,7 +123,7 @@ ax.set_xlabel('x')
 ax.set_ylabel('y')
 ```
 
-- Prefer `ax.axis` over `ax.set(xlim, ylim)`
+- Prefer `ax.axis` to `ax.set(xlim, ylim)`
 
 ```python
 # good
@@ -92,7 +135,7 @@ ax.set(xlim=(-1, 1), ylim=(-1, 1))
 
 ## 3. Pandas Style
 
-- Prefer `df['col']` over `df.col`
+- Prefer `df['col']` to `df.col`
 
 ```python
 # good
@@ -102,7 +145,7 @@ movies['duration']
 movies.duration
 ```
 
-- Prefer `df.query` over `df[]` or `df.loc[]` in simple-selection
+- Prefer `df.query` to `df[]` or `df.loc[]` in simple-selection
 
 ```python
 # good
@@ -113,7 +156,7 @@ movies[movies['duration'] >= 200]
 movies.loc[movies['duration'] >= 200, :]
 ```
 
-- Prefer `df.loc` and `df.iloc` over `df[]` in multiple-selection
+- Prefer `df.loc` and `df.iloc` to `df[]` in multiple-selection
 
 ```python
 # good
@@ -125,12 +168,10 @@ movies[movies['duration'] >= 200].genre
 movies[0:2]
 ```
 
-- Prefer `.astype('category')` over `.factorize()`
+- Prefer `.astype('category')` to `.factorize()`
 
 ```python
-# good
 
-# bad
 ```
 
 ## 4. LaTeX Style
@@ -201,7 +242,7 @@ $$
 
 ### 4.2. Brackets
 
-- Prefer `\Bigg...\Bigg` over `\left...\right`
+- Prefer `\Bigg...\Bigg` to `\left...\right`
 
 $$
 A\Bigg[\frac12\ \frac13\ ⋯\ \frac1{99}\Bigg]
@@ -213,7 +254,7 @@ A\Bigg[\frac12\ \frac13\ ⋯\ \frac1{99}\Bigg]
 $$
 ```
 
-- Prefer `\underset{}{}` over `\underset{}`
+- Prefer `\underset{}{}` to `\underset{}`
 
 $$
 \underset{θ}\mathrm{argmax}\ p(x_i ∣ θ)
@@ -227,7 +268,7 @@ $$
 
 ### 4.3. Expressions
 
-- Prefer `^{\top}` over `^T` for transpose
+- Prefer `^{\top}` to `^T` for transpose
 
 $$
 𝐀^⊤
@@ -239,7 +280,7 @@ $$
 $$
 ```
 
-- Prefer `\to` over `\rightarrow` for limit
+- Prefer `\to` to `\rightarrow` for limit
 
 $$
 \lim_{n → ∞}
@@ -251,7 +292,7 @@ $$
 $$
 ```
 
-- Prefer `underset{}{}` over `\limits_`
+- Prefer `underset{}{}` to `\limits_`
 
 $$
 \underset{w}\mathrm{argmin}\ (wx +b)
@@ -265,7 +306,7 @@ $$
 
 ### 4.4. Fonts
 
-- Prefer `mathrm{}` over `{\rm }` or `\mathop{}` or `\operatorname{}`
+- Prefer `mathrm{}` to `{\rm }` or `\mathop{}` or `\operatorname{}`
 
 $$
 θ_\mathrm{MLE} = \underset{θ}\mathrm{argmax}\ ∑_{i = 1}^{N}\log p(x_i ∣ θ)
@@ -277,5 +318,5 @@ $$
 $$
 ```
 
-- Prefer `\mathbf{}` over `{\bf }`
-- Prefer `\mathit{}` over `{\it }`
+- Prefer `\mathbf{}` to `{\bf }`
+- Prefer `\mathit{}` to `{\it }`
