@@ -14,14 +14,14 @@ parts:
       - file: sklearn/06-ensemble-learning
       # - file: sklearn/07-dimensionality-reduction
       # - file: sklearn/08-unsupervised-learning
-  - caption: Deep learning
+  - caption: Deep learning - PyTorch
     chapters:
       - file: pytorch/1-intro-pytorch
   - caption: Probablity
     chapters:
       - file: probability/01-Probability-and-Counting
       - file: probability/02-Conditional-Probability
-      - file: probability/03-Random-Variables-and-their-Distributions
+      - file: probability/03-Distributions
       - file: probability/04-Expectation
       - file: probability/05-Continuous-Random-Variables
       - file: probability/06-Moments
@@ -36,16 +36,3 @@ parts:
       - file: probability/15-Parameter-Testing
       - file: probability/16-Non-Parameter-Testing
       - file: probability/17-Survival-Analysis
-  # - caption: Bayesian Analysis
-  #   chapters:
-  #     - file: pymc/01-Probablity
-  #     - file: pymc/03-Programming
-  #     - file: pymc/04-Linear Regression
-  #     - file: pymc/05-Model Selection
-  #     - file: pymc/06-Linear Classification
-  #     - file: pymc/07-Dimension Reduction
-  #     - file: pymc/09-Exponential Family
-  #     - file: pymc/11-Gaussian Mixture
-  #     - file: pymc/13-Gaussian Process
-  #     - file: pymc/14-Markovian Methods
-  #     - file: pymc/15-Non-Markovian Methods
