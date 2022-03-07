@@ -48,6 +48,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://ivaquero.github.io/blog-stats/README.html" />
@@ -771,10 +773,10 @@ A\Bigg[\frac12\ \frac13\ ⋯\ \frac1{99}\Bigg]
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\underset{w}{\argmin}(wx +b)
+\underset{w}{\mathrm{argmin}}(wx +b)
 \]</div>
 <div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="sb">$$</span><span class="nb"></span>
-<span class="nv">\underset</span><span class="nb">{w}{</span><span class="nv">\argmin</span><span class="nb">}</span><span class="o">(</span><span class="nb">wx </span><span class="o">+</span><span class="nb">b</span><span class="o">)</span><span class="nb"></span>
+<span class="nv">\underset</span><span class="nb">{w}{</span><span class="nv">\mathrm</span><span class="nb">{argmin}}</span><span class="o">(</span><span class="nb">wx </span><span class="o">+</span><span class="nb">b</span><span class="o">)</span><span class="nb"></span>
 <span class="s">$$</span>
 </pre></div>
 </div>
@@ -786,10 +788,10 @@ A\Bigg[\frac12\ \frac13\ ⋯\ \frac1{99}\Bigg]
 </ul>
 <div class="math notranslate nohighlight">
 \[
-θ_\mathrm{MLE} = \underset{θ}{\argmax}∑_{i = 1}^{N}\log p(x_i ∣ θ)
+θ_\mathrm{MLE} = \underset{θ}{\mathrm{argmax}}∑_{i = 1}^{N}\log p(x_i ∣ θ)
 \]</div>
 <div class="highlight-latex notranslate"><div class="highlight"><pre><span></span><span class="sb">$$</span><span class="nb"></span>
-<span class="nb">θ_</span><span class="nv">\mathrm</span><span class="nb">{MLE} </span><span class="o">=</span><span class="nb"> </span><span class="nv">\underset</span><span class="nb">{θ}{</span><span class="nv">\argmax</span><span class="nb">}∑_{i </span><span class="o">=</span><span class="nb"> </span><span class="m">1</span><span class="nb">}^{N}</span><span class="nv">\log</span><span class="nb"> p</span><span class="o">(</span><span class="nb">x_i ∣ θ</span><span class="o">)</span><span class="nb"></span>
+<span class="nb">θ_</span><span class="nv">\mathrm</span><span class="nb">{MLE} </span><span class="o">=</span><span class="nb"> </span><span class="nv">\underset</span><span class="nb">{θ}{</span><span class="nv">\mathrm</span><span class="nb">{argmax}}∑_{i </span><span class="o">=</span><span class="nb"> </span><span class="m">1</span><span class="nb">}^{N}</span><span class="nv">\log</span><span class="nb"> p</span><span class="o">(</span><span class="nb">x_i ∣ θ</span><span class="o">)</span><span class="nb"></span>
 <span class="s">$$</span>
 </pre></div>
 </div>
