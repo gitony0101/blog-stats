@@ -48,8 +48,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://ivaquero.github.io/blog-stats/sklearn/03-linear-models.html" />
@@ -140,7 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Deep learning
+  Deep learning - PyTorch
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -157,7 +155,7 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../probability/01-Probability-and-Counting.html">
+  <a class="reference internal" href="../probability/01-Probability.html">
    Probability and Counting
   </a>
  </li>
@@ -167,8 +165,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../probability/03-Random-Variables-and-their-Distributions.html">
-   Random Variables and their Distributions
+  <a class="reference internal" href="../probability/03-Distributions.html">
+   Distributions
   </a>
  </li>
  <li class="toctree-l1">
@@ -204,41 +202,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../probability/10-Inequalities-and-Limit-Theorems.html">
    Inequalities and Limit Theorems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../probability/11-Markov-Chains.html">
-   Markov Chains
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../probability/12-Markov-Chain-Monte-Carlo.html">
-   Markov Chain Monte Carlo
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../probability/13-Poisson-Processes.html">
-   Poisson Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../probability/14-Sampling.html">
-   Sampling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../probability/15-Parameter-Testing.html">
-   Parameter Testing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../probability/16-Non-Parameter-Testing.html">
-   Non Parameter Testing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../probability/17-Survival-Analysis.html">
-   Survival Analysis
   </a>
  </li>
 </ul>
@@ -1640,7 +1603,7 @@ latter are NOT linearly separable from each other.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/py/n14256yd5r5ddms88x9bvsv40000gn/T/ipykernel_63473/2130579894.py:2: DeprecationWarning: `np.int` is a deprecated alias for the builtin `int`. To silence this warning, use `int` by itself. Doing this will not modify any behavior and is safe. When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision. If you wish to review your current use, check the release note link for additional information.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/py/n14256yd5r5ddms88x9bvsv40000gn/T/ipykernel_14772/2130579894.py:2: DeprecationWarning: `np.int` is a deprecated alias for the builtin `int`. To silence this warning, use `int` by itself. Doing this will not modify any behavior and is safe. When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision. If you wish to review your current use, check the release note link for additional information.
 Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
   y = (iris[&quot;target&quot;] == 2).astype(np.int)  # 1 if Iris virginica, else 0
 </pre></div>

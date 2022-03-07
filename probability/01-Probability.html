@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/01-Probability-and-Counting.html" />
+    <link rel="canonical" href="https://ivaquero.github.io/blog-stats/probability/01-Probability.html" />
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -140,7 +140,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Deep learning
+  Deep learning - PyTorch
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -167,8 +167,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="03-Random-Variables-and-their-Distributions.html">
-   Random Variables and their Distributions
+  <a class="reference internal" href="03-Distributions.html">
+   Distributions
   </a>
  </li>
  <li class="toctree-l1">
@@ -204,41 +204,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="10-Inequalities-and-Limit-Theorems.html">
    Inequalities and Limit Theorems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="11-Markov-Chains.html">
-   Markov Chains
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="12-Markov-Chain-Monte-Carlo.html">
-   Markov Chain Monte Carlo
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="13-Poisson-Processes.html">
-   Poisson Processes
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="14-Sampling.html">
-   Sampling
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="15-Parameter-Testing.html">
-   Parameter Testing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="16-Non-Parameter-Testing.html">
-   Non Parameter Testing
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="17-Survival-Analysis.html">
-   Survival Analysis
   </a>
  </li>
 </ul>
@@ -282,7 +247,7 @@ const thebe_selector_output = ".output, .cell_output"
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/probability/01-Probability-and-Counting.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/probability/01-Probability.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -302,7 +267,7 @@ const thebe_selector_output = ".output, .cell_output"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/01-Probability-and-Counting.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/ivaquero/blog-stats//issues/new?title=Issue%20on%20page%20%2Fprobability/01-Probability.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -323,7 +288,7 @@ const thebe_selector_output = ".output, .cell_output"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/01-Probability-and-Counting.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ivaquero/blog-stats/master?urlpath=lab/tree/probability/01-Probability.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -331,7 +296,7 @@ const thebe_selector_output = ".output, .cell_output"
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/01-Probability-and-Counting.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/ivaquero/blog-stats/blob/master/probability/01-Probability.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -353,16 +318,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    Probability and Counting
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vectors">
-   Vectors
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#factorials-and-binomial-coefficients">
-   Factorials and binomial coefficients
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -408,16 +363,6 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#vectors">
-   Vectors
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#factorials-and-binomial-coefficients">
-   Factorials and binomial coefficients
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#sampling-and-simulation">
    Sampling and simulation
   </a>
@@ -448,259 +393,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="vectors">
-<h1>Vectors<a class="headerlink" href="#vectors" title="Permalink to this headline">¶</a></h1>
-<p>Rather than using the usual Python list (array), for probability and statistics it is more convenient to use a <a class="reference external" href="https://docs.scipy.org/doc/numpy/user/basics.creation.html">NumPy</a> array.</p>
-<p>In Python, you can import the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> module using the <code class="docutils literal notranslate"><span class="pre">np</span></code> shorthand alias idiom to save on typing. Some of the examples later in this notebook rely on random number generation, so we will seed the NumPy pseudo-random number generator with an arbitrary value so that if you run a code block, you should see the exact same results.</p>
-<p>Here we pass in a list of integers to the <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.15.1/reference/generated/numpy.array.html"><code class="docutils literal notranslate"><span class="pre">numpy.array</span></code></a> function to create an instance of a NumPy array, and then print the array as follows:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3 1 4 5 9]
-</pre></div>
-</div>
-</div>
-</div>
-<p>The <code class="docutils literal notranslate"><span class="pre">numpy</span></code> module (shortened to the alias <code class="docutils literal notranslate"><span class="pre">np</span></code>) provides many convenient object instance methods that work on an <code class="docutils literal notranslate"><span class="pre">array</span></code>. It is possible to use the functions of the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> module, or invoke these functions as object instance methods of an <code class="docutils literal notranslate"><span class="pre">array</span></code>. Here are a few examples:</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.sum.html"><code class="docutils literal notranslate"><span class="pre">v.sum()</span></code></a> - sum array elements; equivalent to <code class="docutils literal notranslate"><span class="pre">numpy.sum(v)</span></code></p></li>
-<li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.max.html#numpy.ndarray.max"><code class="docutils literal notranslate"><span class="pre">v.max()</span></code></a> - return the maximum value of the array; equivalent to <code class="docutils literal notranslate"><span class="pre">numpy.max(v)</span></code></p></li>
-<li><p><a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.min.html#numpy.ndarray.min"><code class="docutils literal notranslate"><span class="pre">v.min()</span></code></a> -  return the maximum value of the array; equivalent to <code class="docutils literal notranslate"><span class="pre">numpy.min(v)</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sum of v =&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;maximum of v =&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;minimum of v =&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sum of v = 22
-maximum of v = 9
-minimum of v = 1
-</pre></div>
-</div>
-</div>
-</div>
-<p>To obtain the number of elements in the <code class="docutils literal notranslate"><span class="pre">array</span></code>, you can use either:</p>
-<ul class="simple">
-<li><p>the Python built-in <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#len"><code class="docutils literal notranslate"><span class="pre">len</span></code></a> function, passing in the <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
-<li><p>the <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.size.html#numpy.ndarray.size"><code class="docutils literal notranslate"><span class="pre">size</span></code></a> attribute of the NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code></p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;len(v) =&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v.size =&#39;</span><span class="p">,</span> <span class="n">v</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>len(v) = 5
-v.size = 5
-</pre></div>
-</div>
-</div>
-</div>
-<p>To create a NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code> from the sequence <span class="math notranslate nohighlight">\((1, 2, \dots, n)\)</span>, use the <a class="reference external" href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.arange.html"><code class="docutils literal notranslate"><span class="pre">numpy.arange</span></code></a> function. In general, an ascending-order sequence <span class="math notranslate nohighlight">\((m, \dots, n)\)</span> can be generated with <code class="docutils literal notranslate"><span class="pre">arange(m,</span> <span class="pre">n+1)</span></code>. Note that the second parameter <code class="docutils literal notranslate"><span class="pre">stop</span></code> to the <code class="docutils literal notranslate"><span class="pre">arange</span></code> function is <em>not</em> inclusive, so for an ascending-order sequence you must increment <code class="docutils literal notranslate"><span class="pre">stop</span></code> by 1.</p>
-<p>A descending-order sequence can be generated by providing -1 as the third parameter <code class="docutils literal notranslate"><span class="pre">step</span></code> to the <code class="docutils literal notranslate"><span class="pre">arange</span></code> function. However, for the reason mentioned above, you must conversely <em>decrement</em> the second parameter <code class="docutils literal notranslate"><span class="pre">stop</span></code> if you want to include this value in the <code class="docutils literal notranslate"><span class="pre">array</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
-
-<span class="c1"># example of ascending order sequence from m to n, inclusive</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-
-<span class="c1">## example of descending order sequence</span>
-<span class="n">v_reversed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">v_reversed</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 1  2  3  4  5  6  7  8  9 10]
-[10  9  8  7  6  5  4  3  2  1]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Like a Python <code class="docutils literal notranslate"><span class="pre">list</span></code> (and unlike vectors in R), NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code> is zero-indexed. To access the <code class="docutils literal notranslate"><span class="pre">i</span></code><sup>th</sup> element of an <code class="docutils literal notranslate"><span class="pre">array</span></code> named <code class="docutils literal notranslate"><span class="pre">v</span></code>, use <code class="docutils literal notranslate"><span class="pre">v[i-1]</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;1st element (index 0) of v is&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;10th element (index 9) of v =&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1st element (index 0) of v is 1
-10th element (index 9) of v = 10
-</pre></div>
-</div>
-</div>
-</div>
-<p>To access a subset of the <code class="docutils literal notranslate"><span class="pre">array</span></code> members, you can pass another NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code> of the target indices to the indexer of your <code class="docutils literal notranslate"><span class="pre">array</span></code>.</p>
-<p>You can also use a NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code> of boolean values (<code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code>) to index your <code class="docutils literal notranslate"><span class="pre">array</span></code>, keeping any elements where the index corresponds to <code class="docutils literal notranslate"><span class="pre">True</span></code> and filtering out elements where the corresponding index is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NumPy array for the indices 1, 3, 5</span>
-<span class="n">subset_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;elements of v at indices 1, 3 and 5: &#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="n">subset_ind</span><span class="p">])</span>
-
-<span class="c1"># boolean indexer: all True indices will be included in the subset,</span>
-<span class="c1"># while all False indexes will be filtered out</span>
-<span class="c1"># keep all EXCEPT for array values at indices 2, 4, and 6</span>
-<span class="n">boolean_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;elements of v except at indices 2, 4 and 6: &#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">[</span><span class="n">boolean_ind</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>elements of v at indices 1, 3 and 5:  [2 4 6]
-elements of v except at indices 2, 4 and 6:  [ 1  2  4  6  8  9 10]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Many operations on NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code> are interpreted <em>component-wise</em>.  For example, in math the cube of a vector doesn’t have a standard definition, but</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>v**3
-</pre></div>
-</div>
-<p>simply cubes each element individually.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[   1    8   27   64  125  216  343  512  729 1000]
-</pre></div>
-</div>
-</div>
-</div>
-<p>Similarly,</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1 / np.arange(1, 101)**2
-</pre></div>
-</div>
-<p>is a very compact way to get the vector <span class="math notranslate nohighlight">\(1, \frac{1}{2^2}, \frac{1}{3^2},  \ldots , \frac{1}{100^2}\)</span></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.00000000e+00, 2.50000000e-01, 1.11111111e-01, 6.25000000e-02,
-       4.00000000e-02, 2.77777778e-02, 2.04081633e-02, 1.56250000e-02,
-       1.23456790e-02, 1.00000000e-02, 8.26446281e-03, 6.94444444e-03,
-       5.91715976e-03, 5.10204082e-03, 4.44444444e-03, 3.90625000e-03,
-       3.46020761e-03, 3.08641975e-03, 2.77008310e-03, 2.50000000e-03,
-       2.26757370e-03, 2.06611570e-03, 1.89035917e-03, 1.73611111e-03,
-       1.60000000e-03, 1.47928994e-03, 1.37174211e-03, 1.27551020e-03,
-       1.18906064e-03, 1.11111111e-03, 1.04058273e-03, 9.76562500e-04,
-       9.18273646e-04, 8.65051903e-04, 8.16326531e-04, 7.71604938e-04,
-       7.30460190e-04, 6.92520776e-04, 6.57462196e-04, 6.25000000e-04,
-       5.94883998e-04, 5.66893424e-04, 5.40832883e-04, 5.16528926e-04,
-       4.93827160e-04, 4.72589792e-04, 4.52693526e-04, 4.34027778e-04,
-       4.16493128e-04, 4.00000000e-04, 3.84467512e-04, 3.69822485e-04,
-       3.55998576e-04, 3.42935528e-04, 3.30578512e-04, 3.18877551e-04,
-       3.07787011e-04, 2.97265161e-04, 2.87273772e-04, 2.77777778e-04,
-       2.68744961e-04, 2.60145682e-04, 2.51952633e-04, 2.44140625e-04,
-       2.36686391e-04, 2.29568411e-04, 2.22766763e-04, 2.16262976e-04,
-       2.10039908e-04, 2.04081633e-04, 1.98373339e-04, 1.92901235e-04,
-       1.87652468e-04, 1.82615047e-04, 1.77777778e-04, 1.73130194e-04,
-       1.68662506e-04, 1.64365549e-04, 1.60230732e-04, 1.56250000e-04,
-       1.52415790e-04, 1.48720999e-04, 1.45158949e-04, 1.41723356e-04,
-       1.38408304e-04, 1.35208221e-04, 1.32117849e-04, 1.29132231e-04,
-       1.26246686e-04, 1.23456790e-04, 1.20758363e-04, 1.18147448e-04,
-       1.15620303e-04, 1.13173382e-04, 1.10803324e-04, 1.08506944e-04,
-       1.06281220e-04, 1.04123282e-04, 1.02030405e-04, 1.00000000e-04])
-</pre></div>
-</div>
-</div>
-</div>
-<p>In math, <span class="math notranslate nohighlight">\(v+w\)</span> is undefined if <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span> are vectors of different lengths, but with a NumPy <code class="docutils literal notranslate"><span class="pre">array</span></code>, the shorter vector gets <a class="reference external" href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.broadcasting.html">broadcast</a>. For example, <span class="math notranslate nohighlight">\(v+3\)</span> essentially turns 3 into a vector of 3’s of the same length as <code class="docutils literal notranslate"><span class="pre">v</span></code>, thus adding 3 to each element of <span class="math notranslate nohighlight">\(v\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 4  5  6  7  8  9 10 11 12 13]
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="factorials-and-binomial-coefficients">
-<h1>Factorials and binomial coefficients<a class="headerlink" href="#factorials-and-binomial-coefficients" title="Permalink to this headline">¶</a></h1>
-<p>We can compute <span class="math notranslate nohighlight">\(n!\)</span> using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.factorial.html#scipy.special.factorial"><code class="docutils literal notranslate"><span class="pre">scipy.special.factorial(n)</span></code></a> and <span class="math notranslate nohighlight">\(\binom{n}{k}\)</span> using <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.comb.html#scipy.special.comb"><code class="docutils literal notranslate"><span class="pre">scipy.special.comb(n,</span> <span class="pre">k)</span></code></a>. As we have seen, factorials grow extremely quickly. What is the largest <span class="math notranslate nohighlight">\(n\)</span> for which <code class="docutils literal notranslate"><span class="pre">scipy.special.factorial</span></code> returns a number? Beyond that point, <code class="docutils literal notranslate"><span class="pre">scipy.special.factorial</span></code> will return <code class="docutils literal notranslate"><span class="pre">inf</span></code> (infinity), without a warning message.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">factorial</span><span class="p">,</span> <span class="n">comb</span>
-
-<span class="c1"># to learn more about scipy.special.factorial, un-comment out the following line</span>
-<span class="c1">#print(factorial.__doc__)</span>
-
-<span class="c1"># to learn more about scipy.special.comb, un-comment out the following line</span>
-<span class="c1">#print(comb.__doc__)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;5! =&#39;</span><span class="p">,</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;6 choose 2 =&#39;</span><span class="p">,</span> <span class="n">comb</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;200! =&#39;</span><span class="p">,</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span> <span class="s1">&#39;?&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5! = 120.0
-6 choose 2 = 15.0
-200! = inf ?
-</pre></div>
-</div>
-</div>
-</div>
-<p>But it is still possible to use <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.gammaln.html#scipy.special.gammaln"><code class="docutils literal notranslate"><span class="pre">scipy.special.gammaln</span></code></a> define a function to easily compute <span class="math notranslate nohighlight">\(log(n!)\)</span>. Similarly, it would then be possible to compose a function that computes <span class="math notranslate nohighlight">\(log \binom{n}{k}\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">gammaln</span>
-
-<span class="c1"># to learn more about scipy.special.gammaln, un-comment out the following line</span>
-<span class="c1">#print(gammaln.__doc__)</span>
-
-<span class="k">def</span> <span class="nf">logfactorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">gammaln</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="k">def</span> <span class="nf">logchoose</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="n">num</span> <span class="o">=</span> <span class="n">logfactorial</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-    <span class="n">denom</span> <span class="o">=</span> <span class="n">logfactorial</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="n">k</span><span class="p">)</span> <span class="o">+</span> <span class="n">logfactorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">num</span> <span class="o">-</span> <span class="n">denom</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;log(200!) =&#39;</span><span class="p">,</span> <span class="n">logfactorial</span><span class="p">(</span><span class="mi">200</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;log 100000 choose 999 =&#39;</span><span class="p">,</span> <span class="n">logchoose</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span> <span class="mi">999</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>log(200!) = 863.2319871924054
-log 100000 choose 999 = 5591.190431187046
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span><span class="p">,</span> <span class="n">special</span>
 </pre></div>
 </div>
 </div>
@@ -714,11 +407,6 @@ log 100000 choose 999 = 5591.190431187046
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed the random number generator</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1"># Example: sampling without replacement</span>
-<span class="c1">#</span>
-<span class="c1"># do not forget that Python arrays are zero-indexed,</span>
-<span class="c1"># and the 2nd argument to NumPy arange must be incremented by 1</span>
-<span class="c1"># if you want to include that value</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">k</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -737,7 +425,7 @@ log 100000 choose 999 = 5591.190431187046
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Example: sampling with replacement</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">k</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">k</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -755,7 +443,7 @@ log 100000 choose 999 = 5591.190431187046
 <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
 
-<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;v =&#39;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -770,31 +458,10 @@ v, shuffled = [ 5  2  6  1  8  3  4  7 10  9]
 </div>
 </div>
 </div>
-<p>We can also use <code class="docutils literal notranslate"><span class="pre">numpy.random.choice</span></code> to draw from a non-numeric <code class="docutils literal notranslate"><span class="pre">list</span></code> or <code class="docutils literal notranslate"><span class="pre">array</span></code>. For example, the Python built-in function <a class="reference external" href="https://docs.python.org/3.6/library/functions.html#func-list"><code class="docutils literal notranslate"><span class="pre">list</span></code></a> can be used to transform a string of the 26 lowercase letters of the English alphabet into a list of individual letters. <code class="docutils literal notranslate"><span class="pre">numpy.random.choice</span></code> will generate a random 7-letter “word” by sampling from the list of lowercase alphabet chars derived from <a class="reference external" href="https://docs.python.org/3/library/string.html"><code class="docutils literal notranslate"><span class="pre">string.ascii_lowercase</span></code></a>, without replacement. Lastly, the Python String function <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html?highlight=join#str.join"><code class="docutils literal notranslate"><span class="pre">join</span></code></a> concatenates the 7 randomly selected letters into a “word”.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-
-<span class="kn">import</span> <span class="nn">string</span>
-
-<span class="c1"># split string of lower-case alphabets into an array</span>
-<span class="n">alpha</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">ascii_lowercase</span><span class="p">)</span>
-
-<span class="c1"># randomly choose 7 letters, concatenate into a string</span>
-<span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;srmxpqn&#39;
-</pre></div>
-</div>
-</div>
-</div>
 <p><code class="docutils literal notranslate"><span class="pre">numpy.random.choice</span></code> also allows us to specify general probabilities for sampling each number. For example,</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="c1"># from the 4 numbers starting from 0</span>
 <span class="c1"># obtain a sample of size 3</span>
@@ -805,7 +472,7 @@ v, shuffled = [ 5  2  6  1  8  3  4  7 10  9]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 3, 1])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2, 3, 1])
 </pre></div>
 </div>
 </div>
@@ -824,19 +491,18 @@ v, shuffled = [ 5  2  6  1  8  3  4  7 10  9]
 
 <span class="n">ordered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">tmp</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
-    <span class="n">shuffled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">shuffled</span> <span class="o">==</span> <span class="n">ordered</span><span class="p">)</span>
-    <span class="n">tmp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">trials</span><span class="p">)</span>
 
-<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">trial</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+    <span class="n">shuffled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">ordered</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">trial</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">shuffled</span> <span class="o">==</span> <span class="n">ordered</span><span class="p">)</span>
+
 <span class="n">ans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">results</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">trials</span>
 
 <span class="n">expected</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">e</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;simulated value: </span><span class="si">{:.2F}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ans</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;expected value : </span><span class="si">{:.2F}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expected</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;simulated value: </span><span class="si">{</span><span class="n">ans</span><span class="si">:</span><span class="s1">.2F</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;expected value : </span><span class="si">{</span><span class="n">expected</span><span class="si">:</span><span class="s1">.2F</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -865,10 +531,10 @@ expected value : 0.63
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">23</span>
 <span class="n">days_in_year</span> <span class="o">=</span> <span class="mi">365</span>
 
-<span class="n">numer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">days_in_year</span><span class="p">,</span> <span class="n">days_in_year</span><span class="o">-</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">days_in_year</span><span class="p">]</span><span class="o">*</span><span class="n">k</span><span class="p">)</span>
+<span class="n">numer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">days_in_year</span><span class="p">,</span> <span class="n">days_in_year</span> <span class="o">-</span> <span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">days_in_year</span><span class="p">]</span> <span class="o">*</span> <span class="n">k</span><span class="p">)</span>
 
-<span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">numer</span><span class="o">/</span><span class="n">denom</span><span class="p">))</span>
+<span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">numer</span> <span class="o">/</span> <span class="n">denom</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -893,29 +559,30 @@ expected value : 0.63
     <span class="k">elif</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">days_in_year</span><span class="p">:</span>
         <span class="k">return</span> <span class="mf">1.0</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">numer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">days_in_year</span><span class="p">,</span> <span class="n">days_in_year</span><span class="o">-</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">days_in_year</span><span class="p">]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span> <span class="n">numer</span><span class="o">/</span><span class="n">denom</span> <span class="p">))</span>
+        <span class="n">numer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">days_in_year</span><span class="p">,</span> <span class="n">days_in_year</span> <span class="o">-</span> <span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">days_in_year</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">numer</span> <span class="o">/</span> <span class="n">denom</span><span class="p">))</span>
+
 
 <span class="k">def</span> <span class="nf">qbirthday_naive</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot; Return an approximation of the number of people required to have at least 1 birthday</span>
 <span class="sd">        match with probability p.</span>
-<span class="sd">        </span>
-<span class="sd">        This naive implemention is based on the Birthday problem article on Wikipedia.</span>
-<span class="sd">        https://en.wikipedia.org/wiki/Birthday_problem</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">p</span><span class="p">))</span> <span class="p">)</span>
+    <span class="n">raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">p</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">23</span>
 <span class="n">pbirthday_naive_ans</span> <span class="o">=</span> <span class="n">pbirthday_naive</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">((</span><span class="s1">&#39;</span><span class="si">{:.1f}% c</span><span class="s1">hance of at least 1 birthday match &#39;</span>
-       <span class="s1">&#39;among </span><span class="si">{}</span><span class="s1"> people&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pbirthday_naive_ans</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pbirthday_naive_ans</span><span class="o">*</span><span class="mf">100.0</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% chance of at least 1 birthday match among </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> people&#39;</span>
+<span class="p">)</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.50</span>
 <span class="n">qbirthday_naive_ans</span> <span class="o">=</span> <span class="n">qbirthday_naive</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">((</span><span class="s1">&#39;For an approximately </span><span class="si">{:.1f}% c</span><span class="s1">hance of at least 1 birthday match, &#39;</span>
-       <span class="s1">&#39;we need </span><span class="si">{}</span><span class="s1"> people&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">qbirthday_naive_ans</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;For an approximately </span><span class="si">{</span><span class="n">p</span><span class="o">*</span><span class="mf">100.0</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% chance of at least 1 birthday match, we need </span><span class="si">{</span><span class="n">qbirthday_naive_ans</span><span class="si">}</span><span class="s1"> people&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -949,7 +616,7 @@ For an approximately 50.0% chance of at least 1 birthday match, we need 23 peopl
         <span class="k">return</span> <span class="mf">1.0</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">lhs</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">k</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">n</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span>
-        <span class="n">lxx</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">gammaln</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">lxx</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">special</span><span class="o">.</span><span class="n">gammaln</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">lxx</span><span class="p">))</span>
 
 
@@ -968,8 +635,9 @@ For an approximately 50.0% chance of at least 1 birthday match, we need 23 peopl
     <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 
-    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
-        <span class="p">((</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">gammaln</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="p">)))</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span>
+        <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">special</span><span class="o">.</span><span class="n">gammaln</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="o">-</span><span class="n">p</span><span class="p">)))</span> <span class="o">/</span>
+               <span class="n">k</span><span class="p">)</span>
     <span class="n">N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">pbirthday</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">:</span>
         <span class="n">N</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -984,13 +652,15 @@ For an approximately 50.0% chance of at least 1 birthday match, we need 23 peopl
 
 <span class="n">n</span> <span class="o">=</span> <span class="mi">23</span>
 <span class="n">pbirthday_ans</span> <span class="o">=</span> <span class="n">pbirthday</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">coincident</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">((</span><span class="s1">&#39;</span><span class="si">{:.1F}% c</span><span class="s1">hance of triple birthday match &#39;</span>
-       <span class="s1">&#39;among </span><span class="si">{}</span><span class="s1"> people&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pbirthday_ans</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">pbirthday_ans</span> <span class="o">*</span> <span class="mf">100.0</span><span class="si">:</span><span class="s1">.1F</span><span class="si">}</span><span class="s1">% chance of triple birthday match among </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> people&#39;</span>
+<span class="p">)</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">qbirthday_ans</span> <span class="o">=</span> <span class="n">qbirthday</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">coincident</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">((</span><span class="s1">&#39;We need </span><span class="si">{}</span><span class="s1"> people for a triple match &#39;</span>
-       <span class="s1">&#39;with probability of </span><span class="si">{:.1F}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">qbirthday_ans</span><span class="p">,</span> <span class="n">p</span> <span class="o">*</span> <span class="mf">100.0</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;We need </span><span class="si">{</span><span class="n">qbirthday_ans</span><span class="si">}</span><span class="s1"> people for a triple match with probability of </span><span class="si">{</span><span class="n">p</span> <span class="o">*</span> <span class="mf">100.0</span><span class="si">:</span><span class="s1">.1F</span><span class="si">}</span><span class="s1">%&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1020,19 +690,19 @@ We need 88 people for a triple match with probability of 50.0%
 <span class="n">n</span> <span class="o">=</span> <span class="mi">23</span>
 <span class="n">trials</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span>
 
-<span class="n">ordered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ordered</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
 <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>    
-    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">365</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">trials</span><span class="p">):</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">365</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">u</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">return_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">c</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">p</span> <span class="o">=</span>  <span class="n">m</span> <span class="o">/</span> <span class="n">trials</span>  
-<span class="nb">print</span><span class="p">((</span><span class="s1">&#39;In a simulation with </span><span class="si">{}</span><span class="s1"> trials, &#39;</span> 
-       <span class="s1">&#39;the probability of a birthday match with </span><span class="si">{}</span><span class="s1"> people &#39;</span>
-       <span class="s1">&#39;is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">trials</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)))</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">m</span> <span class="o">/</span> <span class="n">trials</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s1">&#39;In a simulation with </span><span class="si">{</span><span class="n">trials</span><span class="si">}</span><span class="s1"> trials, the probability of a birthday match with </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1"> people is </span><span class="si">{</span><span class="n">p</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
