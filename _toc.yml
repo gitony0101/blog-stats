@@ -36,4 +36,3 @@ parts:
       # - file: probability/15-Parameter-Testing
       # - file: probability/16-Non-Parameter-Testing
       # - file: probability/17-Survival-Analysis
-  # - caption: Deep learning - Keras & Tensorflow

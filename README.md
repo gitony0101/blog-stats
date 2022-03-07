@@ -184,16 +184,16 @@ Reduce the use of `begin{array}...end{array}`
 
 $$
 \begin{aligned}
-  y_1 = x^2 + 2*x \\
-  y_2 = x^3 + x
+  y_1 &= x^2 + 2*x \\
+  y_2 &= x^3 + x
 \end{aligned}
 $$
 
 ```latex
 $$
 \begin{aligned}
-  y_1 = x^2 + 2*x \\
-  y_2 = x^3 + x
+  y_1 &= x^2 + 2*x \\
+  y_2 &= x^3 + x
 \end{aligned}
 $$
 ```
@@ -256,16 +256,6 @@ $$
 
 - Prefer `\underset{}{}` to `\underset{}`
 
-$$
-\underset{θ}\mathrm{argmax}\ p(x_i ∣ θ)
-$$
-
-```latex
-$$
-\underset{θ}\mathrm{argmax}\ p(x_i ∣ θ)
-$$
-```
-
 ### 4.3. Expressions
 
 - Prefer `^{\top}` to `^T` for transpose
@@ -295,12 +285,12 @@ $$
 - Prefer `underset{}{}` to `\limits_`
 
 $$
-\underset{w}\mathrm{argmin}\ (wx +b)
+\underset{w}{\argmin}(wx +b)
 $$
 
 ```latex
 $$
-\underset{w}\mathrm{argmin}\ (wx +b)
+\underset{w}{\argmin}(wx +b)
 $$
 ```
 
@@ -309,12 +299,12 @@ $$
 - Prefer `mathrm{}` to `{\rm }` or `\mathop{}` or `\operatorname{}`
 
 $$
-θ_\mathrm{MLE} = \underset{θ}\mathrm{argmax}\ ∑_{i = 1}^{N}\log p(x_i ∣ θ)
+θ_\mathrm{MLE} = \underset{θ}{\argmax}∑_{i = 1}^{N}\log p(x_i ∣ θ)
 $$
 
 ```latex
 $$
-θ_\mathrm{MLE} = \underset{θ}\mathrm{argmax}\ ∑_{i = 1}^{N}\log p(x_i ∣ θ)
+θ_\mathrm{MLE} = \underset{θ}{\argmax}∑_{i = 1}^{N}\log p(x_i ∣ θ)
 $$
 ```
 
