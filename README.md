@@ -285,12 +285,12 @@ $$
 - Prefer `underset{}{}` to `\limits_`
 
 $$
-\underset{w}{\argmin}(wx +b)
+\underset{w}{\mathrm{argmin}}(wx +b)
 $$
 
 ```latex
 $$
-\underset{w}{\argmin}(wx +b)
+\underset{w}{\mathrm{argmin}}(wx +b)
 $$
 ```
 
@@ -299,12 +299,12 @@ $$
 - Prefer `mathrm{}` to `{\rm }` or `\mathop{}` or `\operatorname{}`
 
 $$
-θ_\mathrm{MLE} = \underset{θ}{\argmax}∑_{i = 1}^{N}\log p(x_i ∣ θ)
+θ_\mathrm{MLE} = \underset{θ}{\mathrm{argmax}}∑_{i = 1}^{N}\log p(x_i ∣ θ)
 $$
 
 ```latex
 $$
-θ_\mathrm{MLE} = \underset{θ}{\argmax}∑_{i = 1}^{N}\log p(x_i ∣ θ)
+θ_\mathrm{MLE} = \underset{θ}{\mathrm{argmax}}∑_{i = 1}^{N}\log p(x_i ∣ θ)
 $$
 ```
 
