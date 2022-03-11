@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/logo.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Parallelizing Neural Network Training with PyTorch (Part 1/2)" href="../pytorch/1-intro-pytorch.html" />
+    <link rel="next" title="Vanishing/Exploding Gradients Problem" href="../tensorflow/1-training-deep-neural-networks.html" />
     <link rel="prev" title="Decision Trees" href="05-decision-trees.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -138,13 +138,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Deep learning - PyTorch
+  Deep learning - Tensorflow
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
-   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  <a class="reference internal" href="../tensorflow/1-training-deep-neural-networks.html">
+   Vanishing/Exploding Gradients Problem
   </a>
  </li>
 </ul>
@@ -909,10 +909,8 @@ petal width (cm) 0.4233579963547682
 <h2>Feature importance<a class="headerlink" href="#feature-importance" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784_X.feather&#39;</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784_y.feather&#39;</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mnist_784</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784.npz&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mnist_784</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">mnist_784</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -925,10 +923,6 @@ petal width (cm) 0.4233579963547682
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/py/n14256yd5r5ddms88x9bvsv40000gn/T/ipykernel_14876/867223868.py:2: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
-  rnd_clf.fit(X, y)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>RandomForestClassifier(random_state=42)
 </pre></div>
 </div>
@@ -1389,10 +1383,8 @@ petal width (cm) 0.4233579963547682
 <h1>Voting Classifier<a class="headerlink" href="#voting-classifier" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784_X.feather&#39;</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784_y.feather&#39;</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mnist_784</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784.npz&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mnist_784</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">mnist_784</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1529,7 +1521,7 @@ Training the LinearSVC(max_iter=100, random_state=42, tol=20)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.9692, 0.9715, 0.859]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 0.0, 0.0]
 </pre></div>
 </div>
 </div>
@@ -1644,7 +1636,7 @@ Training the LinearSVC(max_iter=100, random_state=42, tol=20)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.9645, 0.9691]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0, 0.0]
 </pre></div>
 </div>
 </div>
@@ -1780,10 +1772,10 @@ Training the LinearSVC(max_iter=100, random_state=42, tol=20)
             <p class="prev-next-title">Decision Trees</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../pytorch/1-intro-pytorch.html" title="next page">
+    <a class='right-next' id="next-link" href="../tensorflow/1-training-deep-neural-networks.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Parallelizing Neural Network Training with PyTorch (Part 1/2)</p>
+        <p class="prev-next-title">Vanishing/Exploding Gradients Problem</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

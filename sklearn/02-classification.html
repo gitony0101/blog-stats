@@ -140,13 +140,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Deep learning - PyTorch
+  Deep learning - Tensorflow
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../pytorch/1-intro-pytorch.html">
-   Parallelizing Neural Network Training with PyTorch (Part 1/2)
+  <a class="reference internal" href="../tensorflow/1-training-deep-neural-networks.html">
+   Vanishing/Exploding Gradients Problem
   </a>
  </li>
 </ul>
@@ -487,10 +487,17 @@ const thebe_selector_output = ".output, .cell_output"
 <h1>MNIST<a class="headerlink" href="#mnist" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784_X.feather&#39;</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_feather</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784_y.feather&#39;</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># from sklearn.datasets import fetch_openml</span>
+<span class="c1"># X, y = fetch_openml(&#39;mnist_784&#39;, version=1, return_X_y=True, data_home=&#39;data&#39;)</span>
+<span class="c1"># np.savez(file=&quot;../../data-handson/mnist_784.npz&quot;, X=X, y=y)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mnist_784</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;../../data-handson/mnist_784.npz&#39;</span><span class="p">,</span> <span class="n">allow_pickle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">mnist_784</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span> <span class="n">mnist_784</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -514,7 +521,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70000, 1)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70000,)
 </pre></div>
 </div>
 </div>
@@ -542,7 +549,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_8_0.png" src="../_images/02-classification_8_0.png" />
+<img alt="../_images/02-classification_9_0.png" src="../_images/02-classification_9_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -552,7 +559,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([5], dtype=int8)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;5&#39;
 </pre></div>
 </div>
 </div>
@@ -582,7 +589,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_11_0.png" src="../_images/02-classification_11_0.png" />
+<img alt="../_images/02-classification_12_0.png" src="../_images/02-classification_12_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -592,7 +599,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([5], dtype=int8)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;5&#39;
 </pre></div>
 </div>
 </div>
@@ -785,7 +792,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_31_0.png" src="../_images/02-classification_31_0.png" />
+<img alt="../_images/02-classification_32_0.png" src="../_images/02-classification_32_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -810,7 +817,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_33_0.png" src="../_images/02-classification_33_0.png" />
+<img alt="../_images/02-classification_34_0.png" src="../_images/02-classification_34_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -953,7 +960,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_45_0.png" src="../_images/02-classification_45_0.png" />
+<img alt="../_images/02-classification_46_0.png" src="../_images/02-classification_46_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -985,7 +992,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_47_0.png" src="../_images/02-classification_47_0.png" />
+<img alt="../_images/02-classification_48_0.png" src="../_images/02-classification_48_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1087,7 +1094,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_57_0.png" src="../_images/02-classification_57_0.png" />
+<img alt="../_images/02-classification_58_0.png" src="../_images/02-classification_58_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1156,7 +1163,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_62_0.png" src="../_images/02-classification_62_0.png" />
+<img alt="../_images/02-classification_63_0.png" src="../_images/02-classification_63_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1373,6 +1380,20 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[5577,    0,   22,    5,    8,   43,   36,    6,  225,    1],
+       [   0, 6400,   37,   24,    4,   44,    4,    7,  212,   10],
+       [  27,   27, 5220,   92,   73,   27,   67,   36,  378,   11],
+       [  22,   17,  117, 5227,    2,  203,   27,   40,  403,   73],
+       [  12,   14,   41,    9, 5182,   12,   34,   27,  347,  164],
+       [  27,   15,   30,  168,   53, 4444,   75,   14,  535,   60],
+       [  30,   15,   42,    3,   44,   97, 5552,    3,  131,    1],
+       [  21,   10,   51,   30,   49,   12,    3, 5684,  195,  210],
+       [  17,   63,   48,   86,    3,  126,   25,   10, 5429,   44],
+       [  25,   18,   30,   64,  118,   36,    1,  179,  371, 5107]])
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1383,7 +1404,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_84_0.png" src="../_images/02-classification_84_0.png" />
+<img alt="../_images/02-classification_85_0.png" src="../_images/02-classification_85_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1425,7 +1446,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_87_0.png" src="../_images/02-classification_87_0.png" />
+<img alt="../_images/02-classification_88_0.png" src="../_images/02-classification_88_0.png" />
 </div>
 </div>
 </div>
@@ -1503,7 +1524,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_96_0.png" src="../_images/02-classification_96_0.png" />
+<img alt="../_images/02-classification_97_0.png" src="../_images/02-classification_97_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1518,7 +1539,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_97_0.png" src="../_images/02-classification_97_0.png" />
+<img alt="../_images/02-classification_98_0.png" src="../_images/02-classification_98_0.png" />
 </div>
 </div>
 </div>
@@ -1568,7 +1589,7 @@ const thebe_selector_output = ".output, .cell_output"
  Text(0, 0.5, &#39;True Positive Rate (Recall)&#39;)]
 </pre></div>
 </div>
-<img alt="../_images/02-classification_102_1.png" src="../_images/02-classification_102_1.png" />
+<img alt="../_images/02-classification_103_1.png" src="../_images/02-classification_103_1.png" />
 </div>
 </div>
 </div>
@@ -1622,7 +1643,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.ndimage.interpolation</span> <span class="kn">import</span> <span class="n">shift</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.ndimage</span> <span class="kn">import</span> <span class="n">shift</span>
 </pre></div>
 </div>
 </div>
@@ -1641,7 +1662,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_110_0.png" src="../_images/02-classification_110_0.png" />
+<img alt="../_images/02-classification_111_0.png" src="../_images/02-classification_111_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1724,7 +1745,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_116_0.png" src="../_images/02-classification_116_0.png" />
+<img alt="../_images/02-classification_117_0.png" src="../_images/02-classification_117_0.png" />
 </div>
 </div>
 </div>
@@ -1733,6 +1754,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.ndimage.interpolation</span> <span class="kn">import</span> <span class="n">shift</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/py/n14256yd5r5ddms88x9bvsv40000gn/T/ipykernel_23572/987197595.py:1: DeprecationWarning: Please use `shift` from the `scipy.ndimage` namespace, the `scipy.ndimage.interpolation` namespace is deprecated.
+  from scipy.ndimage.interpolation import shift
 </pre></div>
 </div>
 </div>
@@ -1768,7 +1795,7 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_120_0.png" src="../_images/02-classification_120_0.png" />
+<img alt="../_images/02-classification_121_0.png" src="../_images/02-classification_121_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2426,7 +2453,7 @@ Name: Embarked, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02-classification_181_0.png" src="../_images/02-classification_181_0.png" />
+<img alt="../_images/02-classification_182_0.png" src="../_images/02-classification_182_0.png" />
 </div>
 </div>
 <p>To improve this result further, you could:</p>
