@@ -14,9 +14,12 @@ parts:
       - file: sklearn/06-ensemble-learning
       # - file: sklearn/07-dimensionality-reduction
       # - file: sklearn/08-unsupervised-learning
-  - caption: Deep learning - PyTorch
+  - caption: Deep learning - Tensorflow
     chapters:
-      - file: pytorch/1-intro-pytorch
+      - file: tensorflow/1-training-deep-neural-networks
+  # - caption: Deep learning - PyTorch
+  #   chapters:
+  #     - file: pytorch/1-intro-pytorch
   - caption: Probablity
     chapters:
       - file: probability/01-Probability
