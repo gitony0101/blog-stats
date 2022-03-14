@@ -1,2 +1,4 @@
 from stats_utils import confidence_ellipse
 from stats_utils import fetch_data
+from stats_utils.rnd_matrix import rnd_replace_with_const
+from stats_utils.record_rnd import record_by_time
