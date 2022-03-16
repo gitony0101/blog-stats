@@ -28,6 +28,8 @@ Icon
 
 # Thumbnails
 ._*
+bak
+*.pdf
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
