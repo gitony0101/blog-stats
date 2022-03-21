@@ -1,7 +1,5 @@
 # Deep Learning FAQ
 
-- ![inverview](inverview.pdf)
-
 ## 1. Pipeline
 
 ### 1.1. Cleaning
