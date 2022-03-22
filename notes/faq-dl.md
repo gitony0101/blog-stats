@@ -140,6 +140,12 @@ backpropagates the error and updates the weights to reduce the error
 
 ## 5. Optimization
 
+### 5.1. Momentum
+
+### 5.2. Adagrad
+
+### 5.3. Adam
+
 ## 6. Covolution Neural Network
 
 - Covolution Layer
